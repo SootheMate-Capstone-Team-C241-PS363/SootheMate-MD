@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.predict.result.ResultActivity"
+    android:background="@color/blue_200">
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Result"
+        android:textColor="@color/blue_600"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout6"
+        android:layout_width="match_parent"
+        android:layout_height="465dp"
+        android:elevation="12dp"
+        android:outlineAmbientShadowColor="@color/blue_500"
+        android:outlineSpotShadowColor="@color/blue_600"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_container_22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView23">
+
+        <com.dicoding.soothemate.customviews.CircularProgressView
+            android:id="@+id/circularProgressView"
+            android:layout_width="200dp"
+            android:layout_height="203dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="72dp"
+            android:text="YOUR STRESS LEVEL"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/circularProgressView"
+            app:layout_constraintHorizontal_bias="0.505"
+            app:layout_constraintStart_toStartOf="@+id/circularProgressView"
+            app:layout_constraintTop_toTopOf="@+id/circularProgressView" />
+
+        <TextView
+            android:id="@+id/stress_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="45%"
+            android:textColor="@color/blue_500"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/circularProgressView"
+            app:layout_constraintEnd_toEndOf="@+id/textView24"
+            app:layout_constraintStart_toStartOf="@+id/textView24"
+            app:layout_constraintTop_toBottomOf="@+id/textView24"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/stress_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Great"
+            android:textSize="24sp"
+            android:textColor="@color/blue_500"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/circularProgressView"
+            app:layout_constraintStart_toStartOf="@+id/circularProgressView"
+            app:layout_constraintTop_toBottomOf="@+id/circularProgressView" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Description"
+            app:layout_constraintEnd_toEndOf="@+id/stress_info"
+            app:layout_constraintStart_toStartOf="@+id/stress_info"
+            app:layout_constraintTop_toBottomOf="@+id/stress_info" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="36dp"
+            android:src="@drawable/vector_line"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.dicoding.soothemate.customviews.CustomButton
+        android:id="@+id/dont_save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        android:enabled="false"
+        android:text="Continue Without Save"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/save_btn"
+        app:layout_constraintStart_toStartOf="@+id/save_btn" />
+
+    <com.dicoding.soothemate.customviews.CustomButton
+        android:id="@+id/save_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
+        android:text="Continue and Save Result"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toTopOf="@+id/dont_save_btn"
+        app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout6" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

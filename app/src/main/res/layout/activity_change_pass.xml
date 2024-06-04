@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.profile.changepass.ChangePassActivity"
+    android:background="@color/blue_200">
+
+    <soup.neumorphism.NeumorphImageButton
+        android:id="@+id/back_btn"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/back_btn"
+        app:neumorph_shapeType="flat"
+        app:neumorph_shadowColorLight="@color/blue_200"
+        app:neumorph_shadowColorDark="@color/blue_400"
+        app:neumorph_insetTop="4dp"
+        app:neumorph_insetBottom="11dp"
+        app:neumorph_insetStart="0dp"
+        app:neumorph_insetEnd="11dp"
+        android:layout_marginStart="32dp"
+        app:layout_constraintBottom_toBottomOf="@+id/page_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/page_text" />
+
+    <TextView
+        android:id="@+id/page_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Password"
+        android:textColor="@color/blue_500"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/old_password_edtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/page_text"
+        app:neumorph_backgroundColor="@color/white"
+        app:neumorph_lightSource="leftTop"
+        app:neumorph_shadowElevation="3dp"
+        app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+        app:neumorph_shapeType="pressed"
+        app:neumorph_strokeColor="@color/blue_300"
+        app:neumorph_strokeWidth="1dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            style="@style/Widget.Design.TextInputLayout"
+            app:endIconMode="password_toggle"
+            android:paddingLeft="14dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/old_password_edt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="Old Password"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/new_password_edtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/old_password_edtl"
+        app:neumorph_backgroundColor="@color/white"
+        app:neumorph_lightSource="leftTop"
+        app:neumorph_shadowElevation="2dp"
+        app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+        app:neumorph_shapeType="pressed"
+        app:neumorph_strokeColor="@color/blue_300"
+        app:neumorph_strokeWidth="1dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Design.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="14dp"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/new_password_edt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:hint="New Password"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/confirm_password_edtl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/new_password_edtl"
+        app:neumorph_backgroundColor="@color/white"
+        app:neumorph_lightSource="leftTop"
+        app:neumorph_shadowElevation="2dp"
+        app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+        app:neumorph_shapeType="pressed"
+        app:neumorph_strokeColor="@color/blue_300"
+        app:neumorph_strokeWidth="1dp">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.Design.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="14dp"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/confirm_password_edt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="New Password"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </soup.neumorphism.NeumorphCardView>
+
+    <com.dicoding.soothemate.customviews.CustomButton
+        android:id="@+id/confirm_button"
+        android:layout_width="206dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="24dp"
+        android:text="Set Password"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@+id/confirm_password_edtl"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/confirm_password_edtl"
+        app:layout_constraintTop_toBottomOf="@+id/confirm_password_edtl" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

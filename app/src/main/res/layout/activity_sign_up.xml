@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.signup.SignUpActivity"
+    android:background="@color/blue_400">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_container"
+        android:padding="12dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView11"
+            android:layout_width="82dp"
+            android:layout_height="69dp"
+            android:src="@drawable/logo_soothemate"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign Up"
+            android:textColor="@color/blue_500"
+            android:textSize="26sp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView11"
+            app:layout_constraintStart_toStartOf="@+id/imageView11"
+            app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account?"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/textView14"
+            app:layout_constraintHorizontal_bias="0.732"
+            app:layout_constraintStart_toStartOf="@+id/textView14"
+            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:text="Login"
+            android:textColor="@color/blue_500"
+            app:layout_constraintBottom_toBottomOf="@+id/textView15"
+            app:layout_constraintStart_toEndOf="@+id/textView15"
+            app:layout_constraintTop_toTopOf="@+id/textView15" />
+
+        <TextView
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Username"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/usernameEditTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/username"
+            app:layout_constraintTop_toBottomOf="@+id/username">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/usernameEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Username"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Email"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/usernameEditTextLayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/emailEditTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/email"
+            app:layout_constraintTop_toBottomOf="@+id/email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Email"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Gender"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/genderEditTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/gender"
+            app:layout_constraintTop_toBottomOf="@+id/gender">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/genderEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Gender"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/birth_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Birth Date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/genderEditTextLayout" />
+
+        <EditText
+            android:id="@+id/birthDateEdittext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="32dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:hint="Select Date"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/birth_date"
+            app:layout_constraintTop_toBottomOf="@+id/birth_date" />
+
+        <TextView
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Password"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/birthDateEdittext" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/passwordEditTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/password"
+            app:layout_constraintTop_toBottomOf="@+id/password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordEdittext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Password"
+                tools:ignore="SpeakableTextPresentCheck" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.dicoding.soothemate.customviews.CustomButton
+            android:id="@+id/register_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:textAllCaps="false"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/passwordEditTextLayout"
+            app:layout_constraintStart_toStartOf="@+id/passwordEditTextLayout"
+            app:layout_constraintTop_toBottomOf="@+id/passwordEditTextLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </ScrollView>

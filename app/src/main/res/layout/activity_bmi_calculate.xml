@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/predict_bg"
+    app:layoutDescription="@xml/activity_bmi_calculate_scene"
+    tools:context=".ui.bmi.BmiCalculateActivity">
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="BMI Calculate"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/ic_circle_big"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView25"
+        app:layout_constraintStart_toStartOf="@+id/textView25"
+        app:layout_constraintTop_toBottomOf="@+id/textView25"
+        app:layout_constraintVertical_bias="0.067" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bmi_image"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+        app:layout_constraintEnd_toEndOf="@+id/textView25"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/textView25"
+        app:layout_constraintTop_toBottomOf="@+id/textView25"
+        app:layout_constraintVertical_bias="0.348" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/rounded_container_35"
+            android:paddingBottom="100dp">
+
+            <ImageView
+                android:id="@+id/bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/bar"
+                app:layout_constraintBottom_toTopOf="@+id/textView26"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="40dp"
+                android:text="Gender"
+                android:textColor="@color/black_400"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/male_value"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:text="Male"
+                app:layout_constraintEnd_toEndOf="@+id/textView26"
+                app:layout_constraintHorizontal_bias="0.179"
+                app:layout_constraintStart_toStartOf="@+id/textView26"
+                app:layout_constraintTop_toBottomOf="@+id/textView26"
+                app:neumorph_backgroundColor="@color/blue_200"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowColorDark="@color/blue_300"
+                app:neumorph_shadowColorLight="@color/blue_200"
+                app:neumorph_shadowElevation="6dp"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+                app:neumorph_shapeType="pressed"
+                app:neumorph_strokeColor="@color/blue_400"
+                app:neumorph_strokeWidth="1dp" />
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/female_value"
+                android:layout_width="150dp"
+                android:layout_height="80dp"
+                android:gravity="center"
+                android:text="Female"
+                app:layout_constraintBottom_toBottomOf="@+id/male_value"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.166"
+                app:layout_constraintStart_toEndOf="@+id/male_value"
+                app:layout_constraintTop_toTopOf="@+id/male_value"
+                app:layout_constraintVertical_bias="0.0"
+                app:neumorph_backgroundColor="@color/blue_200"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowColorDark="@color/blue_300"
+                app:neumorph_shadowColorLight="@color/blue_200"
+                app:neumorph_shadowElevation="6dp"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+                app:neumorph_shapeType="pressed"
+                app:neumorph_strokeColor="@color/blue_400"
+                app:neumorph_strokeWidth="1dp" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="18dp"
+                android:text="Age"
+                android:textColor="@color/black_400"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/male_value" />
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/age_edtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="@+id/textView8"
+                app:layout_constraintTop_toBottomOf="@+id/textView8"
+                app:neumorph_backgroundColor="@color/blue_200"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowColorDark="@color/blue_300"
+                app:neumorph_shadowColorLight="@color/blue_200"
+                app:neumorph_shadowElevation="6dp"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+                app:neumorph_shapeType="pressed"
+                app:neumorph_strokeColor="@color/blue_400"
+                app:neumorph_strokeWidth="1dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/age_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="Input"
+                    android:inputType="text"
+                    android:padding="12dp" />
+            </soup.neumorphism.NeumorphCardView>
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="18dp"
+                android:text="Height"
+                android:textColor="@color/black_400"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/age_edtl" />
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/height_edtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="@+id/textView9"
+                app:layout_constraintTop_toBottomOf="@+id/textView9"
+                app:neumorph_backgroundColor="@color/blue_200"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowColorDark="@color/blue_300"
+                app:neumorph_shadowColorLight="@color/blue_200"
+                app:neumorph_shadowElevation="6dp"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+                app:neumorph_shapeType="pressed"
+                app:neumorph_strokeColor="@color/blue_400"
+                app:neumorph_strokeWidth="1dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/height_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="in cm"
+                    android:inputType="text"
+                    android:padding="12dp" />
+            </soup.neumorphism.NeumorphCardView>
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="18dp"
+                android:text="Weight"
+                android:textColor="@color/black_400"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/height_edtl" />
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/weight_edtl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="@+id/textView10"
+                app:layout_constraintTop_toBottomOf="@+id/textView10"
+                app:neumorph_backgroundColor="@color/blue_200"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowColorDark="@color/blue_300"
+                app:neumorph_shadowColorLight="@color/blue_200"
+                app:neumorph_shadowElevation="6dp"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+                app:neumorph_shapeType="pressed"
+                app:neumorph_strokeColor="@color/blue_400"
+                app:neumorph_strokeWidth="1dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/weight_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:hint="in kg"
+                    android:inputType="text"
+                    android:padding="12dp" />
+
+            </soup.neumorphism.NeumorphCardView>
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="32dp"
+                android:text="0/200"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView12" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="18dp"
+                android:text="Your BMI Score is"
+                android:textColor="@color/black_400"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/weight_edtl" />
+
+            <soup.neumorphism.NeumorphCardView
+                android:id="@+id/bmi_edtl"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintStart_toStartOf="@+id/textView12"
+                app:layout_constraintTop_toBottomOf="@+id/textView12"
+                app:neumorph_backgroundColor="@color/blue_200"
+                app:neumorph_lightSource="leftTop"
+                app:neumorph_shadowColorDark="@color/blue_300"
+                app:neumorph_shadowColorLight="@color/blue_200"
+                app:neumorph_shadowElevation="6dp"
+                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+                app:neumorph_shapeType="pressed"
+                app:neumorph_strokeColor="@color/blue_400"
+                app:neumorph_strokeWidth="1dp">
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/bmi_edt"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    android:inputType="text"
+                    android:padding="12dp" />
+            </soup.neumorphism.NeumorphCardView>
+
+            <com.dicoding.soothemate.customviews.CustomButton
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="32dp"
+                android:text="Calculate"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bmi_edtl" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

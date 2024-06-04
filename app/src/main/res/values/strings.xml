@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">SootheMate</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <!--    testing-->
+    <string name="title_menu_1">Title 1</string>
+    <string name="title_menu_2">Title 2</string>
+    <string name="title_menu_3">Title 3</string>
+    <string name="title_menu_4">Title 4</string>
+    <string name="desc_menu_1">Description 1</string>
+    <string name="desc_menu_2">Description 2</string>
+    <string name="desc_menu_3">Description 3</string>
+    <string name="desc_menu_4">Description 4</string>
+    <string name="learn_now">Belajar Sekarang</string>
+    <string name="password_hint">Password</string>
+    <string name="title_add">Add</string>
+    <string name="title_profile">Profile</string>
+
+    <string-array name="dropdown_gender">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+    </string-array>
+</resources>

@@ -1,0 +1,86 @@
+package com.dicoding.soothemate.ui.profile.changepass
+
+import android.content.Intent
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.util.Log
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AlertDialog
+import com.dicoding.soothemate.R
+import com.dicoding.soothemate.databinding.ActivityChangePassBinding
+import com.dicoding.soothemate.factory.ViewModelFactory
+import com.dicoding.soothemate.viewmodel.MainViewModel
+import com.dicoding.soothemate.viewmodel.ProfileViewModel
+import com.dicoding.soothemate.viewmodel.SignUpViewModel
+
+class ChangePassActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityChangePassBinding
+
+    private val mainViewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
+    private val profileViewModel by viewModels<ProfileViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityChangePassBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        supportActionBar?.hide()
+
+        setup()
+    }
+
+    private fun setup() {
+        binding.confirmButton.setOnClickListener {
+            customAlertDialog()
+            mainViewModel.getSession().observe(this) { user ->
+                val token = user.token
+                var oldPassword = binding.oldPasswordEdt.text.toString()
+                var newPassword = binding.newPasswordEdt.text.toString()
+                var passwordConfirmation = binding.confirmPasswordEdt.text.toString()
+                profileViewModel.changePassword(oldPassword, newPassword, passwordConfirmation, token)
+            }
+
+            profileViewModel.changePassSuccess.observe(this){ success ->
+                if (success == true) {
+                    Toast.makeText(this, "Password berhasil diperbarui", Toast.LENGTH_LONG).show()
+                    customAlertDialog()
+                } else {
+                    Toast.makeText(this, "Password gagal diperbarui", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    private fun customAlertDialog() {
+        val builder = AlertDialog.Builder(this, R.style.CustomAlertDialog)
+            .create()
+        val view = layoutInflater.inflate(R.layout.custom_dialog, null)
+        val button = view.findViewById<TextView>(R.id.continue_btn)
+        builder.setView(view)
+        button.setOnClickListener {
+            builder.dismiss()
+        }
+        builder.setCanceledOnTouchOutside(true)
+
+        builder.setOnShowListener {
+            val window = builder.window
+            window?.setLayout(
+                (resources.displayMetrics.widthPixels * 0.8).toInt(),
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+        }
+
+        builder.show()
+    }
+
+}
