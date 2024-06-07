@@ -2,30 +2,38 @@ package com.dicoding.soothemate.ui.bmi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Spinner
 import androidx.core.content.ContextCompat
 import com.dicoding.soothemate.R
+import com.dicoding.soothemate.databinding.ActivityBmiCalculateBinding
 import soup.neumorphism.NeumorphButton
+import kotlin.math.pow
 
 class BmiCalculateActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityBmiCalculateBinding
 
     private lateinit var maleButton: NeumorphButton
     private lateinit var femaleButton: NeumorphButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_bmi_calculate)
+        binding = ActivityBmiCalculateBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         supportActionBar?.hide()
 
-        maleButton = findViewById(R.id.male_value)
-        femaleButton = findViewById(R.id.female_value)
+        binding.apply {
 
-        maleButton.setOnClickListener {
-            selectGender(maleButton, femaleButton)
-        }
+            maleButton = maleValue
+            femaleButton = femaleValue
 
-        femaleButton.setOnClickListener {
-            selectGender(femaleButton, maleButton)
+            maleButton.setOnClickListener {
+                selectGender(maleButton, femaleButton)
+            }
+            femaleButton.setOnClickListener {
+                selectGender(femaleButton, maleButton)
+            }
         }
     }
 

@@ -123,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/desc_menu_1"
+            android:text="description"
             app:layout_constraintEnd_toEndOf="@+id/textView7"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/textView7"
@@ -251,24 +251,26 @@
         android:id="@+id/customButton"
         android:layout_width="206dp"
         android:layout_height="49dp"
-        android:layout_marginBottom="16dp"
         android:text="History"
         android:textAllCaps="false"
-        app:layout_constraintBottom_toTopOf="@+id/textView12"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/circularProgressView" />
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="250dp"
+        android:layout_width="240dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="64dp"
-        android:text="Go to history to view your previous input!"
+        android:layout_marginBottom="16dp"
+        android:text="@string/history_btn_desc"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/customButton"
         app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="@+id/customButton" />
+        app:layout_constraintStart_toStartOf="@+id/customButton"
+        app:layout_constraintTop_toBottomOf="@+id/customButton"
+        app:layout_constraintVertical_bias="0.166" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

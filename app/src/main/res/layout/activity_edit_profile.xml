@@ -84,7 +84,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            android:text="user"
             android:inputType="text"
             android:padding="12dp" />
     </soup.neumorphism.NeumorphCardView>
@@ -127,7 +126,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            android:text="user@gmail.com"
             android:inputType="text"
             android:padding="12dp" />
     </soup.neumorphism.NeumorphCardView>
@@ -166,7 +164,7 @@
 
 
         <Spinner
-            android:id="@+id/spinner_age"
+            android:id="@+id/gender_edt"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="Gender" />
@@ -204,14 +202,21 @@
         app:neumorph_strokeWidth="1dp">
 
 
-        <Spinner
-            android:id="@+id/birthdate"
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/birth_date"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Gender" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="32dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:background="@null"
+            android:hint="Select Date" />
     </soup.neumorphism.NeumorphCardView>
 
     <com.dicoding.soothemate.customviews.CustomButton
+        android:id="@+id/save_btn"
         android:layout_width="206dp"
         android:layout_height="48dp"
         android:text="Save"
@@ -220,5 +225,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/birthdate_edtl" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

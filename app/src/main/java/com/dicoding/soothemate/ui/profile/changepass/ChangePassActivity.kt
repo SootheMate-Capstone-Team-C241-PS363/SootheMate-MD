@@ -1,11 +1,10 @@
 package com.dicoding.soothemate.ui.profile.changepass
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -15,7 +14,6 @@ import com.dicoding.soothemate.databinding.ActivityChangePassBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.ProfileViewModel
-import com.dicoding.soothemate.viewmodel.SignUpViewModel
 
 class ChangePassActivity : AppCompatActivity() {
 
@@ -36,12 +34,11 @@ class ChangePassActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        setup()
+        validationPass()
     }
 
     private fun setup() {
         binding.confirmButton.setOnClickListener {
-            customAlertDialog()
             mainViewModel.getSession().observe(this) { user ->
                 val token = user.token
                 var oldPassword = binding.oldPasswordEdt.text.toString()
@@ -50,7 +47,7 @@ class ChangePassActivity : AppCompatActivity() {
                 profileViewModel.changePassword(oldPassword, newPassword, passwordConfirmation, token)
             }
 
-            profileViewModel.changePassSuccess.observe(this){ success ->
+            profileViewModel.isSuccess.observe(this){ success ->
                 if (success == true) {
                     Toast.makeText(this, "Password berhasil diperbarui", Toast.LENGTH_LONG).show()
                     customAlertDialog()
@@ -81,6 +78,38 @@ class ChangePassActivity : AppCompatActivity() {
         }
 
         builder.show()
+    }
+
+    private fun validationPass() {
+        val oldPasswordEditText = binding.oldPasswordEdt
+        val newPasswordEditText = binding.newPasswordEdt
+        val confirmPasswordEditText = binding.confirmPasswordEdt
+        val confirmButton = binding.confirmButton
+
+        confirmButton.isEnabled = false
+
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Do nothing
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                confirmButton.isEnabled = !confirmPasswordEditText.text.isNullOrEmpty() &&
+                        !oldPasswordEditText.text.isNullOrEmpty() &&  !newPasswordEditText.text.isNullOrEmpty()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+                // Do nothing
+            }
+        }
+
+        confirmPasswordEditText.addTextChangedListener(textWatcher)
+        oldPasswordEditText.addTextChangedListener(textWatcher)
+        newPasswordEditText.addTextChangedListener(textWatcher)
+
+        confirmButton.setOnClickListener {
+            setup()
+        }
     }
 
 }

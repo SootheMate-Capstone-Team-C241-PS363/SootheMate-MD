@@ -5,22 +5,27 @@
     <string name="title_notifications">Notifications</string>
 
     <!--    testing-->
-    <string name="title_menu_1">Title 1</string>
-    <string name="title_menu_2">Title 2</string>
-    <string name="title_menu_3">Title 3</string>
-    <string name="title_menu_4">Title 4</string>
-    <string name="desc_menu_1">Description 1</string>
-    <string name="desc_menu_2">Description 2</string>
-    <string name="desc_menu_3">Description 3</string>
-    <string name="desc_menu_4">Description 4</string>
+    <string name="title_menu_1">Steps To Calmness</string>
+    <string name="title_menu_2">Manage Stress Easily</string>
+    <string name="title_menu_3">Find Inner Peace</string>
+    <string name="title_menu_4">Get Calm Life</string>
+    <string name="desc_menu_1">Find peace in your life by managing stress more easily and purposefully</string>
+    <string name="desc_menu_2">Monitor your progress and see how your stress reduces over time</string>
+    <string name="desc_menu_3">Find emotional balance and feel deep sence of inner calm</string>
+    <string name="desc_menu_4">Enjoy a calmer and happier life by managing your stress level</string>
     <string name="learn_now">Belajar Sekarang</string>
     <string name="password_hint">Password</string>
     <string name="title_add">Add</string>
     <string name="title_profile">Profile</string>
+    <string name="splash_screen_desc">Stress AI Therapy</string>
+    <string name="age">Age</string>
+    <string name="null_value">-</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="history_btn_desc">Go to history to view your previous input!</string>
 
     <string-array name="dropdown_gender">
-        <item>Item 1</item>
-        <item>Item 2</item>
-        <item>Item 3</item>
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
 </resources>
