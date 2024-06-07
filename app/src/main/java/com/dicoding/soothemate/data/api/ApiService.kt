@@ -20,6 +20,9 @@ interface ApiService {
     @GET("user/detail")
     fun getDetailUser(): Call<DetailProfile>
 
+    @PUT("user/update")
+    fun updateUserInfo(@Body request: UpdateUserInfo): Call<UpdateUserInfoResponse>
+
     @POST("auth/logout")
     fun logout(): Call<ApiResponse>
 }

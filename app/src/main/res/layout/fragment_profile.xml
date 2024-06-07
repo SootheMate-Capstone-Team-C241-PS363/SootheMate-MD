@@ -97,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Umur"
+            android:text="@string/age"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/detail_account"
             app:layout_constraintHorizontal_bias="0.0"
@@ -109,7 +109,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
-            android:text="21 tahun"
+            android:text="@string/null_value"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/age"
             app:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Tanggal Lahir"
+            android:text="@string/date_of_birth"
             android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/age"
             app:layout_constraintTop_toBottomOf="@+id/age" />
@@ -131,7 +131,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
-            android:text="2023-01-09"
+            android:text="@string/null_value"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/birth_date"
             app:layout_constraintEnd_toEndOf="parent"
@@ -142,9 +142,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Jenis Kelamin"
+            android:text="@string/gender"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="@+id/birth_date"
             app:layout_constraintStart_toStartOf="@+id/birth_date"
             app:layout_constraintTop_toBottomOf="@+id/birth_date" />
 
@@ -153,7 +152,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
-            android:text="Laki-laki"
+            android:text="@string/null_value"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/gender"
             app:layout_constraintEnd_toEndOf="parent"
@@ -210,7 +209,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:text="Change Password"
+                android:text="@string/change_password"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/imageView9"
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
@@ -233,12 +232,22 @@
         android:id="@+id/logout_btn"
         android:layout_width="208dp"
         android:layout_height="45dp"
-        android:text="Sign Out"
+        android:text="@string/sign_out"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout4"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout4"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

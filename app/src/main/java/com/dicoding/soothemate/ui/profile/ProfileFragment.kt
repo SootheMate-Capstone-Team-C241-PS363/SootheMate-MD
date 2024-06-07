@@ -16,6 +16,10 @@ import com.dicoding.soothemate.ui.profile.changepass.ChangePassActivity
 import com.dicoding.soothemate.ui.profile.editprofile.EditProfileActivity
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.ProfileViewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class ProfileFragment : Fragment() {
 
@@ -42,8 +46,6 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-        // run the viewmodel only once
         if (savedInstanceState === null){
             mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
                 var token = user.token
@@ -51,15 +53,22 @@ class ProfileFragment : Fragment() {
             }
         }
 
-
-        // observe the detail profile data
         profileViewModel.detailProfile.observe(viewLifecycleOwner) { userDetail ->
             if (userDetail != null) {
                 binding.username.text = userDetail.name
                 binding.email.text = userDetail.email
                 binding.birthDateValue.text = userDetail.birthDate
                 binding.genderValue.text = userDetail.gender
+
+                val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                val birthDate = dateFormatter.parse(userDetail.birthDate)
+                val age = birthDate?.age ?: 0
+                binding.ageValue.text = "$age years old"
             }
+        }
+
+        profileViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
         }
 
         editProfile()
@@ -68,6 +77,13 @@ class ProfileFragment : Fragment() {
 
         return root
     }
+
+    val Date.age: Int
+        get() {
+            val calendar = Calendar.getInstance()
+            calendar.time = Date(time - Date().time)
+            return 1970 - (calendar.get(Calendar.YEAR) + 1)
+        }
 
     private fun logout(){
         binding.logoutBtn.setOnClickListener {
@@ -95,6 +111,10 @@ class ProfileFragment : Fragment() {
         binding.profilePicture.setOnClickListener {
             startActivity(Intent(requireContext(), EditProfileActivity::class.java))
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

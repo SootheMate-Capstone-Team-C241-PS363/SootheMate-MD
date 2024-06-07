@@ -2,6 +2,8 @@ package com.dicoding.soothemate.ui.home
 
 import android.animation.ValueAnimator
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +14,9 @@ import com.dicoding.soothemate.R
 import com.dicoding.soothemate.customviews.CircularProgressView
 import com.dicoding.soothemate.databinding.FragmentHomeBinding
 import com.dicoding.soothemate.viewmodel.HomeViewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -31,18 +36,16 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
-
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         circularProgressView = binding.circularProgressView
 
+
         // inisialisasi tracking dummy
         animateProgress(45f)
         animateTextViewChange(45)
-
+        realtimeClock()
 
         return root
     }
@@ -50,6 +53,25 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun realtimeClock() {
+        val textViewClock = binding.clockText
+
+        val handler = Handler(Looper.getMainLooper())
+        val runnable = object : Runnable {
+            override fun run() {
+                val currentTime = Calendar.getInstance().time
+                val dateFormat = SimpleDateFormat("HH:mm a", Locale.getDefault())
+                val timeString = dateFormat.format(currentTime)
+
+                textViewClock.text = timeString
+
+                handler.postDelayed(this, 1000)
+            }
+        }
+
+        handler.post(runnable)
     }
 
     // animate tracking indicator

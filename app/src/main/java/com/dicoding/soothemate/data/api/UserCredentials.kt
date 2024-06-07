@@ -24,3 +24,12 @@ data class ResetUserCredentials(
     val passwordConfirmation: String
 )
 
+data class UpdateUserInfo(
+    @field:SerializedName("name")
+    val name: String? = null,
+    @field:SerializedName("gender")
+    val gender : String,
+    @field:SerializedName("birth_date")
+    val birthDate : String
+)
+

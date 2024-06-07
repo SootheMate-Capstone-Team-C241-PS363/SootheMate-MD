@@ -3,6 +3,7 @@ package com.dicoding.soothemate.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -28,16 +29,14 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        binding.loginBtn.setOnClickListener {
-            login()
-        }
-
+        login()
     }
 
 
     private fun login() {
-        val email = binding.emailEdittext.text.toString().trim()
-        val password = binding.passwordEdittext.text.toString()
+        binding.loginBtn.setOnClickListener {
+            val email = binding.emailEdittext.text.toString().trim()
+            val password = binding.passwordEdittext.text.toString()
         loginViewModel.login(email, password)
         loginViewModel.loginSuccess.observe(this) { success ->
             if (success == true) {
@@ -49,5 +48,13 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this, "gagal login", Toast.LENGTH_LONG).show()
             }
         }
+            loginViewModel.isLoading.observe(this) {
+                showLoading(it)
+            }
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }
