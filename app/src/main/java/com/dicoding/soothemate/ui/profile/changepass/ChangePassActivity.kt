@@ -35,6 +35,7 @@ class ChangePassActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         validationPass()
+        exitPage()
     }
 
     private fun setup() {
@@ -109,6 +110,12 @@ class ChangePassActivity : AppCompatActivity() {
 
         confirmButton.setOnClickListener {
             setup()
+        }
+    }
+
+    private fun exitPage() {
+        binding.backBtn.setOnClickListener{
+            finish()
         }
     }
 

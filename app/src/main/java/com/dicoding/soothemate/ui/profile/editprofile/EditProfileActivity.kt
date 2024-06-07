@@ -57,13 +57,10 @@ class EditProfileActivity : AppCompatActivity() {
             showLoading(it)
         }
 
-        binding.apply {
-            val gender: Spinner = genderEdt
-            setSpinnerAdapter(gender, R.array.dropdown_gender)
-        }
-
+        genderInit()
         showDatePickerDialog()
         updateUserInfo()
+        exitPage()
 
         supportActionBar?.hide()
     }
@@ -102,6 +99,19 @@ class EditProfileActivity : AppCompatActivity() {
 
         binding.birthDate.setOnClickListener{
             datePickerDialog.show()
+        }
+    }
+
+    private fun exitPage() {
+        binding.backBtn.setOnClickListener{
+            finish()
+        }
+    }
+
+    private fun genderInit() {
+        binding.apply {
+            val gender: Spinner = genderEdt
+            setSpinnerAdapter(gender, R.array.dropdown_gender)
         }
     }
 
