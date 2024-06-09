@@ -8,16 +8,25 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.soothemate.R
+import com.dicoding.soothemate.customviews.CustomEditText
 import com.dicoding.soothemate.databinding.FragmentPredictBinding
+import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.bmi.BmiCalculateActivity
 import com.dicoding.soothemate.ui.predict.result.ResultActivity
+import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.PredictViewModel
+import com.google.android.material.textfield.TextInputEditText
 
 class PredictFragment : Fragment() {
 
     private var _binding: FragmentPredictBinding? = null
+
+    private val predictViewModel: PredictViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -28,31 +37,14 @@ class PredictFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-//        val predictViewModel =
-//            ViewModelProvider(this).get(PredictViewModel::class.java)
 
         _binding = FragmentPredictBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
 
-        binding.apply {
-            val spinnerGender: Spinner = spinnerGender
-            val spinnerAge: Spinner = spinnerAge
-            val spinnerSleepDuration: Spinner = spinnerSleepDuration
-            val spinnerPhysicalActivityLevel: Spinner = spinnerPhysicalActivity
-            val spinnerWorkingHours: Spinner = spinnerWorkingHours
-            val bmi: Spinner = spinnerBmi
-
-            setSpinnerAdapter(spinnerGender, R.array.dropdown_gender)
-            setSpinnerAdapter(spinnerAge, R.array.dropdown_gender)
-            setSpinnerAdapter(spinnerSleepDuration, R.array.dropdown_gender)
-            setSpinnerAdapter(spinnerPhysicalActivityLevel, R.array.dropdown_gender)
-            setSpinnerAdapter(spinnerWorkingHours, R.array.dropdown_gender)
-            setSpinnerAdapter(bmi, R.array.dropdown_gender)
-        }
-
-        extras()
+        dropdownComponent()
         bmiCalculate()
+        extras()
         calculate()
 
         return root
@@ -68,9 +60,63 @@ class PredictFragment : Fragment() {
         spinner.adapter = adapter
     }
 
+    private fun dropdownComponent() {
+        binding.apply {
+            val spinnerGender: Spinner = spinnerGender.findViewById(R.id.spinner)
+            val spinnerAge: Spinner = spinnerAge.findViewById(R.id.spinner)
+            val spinnerSleepDuration: Spinner = spinnerSleepDuration.findViewById(R.id.spinner)
+            val spinnerPhysicalActivityLevel: Spinner = spinnerPhysicalActivity.findViewById(R.id.spinner)
+            val spinnerWorkingHours: Spinner = spinnerWorkingHours.findViewById(R.id.spinner)
+            val bmi: Spinner = spinnerBmi.findViewById(R.id.spinner)
+
+            setSpinnerAdapter(spinnerGender, R.array.dropdown_gender)
+            setSpinnerAdapter(spinnerAge, R.array.dropdown_gender)
+            setSpinnerAdapter(spinnerSleepDuration, R.array.dropdown_gender)
+            setSpinnerAdapter(spinnerPhysicalActivityLevel, R.array.dropdown_gender)
+            setSpinnerAdapter(spinnerWorkingHours, R.array.dropdown_gender)
+            setSpinnerAdapter(bmi, R.array.dropdown_gender)
+        }
+    }
+
+
+
     private fun calculate() {
         binding.calculateBtn.setOnClickListener {
-            startActivity(Intent(requireContext(), ResultActivity::class.java))
+
+            val isChecked = binding.checkBox.isChecked
+
+            if (isChecked) {
+                val edtValue = listOf(
+                    binding.dailyStepsEdtl,
+                    binding.heartRateEdtl,
+                    binding.bloodPressureEdtl
+                )
+
+                val dropdownItem = listOf(
+                    binding.spinnerGender,
+                    binding.spinnerAge,
+                    binding.spinnerSleepDuration,
+                    binding.spinnerPhysicalActivity,
+                    binding.spinnerWorkingHours,
+                    binding.spinnerBmi
+                )
+
+                if (predictViewModel.isFieldEmpty(edtValue, dropdownItem)) {
+                    startActivity(Intent(requireContext(), ResultActivity::class.java))
+                }
+            } else {
+                val dropdownItem = listOf(
+                    binding.spinnerGender,
+                    binding.spinnerAge,
+                    binding.spinnerSleepDuration,
+                    binding.spinnerPhysicalActivity,
+                    binding.spinnerWorkingHours
+                )
+
+                if (predictViewModel.isFieldEmpty(null, dropdownItem)) {
+                    startActivity(Intent(requireContext(), ResultActivity::class.java))
+                }
+            }
         }
     }
 

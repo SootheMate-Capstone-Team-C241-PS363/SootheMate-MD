@@ -37,6 +37,7 @@
     <string name="change_password">Change Password</string>
 
     <string-array name="dropdown_gender">
+        <item>Select an option</item>
         <item>Male</item>
         <item>Female</item>
     </string-array>

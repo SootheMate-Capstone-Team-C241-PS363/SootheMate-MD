@@ -19,4 +19,5 @@
     <color name="blue_400">#b8e8fe</color>
     <color name="blue_500">#0098DA</color>
     <color name="blue_600">#007aae</color>
+    <color name="red">#ff0f0f</color>
 </resources>

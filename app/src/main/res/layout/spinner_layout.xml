@@ -1,0 +1,28 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <soup.neumorphism.NeumorphCardView
+        android:id="@+id/neumorph_card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:neumorph_backgroundColor="@color/blue_200"
+        app:neumorph_lightSource="leftTop"
+        app:neumorph_shadowColorDark="@color/blue_300"
+        app:neumorph_shadowColorLight="@color/blue_200"
+        app:neumorph_shadowElevation="6dp"
+        app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
+        app:neumorph_shapeType="pressed"
+        app:neumorph_strokeColor="@color/blue_400"
+        app:neumorph_strokeWidth="1dp"
+        app:neumorph_inset="2dp"
+        android:padding="0dp">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="58dp" />
+    </soup.neumorphism.NeumorphCardView>
+</merge>

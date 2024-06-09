@@ -38,6 +38,10 @@ class EditProfileActivity : AppCompatActivity() {
                 var token = user.token
                 profileViewModel.getDetailProfile(token)
             }
+
+            profileViewModel.apiMessage.observe(this){
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
         }
 
         profileViewModel.detailProfile.observe(this) { userDetail ->
@@ -74,14 +78,6 @@ class EditProfileActivity : AppCompatActivity() {
             mainViewModel.getSession().observe(this) { user ->
                 val token = user.token
                 profileViewModel.updateUserInfo(username, selectedGender, birthDate, token)
-            }
-
-            profileViewModel.isSuccess.observe(this) { success ->
-                if (success == true) {
-                    Toast.makeText(this, "User Info berhasil diperbarui", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(this, "User Info gagal diperbarui", Toast.LENGTH_LONG).show()
-                }
             }
         }
     }

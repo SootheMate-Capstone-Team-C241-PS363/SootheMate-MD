@@ -2,6 +2,11 @@ package com.dicoding.soothemate.ui.bmi
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.Spannable
+import android.text.SpannableString
+import android.text.style.AbsoluteSizeSpan
+import android.text.style.LeadingMarginSpan
 import android.widget.Spinner
 import androidx.core.content.ContextCompat
 import com.dicoding.soothemate.R
@@ -35,6 +40,8 @@ class BmiCalculateActivity : AppCompatActivity() {
                 selectGender(femaleButton, maleButton)
             }
         }
+
+        getBmi()
     }
 
     private fun selectGender(selectedButton: NeumorphButton, unselectedButton: NeumorphButton) {
@@ -50,5 +57,47 @@ class BmiCalculateActivity : AppCompatActivity() {
         unselectedButton.setBackgroundColor(ContextCompat.getColor(this, R.color.blue_200))
         unselectedButton.setShadowColorDark(ContextCompat.getColor(this, R.color.blue_300))
         unselectedButton.setShadowColorLight(ContextCompat.getColor(this, R.color.blue_200))
+    }
+
+    private fun calculateBmi(height: Int, weight: Double) {
+        val heightCalculate = height / 100.0
+        val bmiCalculate = weight / (heightCalculate * heightCalculate)
+        var result: String = ""
+        var bmiDescription: String = ""
+
+        if (bmiCalculate < 18.5) {
+            result = "Underweight"
+            bmiDescription = "gajgkjnajaejeajbgakjvjaenioga"
+        } else if (bmiCalculate >= 18.5 && bmiCalculate < 24.9) {
+            result = "Normal weight"
+            bmiDescription = "gajgkjnajaejeajbgakjvjaenioga"
+        } else if (bmiCalculate >= 24.9 && bmiCalculate < 29.9) {
+            result = "Overweight"
+            bmiDescription = "gajgkjnajaejeajbgakjvjaenioga"
+        } else if (bmiCalculate >= 29.9) {
+            result = "Obesity"
+            bmiDescription = "gajgkjnajaejeajbgakjvjaenioga"
+        }
+
+        binding.bmiEdt.gravity = android.view.Gravity.TOP
+        val formattedBMI = String.format("%.1f", bmiCalculate.toFloat())
+        val combinedText = "$formattedBMI ($result) " +
+                "$bmiDescription"
+
+        val spannableString = SpannableString(combinedText)
+
+        val startIndex = combinedText.indexOf("$bmiDescription")
+        val endIndex = combinedText.length
+        spannableString.setSpan(AbsoluteSizeSpan(13, true), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        binding.bmiEdt.text = Editable.Factory.getInstance().newEditable(spannableString)
+    }
+
+    private fun getBmi(){
+        binding.calculateBtn.setOnClickListener {
+            val height = binding.heightEdt.text.toString().toInt()
+            val weight = binding.weightEdt.text.toString().toDouble()
+            calculateBmi(height, weight)
+        }
     }
 }

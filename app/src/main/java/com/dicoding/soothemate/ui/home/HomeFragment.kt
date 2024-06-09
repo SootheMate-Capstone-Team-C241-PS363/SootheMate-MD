@@ -8,12 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
-import com.dicoding.soothemate.R
 import com.dicoding.soothemate.customviews.CircularProgressView
 import com.dicoding.soothemate.databinding.FragmentHomeBinding
-import com.dicoding.soothemate.viewmodel.HomeViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
