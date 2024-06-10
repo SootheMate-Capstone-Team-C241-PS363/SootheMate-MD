@@ -35,10 +35,27 @@
     <string name="bmi_result_null">Please input all the information given above to get the score</string>
     <string name="sign_out">Sign Out</string>
     <string name="change_password">Change Password</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="select_date">Select Date</string>
 
     <string-array name="dropdown_gender">
         <item>Select an option</item>
         <item>Male</item>
         <item>Female</item>
+    </string-array>
+
+    <string-array name="sleep_duration">
+        <item>Select an option</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
     </string-array>
 </resources>

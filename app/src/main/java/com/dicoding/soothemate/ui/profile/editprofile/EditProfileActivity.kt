@@ -5,11 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.dicoding.soothemate.R
+import com.dicoding.soothemate.customviews.CustomEditText
+import com.dicoding.soothemate.customviews.CustomSelectOption
 import com.dicoding.soothemate.databinding.ActivityEditProfileBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.viewmodel.MainViewModel
@@ -61,6 +64,10 @@ class EditProfileActivity : AppCompatActivity() {
             showLoading(it)
         }
 
+
+        changeEditTextBg(binding.editActivity, R.drawable.input_bg_white)
+        changeSpinnerBg(binding.editActivity, R.drawable.input_bg_white)
+
         genderInit()
         showDatePickerDialog()
         updateUserInfo()
@@ -75,9 +82,11 @@ class EditProfileActivity : AppCompatActivity() {
             val birthDate = binding.birthDate.text.toString()
             val selectedGender = binding.genderEdt.selectedItem.toString()
 
-            mainViewModel.getSession().observe(this) { user ->
-                val token = user.token
-                profileViewModel.updateUserInfo(username, selectedGender, birthDate, token)
+            if (validate()){
+                mainViewModel.getSession().observe(this) { user ->
+                    val token = user.token
+                    profileViewModel.updateUserInfo(username, selectedGender, birthDate, token)
+                }
             }
         }
     }
@@ -115,10 +124,56 @@ class EditProfileActivity : AppCompatActivity() {
         val adapter = ArrayAdapter.createFromResource(
             this,
             arrayResId,
-            R.layout.dropdown_item
+            android.R.layout.simple_spinner_dropdown_item
         )
-        adapter.setDropDownViewResource(R.layout.dropdown_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
+    }
+
+    private fun validate(): Boolean {
+        val editTextValue = listOf(
+            binding.usernameEdt,
+            binding.birthDate
+        )
+
+        val dropdownValue = listOf(
+            binding.genderEdt
+        )
+
+
+        var allValid = true
+
+
+        for (editText in editTextValue) {
+            if (!editText.isValidProfile()) {
+                allValid = false
+            }
+        }
+
+        for (dropdown in dropdownValue) {
+            if (!dropdown.isValidProfile()) {
+                allValid = false
+            }
+        }
+        return allValid
+    }
+
+    private fun changeEditTextBg(viewGroup: ViewGroup, backgroundResId: Int) {
+        for (i in 0 until viewGroup.childCount) {
+            val view = viewGroup.getChildAt(i)
+            if (view is CustomEditText) {
+                view.setCustomBackground(backgroundResId)
+            }
+        }
+    }
+
+    private fun changeSpinnerBg(viewGroup: ViewGroup, backgroundResId: Int) {
+        for (i in 0 until viewGroup.childCount) {
+            val view = viewGroup.getChildAt(i)
+            if (view is CustomSelectOption) {
+                view.setCustomBackground(backgroundResId)
+            }
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {

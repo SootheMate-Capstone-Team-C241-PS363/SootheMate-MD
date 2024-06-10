@@ -1,45 +1,45 @@
 package com.dicoding.soothemate.customviews
 
 import android.content.Context
-import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.Spinner
-import android.widget.TextView
-import androidx.core.view.size
-import androidx.core.widget.addTextChangedListener
+import androidx.core.content.ContextCompat
 import com.dicoding.soothemate.R
-import com.google.android.material.textfield.TextInputEditText
-import soup.neumorphism.NeumorphCardView
 
 class CustomSelectOption @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr){
-
-    private lateinit var cardView: NeumorphCardView
-    private lateinit var spinner: Spinner
+    context: Context, attrs: AttributeSet? = null
+) : androidx.appcompat.widget.AppCompatSpinner(context, attrs) {
 
     init {
-        initViews(context)
+        setBackgroundResource(R.drawable.input_bg)
     }
 
-    private fun initViews(context: Context) {
-        val view = LayoutInflater.from(context).inflate(R.layout.spinner_layout, this, true)
-        cardView = view.findViewById(R.id.neumorph_card_view)
-        spinner = view.findViewById(R.id.spinner)
+    fun setCustomBackground(resourceId: Int) {
+        val backgroundDrawable: Drawable? = ContextCompat.getDrawable(context, resourceId)
+        this.background = backgroundDrawable
     }
 
-    fun updateStrokeColor() {
-        if (spinner.selectedItem == null || spinner.selectedItemPosition == 0) {
-            val red = resources.getColor(R.color.red, context.theme)
-            cardView.setStrokeColor(ColorStateList.valueOf(red))
+    fun isValidForm(): Boolean {
+        if (selectedItemPosition == 0) { // Assuming the first item is a placeholder or invalid choice
+            val red: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg_error)
+            this.background = red
+            return false
         } else {
-            val blue400 = resources.getColor(R.color.blue_400, context.theme)
-            cardView.setStrokeColor(ColorStateList.valueOf(blue400))
+            val blue: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg)
+            this.background = blue
+            return true
+        }
+    }
+
+    fun isValidProfile(): Boolean {
+        if (selectedItemPosition == 0) { // Assuming the first item is a placeholder or invalid choice
+            val red: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg_white_error)
+            this.background = red
+            return false
+        } else {
+            val blue: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg_white)
+            this.background = blue
+            return true
         }
     }
 }

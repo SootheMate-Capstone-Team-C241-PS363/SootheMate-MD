@@ -6,13 +6,10 @@ import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
-import android.text.style.LeadingMarginSpan
-import android.widget.Spinner
 import androidx.core.content.ContextCompat
 import com.dicoding.soothemate.R
 import com.dicoding.soothemate.databinding.ActivityBmiCalculateBinding
 import soup.neumorphism.NeumorphButton
-import kotlin.math.pow
 
 class BmiCalculateActivity : AppCompatActivity() {
 
@@ -53,7 +50,7 @@ class BmiCalculateActivity : AppCompatActivity() {
         selectedButton.setShadowColorLight(0)
 
         unselectedButton.setShadowElevation(6f)
-        unselectedButton.setTextColor(ContextCompat.getColor(this, R.color.black_400))
+        unselectedButton.setTextColor(ContextCompat.getColor(this, R.color.black_two))
         unselectedButton.setBackgroundColor(ContextCompat.getColor(this, R.color.blue_200))
         unselectedButton.setShadowColorDark(ContextCompat.getColor(this, R.color.blue_300))
         unselectedButton.setShadowColorLight(ContextCompat.getColor(this, R.color.blue_200))

@@ -1,49 +1,54 @@
 package com.dicoding.soothemate.customviews
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.text.InputType
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatEditText
-import androidx.core.widget.addTextChangedListener
+import androidx.core.content.ContextCompat
 import com.dicoding.soothemate.R
-import com.google.android.material.textfield.TextInputEditText
-import soup.neumorphism.NeumorphCardView
 
 class CustomEditText @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
-
-    private lateinit var cardView: NeumorphCardView
-    private lateinit var editText: TextInputEditText
+    context: Context, attrs: AttributeSet? = null
+) : AppCompatEditText(context, attrs) {
 
     init {
-        initViews(context)
+        hint = "Input"
+        val initialBackground: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg)
+        this.background = initialBackground
+
+        setBackgroundResource(R.drawable.input_bg)
     }
 
-    private fun initViews(context: Context) {
-        val view = LayoutInflater.from(context).inflate(R.layout.input_layout, this, true)
-        cardView = view.findViewById(R.id.neumorph_card_view)
+    fun setCustomBackground(resourceId: Int) {
+        val backgroundDrawable: Drawable? = ContextCompat.getDrawable(context, resourceId)
+        this.background = backgroundDrawable
+    }
 
-        editText = cardView.findViewById(R.id.text_input_edit_text)
-
-        editText.addTextChangedListener {
-            updateStrokeColor()
+    fun isValidForm(): Boolean {
+        val text = text.toString()
+        if (text.isNullOrEmpty()) {
+            error = "this field cannot be empty"
+            val red: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg_error)
+            this.background = red
+            return false
+        } else  {
+            val blue: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg)
+            this.background = blue
+            return true
         }
     }
 
-    fun updateStrokeColor() {
-        if (editText.text.isNullOrEmpty()) {
-            val red = resources.getColor(R.color.red, context.theme)
-            cardView.setStrokeColor(ColorStateList.valueOf(red))
-        } else {
-            val blue400 = resources.getColor(R.color.blue_400, context.theme)
-            cardView.setStrokeColor(ColorStateList.valueOf(blue400))
+    fun isValidProfile(): Boolean {
+        val text = text.toString()
+        if (text.isNullOrEmpty()) {
+            error = "this field cannot be empty"
+            val red: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg_white_error)
+            this.background = red
+            return false
+        } else  {
+            val blue: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg_white)
+            this.background = blue
+            return true
         }
     }
 }
