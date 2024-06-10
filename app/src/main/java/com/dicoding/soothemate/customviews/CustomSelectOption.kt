@@ -20,7 +20,7 @@ class CustomSelectOption @JvmOverloads constructor(
     }
 
     fun isValidForm(): Boolean {
-        if (selectedItemPosition == 0) { // Assuming the first item is a placeholder or invalid choice
+        if (selectedItemPosition == 0) {
             val red: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg_error)
             this.background = red
             return false
@@ -32,7 +32,7 @@ class CustomSelectOption @JvmOverloads constructor(
     }
 
     fun isValidProfile(): Boolean {
-        if (selectedItemPosition == 0) { // Assuming the first item is a placeholder or invalid choice
+        if (selectedItemPosition == 0) { 
             val red: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg_white_error)
             this.background = red
             return false

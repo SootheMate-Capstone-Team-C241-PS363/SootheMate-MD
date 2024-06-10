@@ -16,6 +16,7 @@ import com.dicoding.soothemate.databinding.FragmentPredictBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.bmi.BmiCalculateActivity
 import com.dicoding.soothemate.ui.predict.result.ResultActivity
+import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.PredictViewModel
 
 class PredictFragment : Fragment() {
@@ -24,6 +25,10 @@ class PredictFragment : Fragment() {
 
     private val predictViewModel: PredictViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
+    }
+
+    private val mainViewModel by viewModels<MainViewModel> {
+        ViewModelFactory.getInstance(requireActivity())
     }
 
     // This property is only valid between onCreateView and
@@ -66,15 +71,17 @@ class PredictFragment : Fragment() {
             val spinnerGender: Spinner = spinnerGender
             val spinnerAge: Spinner = spinnerAge
             val spinnerSleepDuration: Spinner = spinnerSleepDuration
-            val spinnerPhysicalActivityLevel: Spinner = spinnerPhysicalActivity
-            val spinnerWorkingHours: Spinner = spinnerWorkingHours
+            val qualityOfSleep: Spinner = spinnerSleepQuality
+            val spinnerMinWorkingHours: Spinner = spinnerMinWorkingHours
+            val spinnerMaksWorkingHours: Spinner = spinnerMaksWorkingHours
             val bmi: Spinner = spinnerBmi
 
             setSpinnerAdapter(spinnerGender, R.array.dropdown_gender)
-            setSpinnerAdapter(spinnerAge, R.array.dropdown_gender)
-            setSpinnerAdapter(spinnerSleepDuration, R.array.dropdown_gender)
-            setSpinnerAdapter(spinnerPhysicalActivityLevel, R.array.dropdown_gender)
-            setSpinnerAdapter(spinnerWorkingHours, R.array.dropdown_gender)
+            setSpinnerAdapter(spinnerAge, R.array.dropdown_age)
+            setSpinnerAdapter(spinnerSleepDuration, R.array.sleep_duration)
+            setSpinnerAdapter(qualityOfSleep, R.array.sleep_quality)
+            setSpinnerAdapter(spinnerMinWorkingHours, R.array.working_hours)
+            setSpinnerAdapter(spinnerMaksWorkingHours, R.array.working_hours)
             setSpinnerAdapter(bmi, R.array.dropdown_gender)
         }
     }
@@ -115,6 +122,14 @@ class PredictFragment : Fragment() {
 
     private fun calculate() {
         binding.calculateBtn.setOnClickListener {
+            val gender = binding.spinnerGender.selectedItem.toString()
+            val age = binding.spinnerAge.selectedItem.toString().toIntOrNull() ?: 0
+            val sleepDuration = binding.spinnerSleepDuration.selectedItem.toString().toIntOrNull() ?: 0
+            val sleepQuality = binding.spinnerSleepQuality.selectedItem.toString().toIntOrNull() ?: 0
+            val physicalActivity = binding.physicalActivity.text.toString().toIntOrNull() ?: 0
+            val minWorkingHours = binding.spinnerMinWorkingHours.selectedItem.toString().toIntOrNull() ?: 0
+            val maksWorkingHours = binding.spinnerMaksWorkingHours.selectedItem.toString().toIntOrNull() ?: 0
+
             val isChecked = binding.checkBox.isChecked
             if (isChecked) {
                 if (validateExtras()) {
@@ -124,7 +139,22 @@ class PredictFragment : Fragment() {
                 }
             } else {
                 if (validateMandatory()) {
-                    startActivity(Intent(requireContext(), ResultActivity::class.java))
+                    mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
+                        var token = user.token
+                        predictViewModel.predictStress(gender, age, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, null, null, null, null, token)
+                    }
+
+                    predictViewModel.isSuccess.observe(viewLifecycleOwner){
+                        if (it == true) {
+                            predictViewModel.stressValue.observe(viewLifecycleOwner){ result ->
+                                Intent(requireContext(), ResultActivity::class.java).also {
+                                    it.putExtra(ResultActivity.STRESS_VALUE, result.toString())
+                                    it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                                    startActivity(it)
+                                }
+                            }
+                        }
+                    }
                 } else{
                     // do something bingung
                 }
@@ -138,22 +168,35 @@ class PredictFragment : Fragment() {
             binding.spinnerGender,
             binding.spinnerAge,
             binding.spinnerSleepDuration,
-            binding.spinnerPhysicalActivity,
-            binding.spinnerWorkingHours
+            binding.spinnerSleepQuality,
+            binding.spinnerMinWorkingHours,
+            binding.spinnerMaksWorkingHours
+        )
+
+        val editTexts = listOf(
+            binding.physicalActivity
         )
 
         var allValid = true
+
+        for (editText in editTexts) {
+            if (!editText.isValidForm()) {
+                allValid = false
+            }
+        }
 
         for (dropdown in dropdownValue) {
             if (!dropdown.isValidForm()) {
                 allValid = false
             }
         }
+
         return allValid
     }
 
     private fun validateExtras(): Boolean {
         val editTexts = listOf(
+            binding.physicalActivity,
             binding.dailyStepsEdtl,
             binding.heartRateEdtl,
             binding.bloodPressureEdtl
@@ -163,8 +206,9 @@ class PredictFragment : Fragment() {
             binding.spinnerGender,
             binding.spinnerAge,
             binding.spinnerSleepDuration,
-            binding.spinnerPhysicalActivity,
-            binding.spinnerWorkingHours,
+            binding.spinnerSleepQuality,
+            binding.spinnerMinWorkingHours,
+            binding.spinnerMaksWorkingHours,
             binding.spinnerBmi
         )
 
@@ -175,6 +219,7 @@ class PredictFragment : Fragment() {
                 allValid = false
             }
         }
+
         for (dropdown in dropdownValue) {
             if (!dropdown.isValidForm()) {
                 allValid = false

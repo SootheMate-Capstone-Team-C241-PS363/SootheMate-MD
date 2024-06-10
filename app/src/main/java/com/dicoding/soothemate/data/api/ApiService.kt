@@ -25,4 +25,7 @@ interface ApiService {
 
     @POST("auth/logout")
     fun logout(): Call<ApiResponse>
+
+    @POST("stress/predict")
+    fun predictStress(@Body request: PredictStressData): Call<PredictResponse>
 }

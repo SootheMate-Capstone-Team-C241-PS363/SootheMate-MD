@@ -97,7 +97,7 @@
             <com.dicoding.soothemate.customviews.CustomSelectOption
                 android:id="@+id/spinner_gender"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +120,7 @@
             <com.dicoding.soothemate.customviews.CustomSelectOption
                 android:id="@+id/spinner_age"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -143,13 +143,35 @@
             <com.dicoding.soothemate.customviews.CustomSelectOption
                 android:id="@+id/spinner_sleep_duration"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView19"/>
 
+            <TextView
+                android:id="@+id/qualitySleep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="28dp"
+                android:text="Quality of Sleep"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_sleep_duration" />
+
+            <com.dicoding.soothemate.customviews.CustomSelectOption
+                android:id="@+id/spinner_sleep_quality"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/qualitySleep"/>
 
             <TextView
                 android:id="@+id/textView20"
@@ -162,18 +184,19 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_sleep_duration" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_sleep_quality" />
 
-            <com.dicoding.soothemate.customviews.CustomSelectOption
-                android:id="@+id/spinner_physical_activity"
+            <com.dicoding.soothemate.customviews.CustomEditText
+                android:id="@+id/physical_activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:inputType="number"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView20"/>
-
 
             <TextView
                 android:id="@+id/textView21"
@@ -181,22 +204,45 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
-                android:text="Working Hours"
+                android:text="@string/minimum_working_hours_per_day"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_physical_activity" />
+                app:layout_constraintTop_toBottomOf="@+id/physical_activity" />
 
             <com.dicoding.soothemate.customviews.CustomSelectOption
-                android:id="@+id/spinner_working_hours"
+                android:id="@+id/spinner_min_working_hours"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView21"/>
+
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="28dp"
+                android:text="@string/minimum_working_hours_per_day"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_min_working_hours" />
+
+            <com.dicoding.soothemate.customviews.CustomSelectOption
+                android:id="@+id/spinner_maks_working_hours"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView26"/>
 
             <CheckBox
                 android:id="@+id/checkBox"
@@ -208,7 +254,7 @@
                 android:textColor="@color/black_two"
                 android:fontFamily="@font/poppins_semibold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_working_hours" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_maks_working_hours" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/extras"
@@ -250,7 +296,7 @@
                 <com.dicoding.soothemate.customviews.CustomSelectOption
                     android:id="@+id/spinner_bmi"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"

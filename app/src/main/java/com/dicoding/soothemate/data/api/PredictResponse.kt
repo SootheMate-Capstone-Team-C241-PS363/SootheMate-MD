@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class PredictResponse(
 
 	@field:SerializedName("data")
-	val data: Data,
+	val data: PredictData,
 
 	@field:SerializedName("message")
 	val message: String,
