@@ -51,12 +51,18 @@ class EditProfileActivity : AppCompatActivity() {
             if (userDetail != null) {
                 binding.usernameEdt.text = Editable.Factory.getInstance().newEditable(userDetail.name)
                 binding.emailEdt.text = Editable.Factory.getInstance().newEditable(userDetail.email)
-                binding.birthDate.text = Editable.Factory.getInstance().newEditable(userDetail.birthDate)
+                binding.birthDate.text = Editable.Factory.getInstance().newEditable(userDetail.birthDate?:"")
                 val genderArray = resources.getStringArray(R.array.dropdown_gender)
-                val genderIndex = genderArray.indexOf(userDetail.gender)
+                val genderIndex = userDetail.gender?.let {
+                    genderArray.indexOf(it)
+                } ?: -1
+
                 if (genderIndex != -1) {
                     binding.genderEdt.setSelection(genderIndex)
+                } else {
+                    binding.genderEdt.setSelection(0)
                 }
+
             }
         }
 

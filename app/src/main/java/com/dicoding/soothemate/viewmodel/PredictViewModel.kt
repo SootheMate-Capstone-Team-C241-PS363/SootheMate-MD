@@ -50,9 +50,9 @@ class PredictViewModel : ViewModel() {
                 call: Call<PredictResponse>,
                 response: Response<PredictResponse>
             ) {
-                _isLoading.value = false
                 if (response.isSuccessful) {
                     val responseBody = response.body()
+                    _isLoading.value = false
                     if (responseBody != null && responseBody.status == "success") {
                         _stressValue.value = responseBody.data.stressLevel
                         _apiMessage.value = responseBody.message

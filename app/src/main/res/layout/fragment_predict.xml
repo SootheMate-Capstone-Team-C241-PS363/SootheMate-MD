@@ -18,7 +18,7 @@
         android:text="Predict Your Stress"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/poppins_semibold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -78,7 +78,7 @@
                 android:text="Gender"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -113,7 +113,7 @@
                 android:text="@string/age"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinner_gender" />
 
@@ -136,7 +136,7 @@
                 android:text="@string/sleep_duration"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinner_age" />
 
@@ -159,7 +159,7 @@
                 android:text="Quality of Sleep"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinner_sleep_duration" />
 
@@ -182,7 +182,7 @@
                 android:text="@string/physical_activity_level"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinner_sleep_quality" />
 
@@ -207,7 +207,7 @@
                 android:text="@string/minimum_working_hours_per_day"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/physical_activity" />
 
@@ -227,10 +227,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
-                android:text="@string/minimum_working_hours_per_day"
+                android:text="@string/maximum_working_hours_per_day"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/spinner_min_working_hours" />
 
@@ -275,7 +275,7 @@
                     android:text="BMI Category"
                     android:textColor="@color/black_two"
                     android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -285,7 +285,7 @@
                     android:layout_height="wrap_content"
                     android:text="calculate"
                     android:textColor="@color/black_two"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_medium"
                     app:layout_constraintBottom_toBottomOf="@+id/textView22"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.855"
@@ -312,7 +312,7 @@
                     android:text="@string/blood_pressure"
                     android:textColor="@color/black_two"
                     android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/spinner_bmi" />
 
@@ -321,6 +321,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
+                    android:inputType="text"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -337,22 +338,23 @@
                     android:text="@string/heart_rate"
                     android:textColor="@color/black_two"
                     android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/blood_pressure_edtl" />
 
-                <com.dicoding.soothemate.customviews.CustomEditText
-                    android:id="@+id/heart_rate_edtl"
+                <com.dicoding.soothemate.customviews.CustomSelectOption
+                    android:id="@+id/spinner_heart_rate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
+                    android:inputType="number"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/textView24"
                     app:layout_constraintTop_toBottomOf="@+id/textView24">
-                </com.dicoding.soothemate.customviews.CustomEditText>
+                </com.dicoding.soothemate.customviews.CustomSelectOption>
 
 
                 <TextView
@@ -364,15 +366,16 @@
                     android:text="@string/daily_steps"
                     android:textColor="@color/black_two"
                     android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_medium"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/heart_rate_edtl" />
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_heart_rate" />
 
                 <com.dicoding.soothemate.customviews.CustomEditText
                     android:id="@+id/daily_steps_edtl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="12dp"
+                    android:inputType="number"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -386,9 +389,10 @@
             <com.dicoding.soothemate.customviews.CustomButton
                 android:id="@+id/calculateBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_height="49dp"
                 android:layout_marginTop="28dp"
+                android:layout_marginBottom="28dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:text="Calculate"
                 android:textAllCaps="false"
@@ -397,6 +401,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/extras" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
 

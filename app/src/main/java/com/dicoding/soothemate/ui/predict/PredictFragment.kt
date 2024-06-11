@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.dicoding.soothemate.R
@@ -16,12 +17,15 @@ import com.dicoding.soothemate.databinding.FragmentPredictBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.bmi.BmiCalculateActivity
 import com.dicoding.soothemate.ui.predict.result.ResultActivity
+import com.dicoding.soothemate.ui.predict.result.ResultActivity.Companion.STRESS_VALUE
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.PredictViewModel
 
 class PredictFragment : Fragment() {
 
     private var _binding: FragmentPredictBinding? = null
+
+    private var token: String? = null
 
     private val predictViewModel: PredictViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
@@ -44,6 +48,17 @@ class PredictFragment : Fragment() {
         _binding = FragmentPredictBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        predictViewModel.stressValue.observe(viewLifecycleOwner){ stressLevel ->
+            if (stressLevel != null){
+                Intent(requireContext(), ResultActivity::class.java).also {
+                    it.putExtra(STRESS_VALUE, stressLevel.toString())
+                    startActivity(it)
+                }
+            } else {
+                Toast.makeText(requireContext(), "Error, mohon coba kembali", Toast.LENGTH_LONG).show()
+            }
+        }
+
 
         changeEditTextBg(binding.predictLayout, R.drawable.input_bg)
         changeSpinnerBg(binding.predictLayout, R.drawable.input_bg)
@@ -51,7 +66,10 @@ class PredictFragment : Fragment() {
         dropdownComponent()
         bmiCalculate()
         extras()
-        calculate()
+
+        binding.calculateBtn.setOnClickListener {
+            calculate()
+        }
 
         return root
     }
@@ -75,6 +93,7 @@ class PredictFragment : Fragment() {
             val spinnerMinWorkingHours: Spinner = spinnerMinWorkingHours
             val spinnerMaksWorkingHours: Spinner = spinnerMaksWorkingHours
             val bmi: Spinner = spinnerBmi
+            val heartRate: Spinner = spinnerHeartRate
 
             setSpinnerAdapter(spinnerGender, R.array.dropdown_gender)
             setSpinnerAdapter(spinnerAge, R.array.dropdown_age)
@@ -82,7 +101,8 @@ class PredictFragment : Fragment() {
             setSpinnerAdapter(qualityOfSleep, R.array.sleep_quality)
             setSpinnerAdapter(spinnerMinWorkingHours, R.array.working_hours)
             setSpinnerAdapter(spinnerMaksWorkingHours, R.array.working_hours)
-            setSpinnerAdapter(bmi, R.array.dropdown_gender)
+            setSpinnerAdapter(bmi, R.array.dropdown_bmi)
+            setSpinnerAdapter(heartRate, R.array.dropdown_heart_rate)
         }
     }
 
@@ -121,45 +141,46 @@ class PredictFragment : Fragment() {
     }
 
     private fun calculate() {
-        binding.calculateBtn.setOnClickListener {
-            val gender = binding.spinnerGender.selectedItem.toString()
-            val age = binding.spinnerAge.selectedItem.toString().toIntOrNull() ?: 0
-            val sleepDuration = binding.spinnerSleepDuration.selectedItem.toString().toIntOrNull() ?: 0
-            val sleepQuality = binding.spinnerSleepQuality.selectedItem.toString().toIntOrNull() ?: 0
-            val physicalActivity = binding.physicalActivity.text.toString().toIntOrNull() ?: 0
-            val minWorkingHours = binding.spinnerMinWorkingHours.selectedItem.toString().toIntOrNull() ?: 0
-            val maksWorkingHours = binding.spinnerMaksWorkingHours.selectedItem.toString().toIntOrNull() ?: 0
-
-            val isChecked = binding.checkBox.isChecked
-            if (isChecked) {
-                if (validateExtras()) {
-                    startActivity(Intent(requireContext(), ResultActivity::class.java))
-                } else{
-                    // do something bingung
-                }
-            } else {
-                if (validateMandatory()) {
+        val gender = binding.spinnerGender.selectedItem.toString()
+        val age = binding.spinnerAge.selectedItem.toString().toIntOrNull() ?: 0
+        val sleepDuration = binding.spinnerSleepDuration.selectedItem.toString().toIntOrNull() ?: 0
+        val sleepQuality = binding.spinnerSleepQuality.selectedItem.toString().toIntOrNull() ?: 0
+        val physicalActivity = binding.physicalActivity.text.toString().toIntOrNull() ?: 0
+        val minWorkingHours = binding.spinnerMinWorkingHours.selectedItem.toString().toIntOrNull() ?: 0
+        val maksWorkingHours = binding.spinnerMaksWorkingHours.selectedItem.toString().toIntOrNull() ?: 0
+        val bmiCategory = binding.spinnerMaksWorkingHours.selectedItem.toString()
+        val bloodPressure = binding.bloodPressureEdtl.text.toString()
+        val heartRate = binding.spinnerHeartRate.selectedItem.toString().toIntOrNull() ?: 0
+        val dailySteps = binding.dailyStepsEdtl.text.toString().toInt()
+        val isChecked = binding.checkBox.isChecked
+        if (isChecked) {
+            if (validateExtras()) {
+                if (token == null) {
                     mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
-                        var token = user.token
-                        predictViewModel.predictStress(gender, age, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, null, null, null, null, token)
-                    }
+                        token = user.token
 
-                    predictViewModel.isSuccess.observe(viewLifecycleOwner){
-                        if (it == true) {
-                            predictViewModel.stressValue.observe(viewLifecycleOwner){ result ->
-                                Intent(requireContext(), ResultActivity::class.java).also {
-                                    it.putExtra(ResultActivity.STRESS_VALUE, result.toString())
-                                    it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                                    startActivity(it)
-                                }
-                            }
-                        }
                     }
-                } else{
-                    // do something bingung
+                } else {
+                    predictViewModel.predictStress(gender, age, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, null, null, null, null,
+                        token!!
+                    )
                 }
             }
+        } else {
+            if (validateMandatory()) {
+                if (token == null) {
+                    mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
+                        token = user.token
 
+                    }
+                } else {
+                    predictViewModel.predictStress(gender, age, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, null, null, null, null,
+                        token!!
+                    )
+                }
+            } else{
+                // do something bingung
+            }
         }
     }
 
@@ -197,9 +218,7 @@ class PredictFragment : Fragment() {
     private fun validateExtras(): Boolean {
         val editTexts = listOf(
             binding.physicalActivity,
-            binding.dailyStepsEdtl,
-            binding.heartRateEdtl,
-            binding.bloodPressureEdtl
+            binding.dailyStepsEdtl
         )
 
         val dropdownValue = listOf(
@@ -209,7 +228,8 @@ class PredictFragment : Fragment() {
             binding.spinnerSleepQuality,
             binding.spinnerMinWorkingHours,
             binding.spinnerMaksWorkingHours,
-            binding.spinnerBmi
+            binding.spinnerBmi,
+            binding.spinnerHeartRate
         )
 
         var allValid = true
@@ -226,6 +246,10 @@ class PredictFragment : Fragment() {
             }
         }
         return allValid
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

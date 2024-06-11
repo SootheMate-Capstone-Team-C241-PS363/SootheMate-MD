@@ -3,13 +3,13 @@ package com.dicoding.soothemate.customviews
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import com.dicoding.soothemate.R
+import com.google.android.material.textfield.TextInputEditText
 
 class CustomEditText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
-) : AppCompatEditText(context, attrs) {
+) : TextInputEditText(context, attrs) {
 
     init {
         hint = "Input"

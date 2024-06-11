@@ -61,9 +61,11 @@ class ProfileFragment : Fragment() {
                 binding.genderValue.text = userDetail.gender
 
                 val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val birthDate = dateFormatter.parse(userDetail.birthDate)
-                val age = birthDate?.age ?: 0
-                binding.ageValue.text = "$age years old"
+                if (userDetail.birthDate != null) {
+                    val birthDate = userDetail.birthDate?.let { dateFormatter.parse(it) }
+                    val age = birthDate?.age ?: 0
+                    binding.ageValue.text = "$age years old"
+                }
             }
         }
 

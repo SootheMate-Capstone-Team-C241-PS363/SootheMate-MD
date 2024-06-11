@@ -20,7 +20,12 @@ class MainViewModel(private val repository: UserRepository) : ViewModel() {
     private val _logoutSuccess = MutableLiveData<Boolean?>()
     val logoutSuccess: LiveData<Boolean?> = _logoutSuccess
 
+    private val _isSuccess = MutableLiveData<Boolean?>()
+    val isSuccess: LiveData<Boolean?> = _isSuccess
+
+
     fun getSession(): LiveData<UserModel> {
+        _isSuccess.value = false
         return repository.getSession().asLiveData()
     }
 
