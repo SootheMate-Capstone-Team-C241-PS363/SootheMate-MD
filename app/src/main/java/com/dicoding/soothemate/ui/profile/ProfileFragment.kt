@@ -46,11 +46,9 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        if (savedInstanceState === null){
-            mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
-                var token = user.token
-                profileViewModel.getDetailProfile(token)
-            }
+        mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
+            var token = user.token
+            profileViewModel.getDetailProfile(token)
         }
 
         profileViewModel.detailProfile.observe(viewLifecycleOwner) { userDetail ->

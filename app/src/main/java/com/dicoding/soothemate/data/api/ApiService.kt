@@ -28,4 +28,7 @@ interface ApiService {
 
     @POST("stress/predict")
     fun predictStress(@Body request: PredictStressData): Call<PredictResponse>
+
+    @POST("stress/save")
+    fun savePredictStress(@Body request: SavePredictData): Call<SavePredictResponse>
 }
