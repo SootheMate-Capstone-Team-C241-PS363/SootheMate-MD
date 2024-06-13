@@ -1,12 +1,14 @@
 package com.dicoding.soothemate.ui.predict
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -32,7 +34,7 @@ class PredictFragment : Fragment() {
     }
 
     private val mainViewModel by viewModels<MainViewModel> {
-        ViewModelFactory.getInstance(requireActivity())
+        ViewModelFactory.getInstance(requireContext())
     }
 
     // This property is only valid between onCreateView and
@@ -75,14 +77,34 @@ class PredictFragment : Fragment() {
     }
 
     private fun setSpinnerAdapter(spinner: Spinner, arrayResId: Int) {
-        val adapter = ArrayAdapter.createFromResource(
+        val adapter = object : ArrayAdapter<String>(
             requireContext(),
-            arrayResId,
-            android.R.layout.simple_spinner_dropdown_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            android.R.layout.simple_spinner_dropdown_item,
+            resources.getStringArray(arrayResId)
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                if (position == 0) {
+                    (view as TextView).setTextColor(Color.GRAY)
+                }
+                return view
+            }
+
+            override fun isEnabled(position: Int): Boolean {
+                return position != 0
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent)
+                if (position == 0) {
+                    (view as TextView).setTextColor(Color.GRAY)
+                }
+                return view
+            }
+        }
         spinner.adapter = adapter
     }
+
 
     private fun dropdownComponent() {
         binding.apply {
@@ -148,13 +170,25 @@ class PredictFragment : Fragment() {
         val physicalActivity = binding.physicalActivity.text.toString().toIntOrNull() ?: 0
         val minWorkingHours = binding.spinnerMinWorkingHours.selectedItem.toString().toIntOrNull() ?: 0
         val maksWorkingHours = binding.spinnerMaksWorkingHours.selectedItem.toString().toIntOrNull() ?: 0
-        val bmiCategory = binding.spinnerMaksWorkingHours.selectedItem.toString()
-        val bloodPressure = binding.bloodPressureEdtl.text.toString()
-        val heartRate = binding.spinnerHeartRate.selectedItem.toString().toIntOrNull() ?: 0
-        val dailySteps = binding.dailyStepsEdtl.text.toString().toInt()
+//        val bmiCategory = binding.spinnerMaksWorkingHours.selectedItem.toString()
+//        val bloodPressure = binding.bloodPressureEdtl.text.toString()
+//        val heartRate = binding.spinnerHeartRate.selectedItem.toString().toIntOrNull() ?: 0
+//        val dailySteps = binding.dailyStepsEdtl.text.toString().toInt()
         val isChecked = binding.checkBox.isChecked
         if (isChecked) {
             if (validateExtras()) {
+//                if (token == null) {
+//                    mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
+//                        token = user.token
+//
+//                    }
+//                } else {
+//                    predictViewModel.predictStress(gender, age, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, bmiCategory, bloodPressure, heartRate, dailySteps,
+//                        token!!
+//                    )
+//                    token = null
+//                }
+            } else if (validateMandatory()) {
                 if (token == null) {
                     mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
                         token = user.token
@@ -165,21 +199,6 @@ class PredictFragment : Fragment() {
                         token!!
                     )
                 }
-            }
-        } else {
-            if (validateMandatory()) {
-                if (token == null) {
-                    mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
-                        token = user.token
-
-                    }
-                } else {
-                    predictViewModel.predictStress(gender, age, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, null, null, null, null,
-                        token!!
-                    )
-                }
-            } else{
-                // do something bingung
             }
         }
     }

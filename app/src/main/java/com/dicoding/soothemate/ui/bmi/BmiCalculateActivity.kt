@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
+import android.view.Gravity
 import androidx.core.content.ContextCompat
 import com.dicoding.soothemate.R
 import com.dicoding.soothemate.databinding.ActivityBmiCalculateBinding
@@ -38,7 +39,7 @@ class BmiCalculateActivity : AppCompatActivity() {
             }
         }
 
-        getBmi()
+        setupCalculateButton()
     }
 
     private fun selectGender(selectedButton: NeumorphButton, unselectedButton: NeumorphButton) {
@@ -57,44 +58,52 @@ class BmiCalculateActivity : AppCompatActivity() {
     }
 
     private fun calculateBmi(height: Int, weight: Double) {
-        val heightCalculate = height / 100.0
-        val bmiCalculate = weight / (heightCalculate * heightCalculate)
-        var result: String = ""
-        var bmiDescription: String = ""
+        val heightInMeters = height / 100.0
+        val bmi = weight / (heightInMeters * heightInMeters)
+        val result: String
+        val bmiDescription: String
 
-        if (bmiCalculate < 18.5) {
-            result = "Underweight"
-            bmiDescription = "gajgkjnajaejeajbgakjvjaenioga"
-        } else if (bmiCalculate >= 18.5 && bmiCalculate < 24.9) {
-            result = "Normal weight"
-            bmiDescription = "gajgkjnajaejeajbgakjvjaenioga"
-        } else if (bmiCalculate >= 24.9 && bmiCalculate < 29.9) {
-            result = "Overweight"
-            bmiDescription = "gajgkjnajaejeajbgakjvjaenioga"
-        } else if (bmiCalculate >= 29.9) {
-            result = "Obesity"
-            bmiDescription = "gajgkjnajaejeajbgakjvjaenioga"
+        when {
+            bmi < 18.5 -> {
+                result = "Underweight"
+                bmiDescription = "You are underweight. Consider eating more and working on gaining muscle mass."
+            }
+            bmi < 24.9 -> {
+                result = "Normal weight"
+                bmiDescription = "You have a normal weight. Keep up the good work!"
+            }
+            bmi < 29.9 -> {
+                result = "Overweight"
+                bmiDescription = "You are overweight. Consider adopting a healthier diet and increasing physical activity."
+            }
+            else -> {
+                result = "Obesity"
+                bmiDescription = "You are obese. Consult with a healthcare provider for personalized advice."
+            }
         }
 
-        binding.bmiEdt.gravity = android.view.Gravity.TOP
-        val formattedBMI = String.format("%.1f", bmiCalculate.toFloat())
-        val combinedText = "$formattedBMI ($result) " +
-                "$bmiDescription"
+        binding.bmiEdt.gravity = Gravity.TOP
+        val formattedBMI = String.format("%.1f", bmi)
+        val combinedText = "$formattedBMI ($result) $bmiDescription"
 
         val spannableString = SpannableString(combinedText)
-
-        val startIndex = combinedText.indexOf("$bmiDescription")
+        val startIndex = combinedText.indexOf(bmiDescription)
         val endIndex = combinedText.length
         spannableString.setSpan(AbsoluteSizeSpan(13, true), startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
         binding.bmiEdt.text = Editable.Factory.getInstance().newEditable(spannableString)
     }
 
-    private fun getBmi(){
+    private fun setupCalculateButton() {
         binding.calculateBtn.setOnClickListener {
-            val height = binding.heightEdt.text.toString().toInt()
-            val weight = binding.weightEdt.text.toString().toDouble()
-            calculateBmi(height, weight)
+            val height = binding.heightEdt.text.toString().toIntOrNull()
+            val weight = binding.weightEdt.text.toString().toDoubleOrNull()
+
+            if (height != null && weight != null) {
+                calculateBmi(height, weight)
+            } else {
+                binding.bmiEdt.text = Editable.Factory.getInstance().newEditable("Please enter valid height and weight.")
+            }
         }
     }
 }

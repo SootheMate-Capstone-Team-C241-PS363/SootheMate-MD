@@ -9,6 +9,8 @@ data class UserCredentials(
     val email: String,
     @field:SerializedName("password")
     val password: String,
+    @field:SerializedName("password_confirmation")
+    val passwordConfirmation: String,
     @field:SerializedName("gender")
     val gender : String,
     @field:SerializedName("birth_date")
@@ -32,4 +34,3 @@ data class UpdateUserInfo(
     @field:SerializedName("birth_date")
     val birthDate : String
 )
-

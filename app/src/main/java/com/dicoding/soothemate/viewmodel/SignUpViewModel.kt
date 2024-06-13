@@ -14,11 +14,11 @@ class SignUpViewModel (private val repository: UserRepository) : ViewModel() {
     private val _signUpSuccess = MutableLiveData<Boolean?>()
     val signUpSuccess: LiveData<Boolean?> = _signUpSuccess
 
-    fun signUp(name: String, email: String, password: String, gender: String, birthDate: String) {
+    fun signUp(name: String, email: String, password: String, passwordConfirmation: String, gender: String, birthDate: String) {
         viewModelScope.launch {
             try {
                 _signUpSuccess.value = null
-                val token = repository.register(name, email, password, gender, birthDate)
+                val token = repository.register(name, email, password, passwordConfirmation, gender, birthDate)
                 if (token != null) {
                     val userModel = UserModel(email, token)
                     saveSession(userModel)

@@ -1,6 +1,7 @@
 package com.dicoding.soothemate.ui.profile.editprofile
 
 import android.app.DatePickerDialog
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import com.dicoding.soothemate.R
@@ -123,18 +125,39 @@ class EditProfileActivity : AppCompatActivity() {
         binding.apply {
             val gender: Spinner = genderEdt
             setSpinnerAdapter(gender, R.array.dropdown_gender)
+            gender.prompt = getString(R.string.select_gender)
         }
     }
 
     private fun setSpinnerAdapter(spinner: Spinner, arrayResId: Int) {
-        val adapter = ArrayAdapter.createFromResource(
+        val adapter = object : ArrayAdapter<String>(
             this,
-            arrayResId,
-            android.R.layout.simple_spinner_dropdown_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            android.R.layout.simple_spinner_dropdown_item,
+            resources.getStringArray(arrayResId)
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                if (position == 0) {
+                    (view as TextView).setTextColor(Color.GRAY)
+                }
+                return view
+            }
+
+            override fun isEnabled(position: Int): Boolean {
+                return position != 0
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent)
+                if (position == 0) {
+                    (view as TextView).setTextColor(Color.GRAY)
+                }
+                return view
+            }
+        }
         spinner.adapter = adapter
     }
+
 
     private fun validate(): Boolean {
         val editTextValue = listOf(

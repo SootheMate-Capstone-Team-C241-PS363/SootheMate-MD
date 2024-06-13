@@ -9,7 +9,7 @@ import retrofit2.http.PUT
 interface ApiService {
 
     @POST("auth/login")
-    suspend fun login(@Body request: UserCredentials): LoginResponse
+    suspend fun login(@Body request: UserRequest): LoginResponse
 
     @POST("auth/register")
     suspend fun register(@Body request: UserCredentials): RegisterResponse
