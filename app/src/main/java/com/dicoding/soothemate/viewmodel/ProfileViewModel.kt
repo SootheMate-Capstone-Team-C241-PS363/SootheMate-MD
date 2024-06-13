@@ -12,6 +12,8 @@ import com.dicoding.soothemate.data.api.ProfileData
 import com.dicoding.soothemate.data.api.ResetUserCredentials
 import com.dicoding.soothemate.data.api.UpdateUserInfo
 import com.dicoding.soothemate.data.api.UpdateUserInfoResponse
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,6 +25,9 @@ class ProfileViewModel (private val repository: UserRepository) : ViewModel() {
 
     private val _isSuccess = MutableLiveData<Boolean?>()
     val isSuccess: LiveData<Boolean?> = _isSuccess
+
+    private val _apiMessage = MutableLiveData<String?>()
+    val apiMessage: LiveData<String?> = _apiMessage
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
@@ -68,7 +73,18 @@ class ProfileViewModel (private val repository: UserRepository) : ViewModel() {
                         _isSuccess.value = false
                     }
                 } else {
-                    Log.e(TAG, "onFailure: ${response.message()}")
+                    val errorBody = response.errorBody()?.string()
+                    val errorMessage = if (!errorBody.isNullOrEmpty()) {
+                        try {
+                            JSONObject(errorBody).getString("message")
+                        } catch (e: JSONException) {
+                            "Unknown error"
+                        }
+                    } else {
+                        response.message()
+                    }
+                    Log.e(TAG, "onFailure: $errorMessage")
+                    _apiMessage.value = errorMessage
                     _isSuccess.value = false
                 }
             }
@@ -94,13 +110,25 @@ class ProfileViewModel (private val repository: UserRepository) : ViewModel() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     if (responseBody != null && responseBody.status == "success") {
+                        _apiMessage.value = responseBody.message
                         _isSuccess.value = true
                     } else {
                         Log.e(TAG, "onFailure: ${responseBody?.message}")
                         _isSuccess.value = false
                     }
                 } else {
-                    Log.e(TAG, "onFailure: ${response.message()}")
+                    val errorBody = response.errorBody()?.string()
+                    val errorMessage = if (!errorBody.isNullOrEmpty()) {
+                        try {
+                            JSONObject(errorBody).getString("message")
+                        } catch (e: JSONException) {
+                            "Unknown error"
+                        }
+                    } else {
+                        response.message()
+                    }
+                    Log.e(TAG, "onFailure: $errorMessage")
+                    _apiMessage.value = errorMessage
                     _isSuccess.value = false
                 }
             }
@@ -112,6 +140,7 @@ class ProfileViewModel (private val repository: UserRepository) : ViewModel() {
             }
         })
     }
+
 
     companion object{
         private const val TAG = "ProfileViewModel"

@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/predict_bg"
     app:layoutDescription="@xml/fragment_predict_scene"
-    tools:context=".ui.predict.PredictFragment">
+    tools:context=".ui.predict.PredictFragment"
+    android:id="@+id/predict_layout">
 
     <TextView
         android:id="@+id/textView13"
@@ -17,7 +18,7 @@
         android:text="Predict Your Stress"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/poppins_semibold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -75,39 +76,33 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="40dp"
                 android:text="Gender"
-                android:textColor="@color/black_400"
+                android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <soup.neumorphism.NeumorphCardView
-                android:id="@+id/spinner_gender_edtl"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/error_message"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="This field cannot be empty"
+                android:textColor="@android:color/holo_red_dark"
+                android:visibility="gone"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textView17"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView17" />
+
+            <com.dicoding.soothemate.customviews.CustomSelectOption
+                android:id="@+id/spinner_gender"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView17"
-                app:neumorph_backgroundColor="@color/blue_200"
-                app:neumorph_lightSource="leftTop"
-                app:neumorph_shadowColorDark="@color/blue_300"
-                app:neumorph_shadowColorLight="@color/blue_200"
-                app:neumorph_shadowElevation="6dp"
-                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-                app:neumorph_shapeType="pressed"
-                app:neumorph_strokeColor="@color/blue_400"
-                app:neumorph_strokeWidth="1dp"
-                app:neumorph_inset="2dp"
-                android:padding="0dp">
-
-                <Spinner
-                    android:id="@+id/spinner_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/dropdown_option" />
-            </soup.neumorphism.NeumorphCardView>
+                app:layout_constraintTop_toBottomOf="@+id/textView17"/>
 
             <TextView
                 android:id="@+id/textView18"
@@ -116,40 +111,21 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
                 android:text="@string/age"
-                android:textColor="@color/black_400"
+                android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_gender_edtl" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_gender" />
 
-            <soup.neumorphism.NeumorphCardView
-                android:id="@+id/spinner_age_edtl"
+            <com.dicoding.soothemate.customviews.CustomSelectOption
+                android:id="@+id/spinner_age"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView18"
-                app:neumorph_backgroundColor="@color/blue_200"
-                app:neumorph_lightSource="leftTop"
-                app:neumorph_shadowColorDark="@color/blue_300"
-                app:neumorph_shadowColorLight="@color/blue_200"
-                app:neumorph_shadowElevation="6dp"
-                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-                app:neumorph_shapeType="pressed"
-                app:neumorph_strokeColor="@color/blue_400"
-                app:neumorph_strokeWidth="1dp"
-                app:neumorph_inset="2dp"
-                android:padding="0dp">
-
-                <Spinner
-                    android:id="@+id/spinner_age"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/dropdown_option" />
-            </soup.neumorphism.NeumorphCardView>
-
+                app:layout_constraintTop_toBottomOf="@+id/textView18"/>
 
             <TextView
                 android:id="@+id/textView19"
@@ -158,40 +134,44 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
                 android:text="@string/sleep_duration"
-                android:textColor="@color/black_400"
+                android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_age_edtl" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_age" />
 
-            <soup.neumorphism.NeumorphCardView
-                android:id="@+id/spinner_sleep_duration_edtl"
+            <com.dicoding.soothemate.customviews.CustomSelectOption
+                android:id="@+id/spinner_sleep_duration"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView19"
-                app:neumorph_backgroundColor="@color/blue_200"
-                app:neumorph_lightSource="leftTop"
-                app:neumorph_shadowColorDark="@color/blue_300"
-                app:neumorph_shadowColorLight="@color/blue_200"
-                app:neumorph_shadowElevation="6dp"
-                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-                app:neumorph_shapeType="pressed"
-                app:neumorph_strokeColor="@color/blue_400"
-                app:neumorph_strokeWidth="1dp"
-                app:neumorph_inset="2dp"
-                android:padding="0dp">
+                app:layout_constraintTop_toBottomOf="@+id/textView19"/>
 
-                <Spinner
-                    android:id="@+id/spinner_sleep_duration"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/dropdown_option" />
-            </soup.neumorphism.NeumorphCardView>
+            <TextView
+                android:id="@+id/qualitySleep"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="28dp"
+                android:text="Quality of Sleep"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_sleep_duration" />
 
+            <com.dicoding.soothemate.customviews.CustomSelectOption
+                android:id="@+id/spinner_sleep_quality"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/qualitySleep"/>
 
             <TextView
                 android:id="@+id/textView20"
@@ -200,40 +180,23 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
                 android:text="@string/physical_activity_level"
-                android:textColor="@color/black_400"
+                android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_sleep_duration_edtl" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_sleep_quality" />
 
-            <soup.neumorphism.NeumorphCardView
-                android:id="@+id/spinner_physical_activity_edtl"
+            <com.dicoding.soothemate.customviews.CustomEditText
+                android:id="@+id/physical_activity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="12dp"
+                android:inputType="number"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView20"
-                app:neumorph_backgroundColor="@color/blue_200"
-                app:neumorph_lightSource="leftTop"
-                app:neumorph_shadowColorDark="@color/blue_300"
-                app:neumorph_shadowColorLight="@color/blue_200"
-                app:neumorph_shadowElevation="6dp"
-                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-                app:neumorph_shapeType="pressed"
-                app:neumorph_strokeColor="@color/blue_400"
-                app:neumorph_strokeWidth="1dp"
-                app:neumorph_inset="2dp"
-                android:padding="0dp">
-
-                <Spinner
-                    android:id="@+id/spinner_physical_activity"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/dropdown_option" />
-            </soup.neumorphism.NeumorphCardView>
-
+                app:layout_constraintTop_toBottomOf="@+id/textView20"/>
 
             <TextView
                 android:id="@+id/textView21"
@@ -241,41 +204,45 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
-                android:text="Working Hours"
-                android:textColor="@color/black_400"
+                android:text="@string/minimum_working_hours_per_day"
+                android:textColor="@color/black_two"
                 android:textSize="15sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_physical_activity_edtl" />
+                app:layout_constraintTop_toBottomOf="@+id/physical_activity" />
 
-            <soup.neumorphism.NeumorphCardView
-                android:id="@+id/spinner_working_hours_edtl"
+            <com.dicoding.soothemate.customviews.CustomSelectOption
+                android:id="@+id/spinner_min_working_hours"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView21"
-                app:neumorph_backgroundColor="@color/blue_200"
-                app:neumorph_lightSource="leftTop"
-                app:neumorph_shadowColorDark="@color/blue_300"
-                app:neumorph_shadowColorLight="@color/blue_200"
-                app:neumorph_shadowElevation="6dp"
-                app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-                app:neumorph_shapeType="pressed"
-                app:neumorph_strokeColor="@color/blue_400"
-                app:neumorph_strokeWidth="1dp"
-                app:neumorph_inset="2dp"
-                android:padding="0dp">
+                app:layout_constraintTop_toBottomOf="@+id/textView21"/>
 
-                <Spinner
-                    android:id="@+id/spinner_working_hours"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/dropdown_option" />
-            </soup.neumorphism.NeumorphCardView>
+            <TextView
+                android:id="@+id/textView26"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="28dp"
+                android:text="@string/maximum_working_hours_per_day"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                android:fontFamily="@font/poppins_medium"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_min_working_hours" />
 
+            <com.dicoding.soothemate.customviews.CustomSelectOption
+                android:id="@+id/spinner_maks_working_hours"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView26"/>
 
             <CheckBox
                 android:id="@+id/checkBox"
@@ -284,8 +251,10 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="28dp"
                 android:text="@string/extras_checkbox"
+                android:textColor="@color/black_two"
+                android:fontFamily="@font/poppins_semibold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_working_hours_edtl" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner_maks_working_hours" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/extras"
@@ -304,9 +273,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:text="BMI Category"
-                    android:textColor="@color/black_400"
+                    android:textColor="@color/black_two"
                     android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -315,8 +284,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="calculate"
-                    android:textColor="@color/black_400"
-                    android:textStyle="bold"
+                    android:textColor="@color/black_two"
+                    android:fontFamily="@font/poppins_medium"
                     app:layout_constraintBottom_toBottomOf="@+id/textView22"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.855"
@@ -324,33 +293,15 @@
                     app:layout_constraintTop_toTopOf="@+id/textView22"
                     app:layout_constraintVertical_bias="0.0" />
 
-                <soup.neumorphism.NeumorphCardView
-                    android:id="@+id/spinner_bmi_edtl"
+                <com.dicoding.soothemate.customviews.CustomSelectOption
+                    android:id="@+id/spinner_bmi"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView22"
-                    app:neumorph_backgroundColor="@color/blue_200"
-                    app:neumorph_lightSource="leftTop"
-                    app:neumorph_shadowColorDark="@color/blue_300"
-                    app:neumorph_shadowColorLight="@color/blue_200"
-                    app:neumorph_shadowElevation="6dp"
-                    app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-                    app:neumorph_shapeType="pressed"
-                    app:neumorph_strokeColor="@color/blue_400"
-                    app:neumorph_strokeWidth="1dp"
-                    app:neumorph_inset="2dp"
-                    android:padding="0dp">
-
-                    <Spinner
-                        android:id="@+id/spinner_bmi"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/dropdown_option" />
-                </soup.neumorphism.NeumorphCardView>
+                    app:layout_constraintTop_toBottomOf="@+id/textView22"/>
 
                 <TextView
                     android:id="@+id/textView23"
@@ -359,41 +310,23 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="28dp"
                     android:text="@string/blood_pressure"
-                    android:textColor="@color/black_400"
+                    android:textColor="@color/black_two"
                     android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_medium"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner_bmi_edtl" />
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_bmi" />
 
-                <soup.neumorphism.NeumorphCardView
+                <com.dicoding.soothemate.customviews.CustomEditText
                     android:id="@+id/blood_pressure_edtl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:inputType="text"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView23"
-                    app:neumorph_backgroundColor="@color/blue_200"
-                    app:neumorph_lightSource="leftTop"
-                    app:neumorph_shadowColorDark="@color/blue_300"
-                    app:neumorph_shadowColorLight="@color/blue_200"
-                    app:neumorph_shadowElevation="6dp"
-                    app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-                    app:neumorph_shapeType="pressed"
-                    app:neumorph_strokeColor="@color/blue_400"
-                    app:neumorph_strokeWidth="1dp"
-                    app:neumorph_inset="2dp">
-
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/blood_pressure_edt"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:hint="@string/input_value"
-                        android:inputType="text" />
-                </soup.neumorphism.NeumorphCardView>
+                    app:layout_constraintTop_toBottomOf="@+id/textView23"/>
 
 
                 <TextView
@@ -403,42 +336,25 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="28dp"
                     android:text="@string/heart_rate"
-                    android:textColor="@color/black_400"
+                    android:textColor="@color/black_two"
                     android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_medium"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/blood_pressure_edtl" />
 
-                <soup.neumorphism.NeumorphCardView
-                    android:id="@+id/heart_rate_edtl"
+                <com.dicoding.soothemate.customviews.CustomSelectOption
+                    android:id="@+id/spinner_heart_rate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:inputType="number"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/textView24"
-                    app:layout_constraintTop_toBottomOf="@+id/textView24"
-                    app:neumorph_backgroundColor="@color/blue_200"
-                    app:neumorph_lightSource="leftTop"
-                    app:neumorph_shadowColorDark="@color/blue_300"
-                    app:neumorph_shadowColorLight="@color/blue_200"
-                    app:neumorph_shadowElevation="6dp"
-                    app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-                    app:neumorph_shapeType="pressed"
-                    app:neumorph_strokeColor="@color/blue_400"
-                    app:neumorph_strokeWidth="1dp"
-                    app:neumorph_inset="2dp">
-
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/heart_rate_edt"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:hint="@string/input_value"
-                        android:inputType="text" />
-                </soup.neumorphism.NeumorphCardView>
+                    app:layout_constraintTop_toBottomOf="@+id/textView24">
+                </com.dicoding.soothemate.customviews.CustomSelectOption>
 
 
                 <TextView
@@ -448,51 +364,35 @@
                     android:layout_marginStart="32dp"
                     android:layout_marginTop="28dp"
                     android:text="@string/daily_steps"
-                    android:textColor="@color/black_400"
+                    android:textColor="@color/black_two"
                     android:textSize="15sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_medium"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/heart_rate_edtl" />
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_heart_rate" />
 
-                <soup.neumorphism.NeumorphCardView
+                <com.dicoding.soothemate.customviews.CustomEditText
                     android:id="@+id/daily_steps_edtl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:inputType="number"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/textView25"
-                    app:layout_constraintTop_toBottomOf="@+id/textView25"
-                    app:neumorph_backgroundColor="@color/blue_200"
-                    app:neumorph_lightSource="leftTop"
-                    app:neumorph_shadowColorDark="@color/blue_300"
-                    app:neumorph_shadowColorLight="@color/blue_200"
-                    app:neumorph_shadowElevation="6dp"
-                    app:neumorph_shapeAppearance="@style/CustomShapeAppearance"
-                    app:neumorph_shapeType="pressed"
-                    app:neumorph_strokeColor="@color/blue_400"
-                    app:neumorph_strokeWidth="1dp"
-                    app:neumorph_inset="2dp">
-
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/daily_steps_edt"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:hint="@string/input_value"
-                        android:inputType="text"/>
-                </soup.neumorphism.NeumorphCardView>
+                    app:layout_constraintTop_toBottomOf="@+id/textView25" >
+                </com.dicoding.soothemate.customviews.CustomEditText>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.dicoding.soothemate.customviews.CustomButton
                 android:id="@+id/calculateBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
+                android:layout_height="49dp"
                 android:layout_marginTop="28dp"
+                android:layout_marginBottom="28dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginEnd="32dp"
                 android:text="Calculate"
                 android:textAllCaps="false"
@@ -501,6 +401,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/extras" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.motion.widget.MotionLayout>
 

@@ -224,7 +224,7 @@
         android:layout_height="48dp"
         android:gravity="center"
         android:text="Skip"
-        android:textColor="@color/black_400"
+        android:textColor="@color/black_two"
         android:textSize="16sp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="@+id/next_btn"

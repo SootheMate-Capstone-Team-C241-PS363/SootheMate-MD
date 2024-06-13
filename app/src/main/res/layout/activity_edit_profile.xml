@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.profile.editprofile.EditProfileActivity"
-    android:background="@color/blue_200">
+    android:background="@color/blue_200"
+    android:id="@+id/edit_activity">
 
     <soup.neumorphism.NeumorphImageButton
         android:id="@+id/back_btn"
@@ -53,19 +54,20 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="25dp"
-        android:text="Name"
-        android:textColor="@color/black_400"
+        android:text="@string/name"
+        android:textColor="@color/black_two"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile_picture" />
 
-    <com.google.android.material.textfield.TextInputEditText
+    <com.dicoding.soothemate.customviews.CustomEditText
         android:id="@+id/username_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_container_stroke_shadow_14"
+        android:background="@drawable/input_bg_white"
         android:inputType="text"
+        android:text="user"
         android:padding="12dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
@@ -81,18 +83,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginStart="32dp"
-        android:text="Email"
-        android:textColor="@color/black_400"
+        android:text="@string/email"
+        android:textColor="@color/black_two"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/username_edt" />
 
-    <com.google.android.material.textfield.TextInputEditText
+    <com.dicoding.soothemate.customviews.CustomEditText
         android:id="@+id/email_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_container_stroke_shadow_14"
+        android:background="@drawable/input_bg_white"
         android:textColor="@android:color/darker_gray"
         android:inputType="none"
         android:focusable="false"
@@ -112,18 +114,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginStart="32dp"
-        android:text="Gender"
-        android:textColor="@color/black_400"
+        android:text="@string/gender"
+        android:textColor="@color/black_two"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/email_edt" />
 
-    <Spinner
+    <com.dicoding.soothemate.customviews.CustomSelectOption
         android:id="@+id/gender_edt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_container_stroke_shadow_14"
+        android:background="@drawable/input_bg_white"
         android:textColor="@android:color/darker_gray"
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
@@ -148,21 +150,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         android:layout_marginStart="32dp"
-        android:text="Date of Birth"
-        android:textColor="@color/black_400"
+        android:text="@string/date_of_birth"
+        android:textColor="@color/black_two"
         android:textSize="15sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gender_edt" />
 
-    <com.google.android.material.textfield.TextInputEditText
+    <com.dicoding.soothemate.customviews.CustomEditText
         android:id="@+id/birth_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_container_stroke_shadow_14"
+        android:background="@drawable/input_bg_white"
         android:clickable="true"
         android:focusable="false"
-        android:hint="Select Date"
+        android:hint="@string/select_date"
         android:padding="12dp"
         android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"

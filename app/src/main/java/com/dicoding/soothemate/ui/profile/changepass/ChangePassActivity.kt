@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
@@ -31,6 +32,16 @@ class ChangePassActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChangePassBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (savedInstanceState === null){
+            profileViewModel.apiMessage.observe(this){
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+
+            profileViewModel.isLoading.observe(this) {
+                showLoading(it)
+            }
+        }
 
         supportActionBar?.hide()
 
@@ -91,7 +102,7 @@ class ChangePassActivity : AppCompatActivity() {
 
         val textWatcher = object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Do nothing
+
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -100,7 +111,7 @@ class ChangePassActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                // Do nothing
+
             }
         }
 
@@ -111,6 +122,10 @@ class ChangePassActivity : AppCompatActivity() {
         confirmButton.setOnClickListener {
             setup()
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     private fun exitPage() {

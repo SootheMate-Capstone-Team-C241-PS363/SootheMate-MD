@@ -7,6 +7,7 @@ import com.dicoding.soothemate.data.UserRepository
 import com.dicoding.soothemate.di.Injection
 import com.dicoding.soothemate.viewmodel.LoginViewModel
 import com.dicoding.soothemate.viewmodel.MainViewModel
+import com.dicoding.soothemate.viewmodel.PredictViewModel
 import com.dicoding.soothemate.viewmodel.ProfileViewModel
 import com.dicoding.soothemate.viewmodel.SignUpViewModel
 
@@ -21,13 +22,14 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 LoginViewModel(repository) as T
             }
-
             modelClass.isAssignableFrom(SignUpViewModel::class.java) -> {
                 SignUpViewModel(repository) as T
             }
-
             modelClass.isAssignableFrom(ProfileViewModel::class.java) -> {
                 ProfileViewModel(repository) as T
+            }
+            modelClass.isAssignableFrom(PredictViewModel::class.java) -> {
+                PredictViewModel() as T
             }
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
@@ -38,12 +40,9 @@ class ViewModelFactory(private val repository: UserRepository) : ViewModelProvid
         private var INSTANCE: ViewModelFactory? = null
         @JvmStatic
         fun getInstance(context: Context): ViewModelFactory {
-            if (INSTANCE == null) {
-                synchronized(ViewModelFactory::class.java) {
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context))
-                }
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: ViewModelFactory(Injection.provideRepository(context)).also { INSTANCE = it }
             }
-            return INSTANCE as ViewModelFactory
         }
     }
 }

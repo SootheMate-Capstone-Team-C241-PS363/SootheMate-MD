@@ -1,14 +1,14 @@
 package com.dicoding.soothemate.ui.profile
 
+import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
 import com.dicoding.soothemate.databinding.FragmentProfileBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.onboarding.OnboardingActivity
@@ -61,9 +61,11 @@ class ProfileFragment : Fragment() {
                 binding.genderValue.text = userDetail.gender
 
                 val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val birthDate = dateFormatter.parse(userDetail.birthDate)
-                val age = birthDate?.age ?: 0
-                binding.ageValue.text = "$age years old"
+                if (userDetail.birthDate != null) {
+                    val birthDate = userDetail.birthDate?.let { dateFormatter.parse(it) }
+                    val age = birthDate?.age ?: 0
+                    binding.ageValue.text = "$age years old"
+                }
             }
         }
 

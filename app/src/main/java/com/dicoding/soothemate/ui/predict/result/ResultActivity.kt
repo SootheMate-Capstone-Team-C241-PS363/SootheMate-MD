@@ -3,6 +3,8 @@ package com.dicoding.soothemate.ui.predict.result
 import android.animation.ValueAnimator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.annotation.StringRes
 import com.dicoding.soothemate.R
 import com.dicoding.soothemate.customviews.CircularProgressView
 import com.dicoding.soothemate.databinding.ActivityResultBinding
@@ -24,9 +26,14 @@ class ResultActivity : AppCompatActivity() {
 
         circularProgressView = binding.circularProgressView
 
-        // inisialisasi tracking dummy
-        animateProgress(45f)
-        animateTextViewChange(45)
+        val stressValue = intent.getStringExtra(STRESS_VALUE)
+
+        if (stressValue != null) {
+            animateProgress(stressValue.toFloat())
+        }
+        if (stressValue != null) {
+            animateTextViewChange(stressValue.toInt())
+        }
     }
 
     // animate tracking indicator
@@ -53,5 +60,9 @@ class ResultActivity : AppCompatActivity() {
         animator.start()
 
         currentStress = targetProgress
+    }
+
+    companion object {
+        var STRESS_VALUE = "stress_value"
     }
 }
