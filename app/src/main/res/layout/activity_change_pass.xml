@@ -9,8 +9,8 @@
 
     <soup.neumorphism.NeumorphImageButton
         android:id="@+id/back_btn"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:src="@drawable/back_btn"
         app:neumorph_shapeType="flat"
         app:neumorph_shadowColorLight="@color/blue_200"
@@ -28,7 +28,7 @@
         android:id="@+id/page_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change Password"
+        android:text="@string/change_password_layout_title"
         android:textColor="@color/blue_500"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:hint="Old Password"
+                android:hint="@string/old_password"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
     </soup.neumorphism.NeumorphCardView>
@@ -106,7 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
-                android:hint="New Password"
+                android:hint="@string/new_password"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
     </soup.neumorphism.NeumorphCardView>
@@ -142,7 +142,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@null"
-                android:hint="New Password"
+                android:hint="@string/new_password"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
     </soup.neumorphism.NeumorphCardView>
@@ -151,7 +151,7 @@
         android:id="@+id/confirm_button"
         android:layout_width="206dp"
         android:layout_height="45dp"
-        android:text="Set Password"
+        android:text="@string/set_password"
         android:textAllCaps="false"
         android:elevation="12dp"
         android:layout_marginTop="24dp"

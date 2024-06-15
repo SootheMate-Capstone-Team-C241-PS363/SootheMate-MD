@@ -53,6 +53,13 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.detailProfile.observe(viewLifecycleOwner) { userDetail ->
             if (userDetail != null) {
+
+                if (userDetail.avatar != null) {
+                    Glide.with(binding.root)
+                        .load(userDetail.avatar)
+                        .into(binding.profilePicture)
+                }
+
                 binding.username.text = userDetail.name
                 binding.email.text = userDetail.email
                 binding.birthDateValue.text = userDetail.birthDate

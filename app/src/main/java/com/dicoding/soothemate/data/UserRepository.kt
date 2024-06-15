@@ -23,7 +23,7 @@ class UserRepository private constructor(
 
     suspend fun login(email: String, password: String): String? {
         return try {
-            val request = UserCredentials("", email, password, "", "")
+            val request = UserCredentials("", email, password, "", "", "")
             val response = apiService.login(request)
             val token = response.data.accessToken
             if (response.status == "success") {
@@ -41,9 +41,9 @@ class UserRepository private constructor(
         userPreference.logout()
     }
 
-    suspend fun register(name: String, email: String, password: String, birthDate: String, gender: String): String? {
+    suspend fun register(name: String, email: String, password: String,passwordConfirmation: String, birthDate: String, gender: String): String? {
         return try {
-            val request = UserCredentials(name, email, password, birthDate, gender)
+            val request = UserCredentials(name, email, password, passwordConfirmation, birthDate, gender)
             val response = apiService.register(request)
             val token = response.data.accessToken
             if (response.status == "success") {

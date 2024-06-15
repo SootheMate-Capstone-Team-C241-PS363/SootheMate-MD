@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/activity_history_detail_scene"
+    tools:context=".ui.history.HistoryDetailActivity">
+
+
+    <ImageView
+        android:id="@+id/ivHistoryDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        android:src="@drawable/img_history_detail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_margin="40dp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/img_back_history"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvHistoryInput"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_semibold_two"
+        android:text="@string/history_input"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@id/backBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/backBtn" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-110dp"
+        android:background="@drawable/rounded_container_35"
+        android:paddingBottom="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivHistoryDetail">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tvGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/gender"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Spinner
+                android:id="@+id/etGender"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/input"
+                android:inputType="text"
+                android:popupBackground="@drawable/bg_input_form_history_detail"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvGender"
+                tools:text="Male" />
+
+            <TextView
+                android:id="@+id/tvAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/age"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etGender" />
+
+            <EditText
+                android:id="@+id/etAge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/input"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvAge"
+                tools:text="15" />
+
+            <TextView
+                android:id="@+id/tvSleepDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/sleep_duration"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etAge" />
+
+            <EditText
+                android:id="@+id/etSleepDuration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/input"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSleepDuration"
+                tools:text="15" />
+
+            <TextView
+                android:id="@+id/tvSleepQuality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/quality_of_sleep"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etSleepDuration" />
+
+            <EditText
+                android:id="@+id/etSleepQuality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/input"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvSleepQuality"
+                tools:text="4" />
+
+            <TextView
+                android:id="@+id/tvPhysicalActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/physical_activity_level"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etSleepQuality" />
+
+            <EditText
+                android:id="@+id/etPhysicalActivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/input"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPhysicalActivity"
+                tools:text="60" />
+
+            <TextView
+                android:id="@+id/tvWorkingHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/maximum_working_hours_per_day"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etPhysicalActivity" />
+
+            <EditText
+                android:id="@+id/etWorkingHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/input"
+                android:inputType="numberDecimal"
+                android:padding="12dp"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvWorkingHours"
+                tools:text="8" />
+
+            <TextView
+                android:id="@+id/tvBMICategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/bmi_category"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etWorkingHours" />
+
+            <Spinner
+                android:id="@+id/etBMICategory"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/input"
+                android:inputType="text"
+                android:popupBackground="@drawable/bg_input_form_history_detail"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvBMICategory"
+                tools:text="Overweight" />
+
+            <TextView
+                android:id="@+id/tvBloodPressure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/blood_pressure"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etBMICategory" />
+
+            <EditText
+                android:id="@+id/etBloodPressure"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/input"
+                android:inputType="text"
+                android:padding="12dp"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvBloodPressure"
+                tools:text="120/80" />
+
+            <TextView
+                android:id="@+id/tvHeartRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/heart_rate"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etBloodPressure" />
+
+            <EditText
+                android:id="@+id/etHeartRate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/input"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvHeartRate"
+                tools:text="98" />
+
+
+            <TextView
+                android:id="@+id/tvDailySteps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/daily_steps"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etHeartRate" />
+
+            <EditText
+                android:id="@+id/etDailySteps"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:background="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:hint="@string/input"
+                android:inputType="number"
+                android:padding="12dp"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvDailySteps"
+                tools:text="4200" />
+
+            <com.dicoding.soothemate.customviews.CustomButton
+                android:id="@+id/btnEditAndSave"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="52dp"
+                android:layout_marginEnd="28dp"
+                android:allowClickWhenDisabled="false"
+                android:enabled="false"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/edit_and_save"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etDailySteps" />
+
+            <com.dicoding.soothemate.customviews.CustomButton
+                android:id="@+id/btn_back_to_history"
+                android:layout_width="match_parent"
+                android:layout_height="47dp"
+                android:layout_marginStart="28dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="28dp"
+                android:enabled="true"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/return_to_history"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnEditAndSave" />
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="32dp"
+                android:src="@drawable/arrow_left_white"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_back_to_history"
+                app:layout_constraintStart_toStartOf="@+id/btn_back_to_history"
+                app:layout_constraintTop_toTopOf="@+id/btn_back_to_history" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.motion.widget.MotionLayout>

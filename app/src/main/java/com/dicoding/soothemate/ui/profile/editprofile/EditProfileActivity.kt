@@ -1,22 +1,37 @@
 package com.dicoding.soothemate.ui.profile.editprofile
 
 import android.app.DatePickerDialog
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.dicoding.soothemate.R
 import com.dicoding.soothemate.customviews.CustomEditText
 import com.dicoding.soothemate.customviews.CustomSelectOption
 import com.dicoding.soothemate.databinding.ActivityEditProfileBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.ProfileViewModel
+import com.yalantis.ucrop.UCrop
+import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
 import java.util.Calendar
 
 class EditProfileActivity : AppCompatActivity() {
@@ -30,6 +45,9 @@ class EditProfileActivity : AppCompatActivity() {
     private val mainViewModel by viewModels<MainViewModel> {
         ViewModelFactory.getInstance(this)
     }
+
+    private var currentImageUri: Uri? = null
+    private lateinit var utils: Utils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +65,19 @@ class EditProfileActivity : AppCompatActivity() {
             }
         }
 
-        profileViewModel.detailProfile.observe(this) { userDetail ->
+        supportActionBar?.hide()
+
+        utils = Utils()
+
+        profileViewModel.detailProfile.observe(this@EditProfileActivity) { userDetail ->
             if (userDetail != null) {
+
+                if (currentImageUri == null && userDetail.avatar != null) {
+                    Glide.with(binding.root)
+                        .load(userDetail.avatar)
+                        .into(binding.profilePicture)
+                }
+
                 binding.usernameEdt.text = Editable.Factory.getInstance().newEditable(userDetail.name)
                 binding.emailEdt.text = Editable.Factory.getInstance().newEditable(userDetail.email)
                 binding.birthDate.text = Editable.Factory.getInstance().newEditable(userDetail.birthDate?:"")
@@ -66,7 +95,7 @@ class EditProfileActivity : AppCompatActivity() {
             }
         }
 
-        profileViewModel.isLoading.observe(this) {
+        profileViewModel.isLoading.observe(this@EditProfileActivity) {
             showLoading(it)
         }
 
@@ -79,7 +108,84 @@ class EditProfileActivity : AppCompatActivity() {
         updateUserInfo()
         exitPage()
 
-        supportActionBar?.hide()
+        binding.profilePicture.setOnClickListener {
+            startGallery()
+        }
+    }
+
+    private fun startGallery() {
+        val intent = Intent()
+        intent.action = Intent.ACTION_GET_CONTENT
+        intent.type = "image/*"
+        val chooser = Intent.createChooser(intent, "Choose a Picture")
+        launcherGallery.launch(chooser)
+    }
+
+    private val launcherGallery = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            val selectedImg: Uri = result.data?.data ?: return@registerForActivityResult
+            val useFlags = result.data!!.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
+            contentResolver.takePersistableUriPermission(selectedImg, useFlags)
+
+            val storageDir = File(filesDir, "cropped_images")
+            if (!storageDir.exists()) {
+                storageDir.mkdirs()
+            }
+
+            val croppedFile = File(storageDir, "cropped_image_${System.currentTimeMillis()}.jpg")
+            val croppedUri = Uri.fromFile(croppedFile)
+
+            UCrop.of(selectedImg, croppedUri)
+                .start(this@EditProfileActivity, launcherIntentCrop)
+
+            currentImageUri = croppedUri
+        }
+    }
+
+    private val launcherIntentCrop = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) { result ->
+        if (result.resultCode == RESULT_OK) {
+            showImage()
+        }
+    }
+
+    private fun showImage() {
+        currentImageUri?.let {
+            Log.d("Image URI", "showImage: $it")
+            binding.profilePicture.setImageURI(it)
+        }
+    }
+
+    private fun File.reduceFileImage(): File {
+        val file = this
+        val bitmap = BitmapFactory.decodeFile(file.path)
+        var compressQuality = 100
+        var streamLength: Int
+        do {
+            val bmpStream = ByteArrayOutputStream()
+            bitmap?.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
+            val bmpPicByteArray = bmpStream.toByteArray()
+            streamLength = bmpPicByteArray.size
+            compressQuality -= 5
+        } while (streamLength > 1000000)
+        bitmap?.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
+        return file
+    }
+
+    private fun uploadImage() {
+        currentImageUri?.let { uri ->
+            val imageFile = utils.uriToFile(uri, this@EditProfileActivity).reduceFileImage()
+
+            lifecycleScope.launch {
+                mainViewModel.getSession().observe(this@EditProfileActivity) { user ->
+                    val token = user.token
+                    profileViewModel.updateUserAvatar(imageFile, token)
+                }
+            }
+        }
     }
 
     private fun updateUserInfo() {
@@ -89,9 +195,15 @@ class EditProfileActivity : AppCompatActivity() {
             val selectedGender = binding.genderEdt.selectedItem.toString()
 
             if (validate()){
-                mainViewModel.getSession().observe(this) { user ->
-                    val token = user.token
-                    profileViewModel.updateUserInfo(username, selectedGender, birthDate, token)
+                lifecycleScope.launch {
+                    mainViewModel.getSession().observe(this@EditProfileActivity) { user ->
+                        val token = user.token
+                        profileViewModel.updateUserInfo(username, selectedGender, birthDate, token)
+                        if (currentImageUri != null) {
+                            uploadImage()
+                            currentImageUri = null
+                        }
+                    }
                 }
             }
         }

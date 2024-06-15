@@ -1,12 +1,14 @@
 package com.dicoding.soothemate.ui.predict
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -97,11 +99,31 @@ class PredictFragment : Fragment() {
     }
 
     private fun setSpinnerAdapter(spinner: Spinner, arrayResId: Int) {
-        val adapter = ArrayAdapter.createFromResource(
+        val adapter = object : ArrayAdapter<String>(
             requireContext(),
-            arrayResId,
-            android.R.layout.simple_spinner_dropdown_item
-        )
+            android.R.layout.simple_spinner_dropdown_item,
+            resources.getStringArray(arrayResId)
+        ) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getView(position, convertView, parent)
+                if (position == 0) {
+                    (view as TextView).setTextColor(Color.GRAY)
+                }
+                return view
+            }
+
+            override fun isEnabled(position: Int): Boolean {
+                return position != 0
+            }
+
+            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+                val view = super.getDropDownView(position, convertView, parent)
+                if (position == 0) {
+                    (view as TextView).setTextColor(Color.GRAY)
+                }
+                return view
+            }
+        }
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
     }

@@ -43,11 +43,53 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        navView.setOnNavigationItemSelectedListener { item ->
+            navController.navigate(item.itemId)
+            true
+        }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            updateNavIcon(destination.id)
+        }
+        navView.itemIconTintList = getColorStateList(R.color.nav_item_color)
+        navView.itemTextColor = getColorStateList(R.color.nav_item_text_color)
+
+        navView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_home -> {
+                    navController.navigate(R.id.navigation_home)
+                    true
+                }
+                R.id.navigation_add -> {
+                    navController.navigate(R.id.navigation_add)
+                    true
+                }
+                R.id.navigation_profile -> {
+                    navController.navigate(R.id.navigation_profile)
+                    true
+                }
+                else -> false
+            }
+        }
+
         viewModel.getSession().observe(this) { user ->
             if (!user.isLogin) {
                 startActivity(Intent(this, OnboardingActivity::class.java))
                 finish()
             }
         }
+    }
+
+    private fun updateNavIcon(selectedItemId: Int) {
+        val menu = binding.navView.menu
+        menu.findItem(R.id.navigation_home)?.setIcon(
+            if (selectedItemId == R.id.navigation_home) R.drawable.ic_home_filled else R.drawable.ic_home_24dp
+        )
+        menu.findItem(R.id.navigation_add)?.setIcon(
+            if (selectedItemId == R.id.navigation_add) R.drawable.ic_add_filled else R.drawable.ic_add_24dp
+        )
+        menu.findItem(R.id.navigation_profile)?.setIcon(
+            if (selectedItemId == R.id.navigation_profile) R.drawable.ic_profile_filled else R.drawable.ic_profile_24dp
+        )
     }
 }

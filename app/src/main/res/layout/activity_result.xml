@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Result"
+        android:text="@string/result_layout_title"
         android:textColor="@color/blue_600"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -27,8 +27,8 @@
         android:elevation="12dp"
         android:outlineAmbientShadowColor="@color/blue_500"
         android:outlineSpotShadowColor="@color/blue_600"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/rounded_container_22"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +50,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="72dp"
-            android:text="YOUR STRESS LEVEL"
+            android:text="@string/your_stress_level"
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/circularProgressView"
@@ -62,7 +62,7 @@
             android:id="@+id/stress_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="45%"
+            android:text="@string/_0"
             android:textColor="@color/blue_500"
             android:textSize="36sp"
             android:textStyle="bold"
@@ -73,11 +73,11 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/stress_info"
+            android:id="@+id/stress_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Great"
+            android:text="@string/title"
             android:textSize="24sp"
             android:textColor="@color/blue_500"
             android:textStyle="bold"
@@ -86,12 +86,14 @@
             app:layout_constraintTop_toBottomOf="@+id/circularProgressView" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/stress_description"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
-            android:text="Description"
-            app:layout_constraintEnd_toEndOf="@+id/stress_info"
-            app:layout_constraintStart_toStartOf="@+id/stress_info"
-            app:layout_constraintTop_toBottomOf="@+id/stress_info" />
+            android:text="@string/description"
+            android:textAlignment="center"
+            app:layout_constraintEnd_toEndOf="@+id/stress_title"
+            app:layout_constraintStart_toStartOf="@+id/stress_title"
+            app:layout_constraintTop_toBottomOf="@+id/stress_title" />
 
         <ImageView
             android:layout_width="match_parent"
@@ -106,15 +108,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.dicoding.soothemate.customviews.CustomButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/dont_save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
         android:layout_marginBottom="32dp"
-        android:enabled="false"
-        android:text="Continue Without Save"
+        android:background="@drawable/button_disable"
+        android:textColor="@color/blue_500"
+        android:text="@string/continue_without_save"
         android:textAllCaps="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/save_btn"
@@ -124,10 +127,10 @@
         android:id="@+id/save_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
         android:layout_marginBottom="8dp"
-        android:text="Continue and Save Result"
+        android:text="@string/continue_and_save_result"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/dont_save_btn"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"

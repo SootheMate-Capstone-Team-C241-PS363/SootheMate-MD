@@ -1,12 +1,14 @@
 package com.dicoding.soothemate.ui.predict.result
 
 import android.animation.ValueAnimator
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
+import com.dicoding.soothemate.MainActivity
 import com.dicoding.soothemate.R
 import com.dicoding.soothemate.customviews.CircularProgressView
 import com.dicoding.soothemate.databinding.ActivityResultBinding
@@ -54,6 +56,7 @@ class ResultActivity : AppCompatActivity() {
         predictViewModel.isSuccess.observe(this){
             if (it == true){
                 Toast.makeText(this, "Save predict berhasil", Toast.LENGTH_LONG).show()
+                exitPage()
             } else {
                 Toast.makeText(this, "Save predict gagal", Toast.LENGTH_LONG).show()
             }
@@ -76,6 +79,7 @@ class ResultActivity : AppCompatActivity() {
         animateTextViewChange(stressValue!!.toInt())
 
         savePredictResult()
+        exitWithoutSave()
     }
 
     private fun animateProgress(targetProgress: Float) {
@@ -96,6 +100,8 @@ class ResultActivity : AppCompatActivity() {
         animator.addUpdateListener { animation ->
             val animatedValue = animation.animatedValue as Int
             binding.stressValue.text = "$animatedValue%"
+            binding.stressTitle.text = stressTitle
+            binding.stressDescription.text = stressDesc
         }
         animator.start()
 
@@ -112,6 +118,18 @@ class ResultActivity : AppCompatActivity() {
                     )
                 }
             }
+        }
+    }
+
+    private fun exitPage() {
+        val intent = Intent(this@ResultActivity, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+    }
+
+    private fun exitWithoutSave() {
+        binding.dontSaveBtn.setOnClickListener {
+            exitPage()
         }
     }
 
