@@ -5,8 +5,9 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/activity_history_detail_scene2"
+    app:layoutDescription="@xml/activity_history_detail_scene"
     tools:context=".ui.history.HistoryDetailActivity">
+
 
     <ImageView
         android:id="@+id/ivHistoryDetail"
@@ -46,11 +47,12 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/white_history_form_container"
+        android:layout_marginTop="-110dp"
+        android:background="@drawable/rounded_container_35"
         android:paddingBottom="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivHistoryDetail">
+        app:layout_constraintTop_toBottomOf="@id/ivHistoryDetail">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -229,7 +231,7 @@
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="@string/working_hours"
+                android:text="@string/maximum_working_hours_per_day"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -387,7 +389,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tvDailySteps"
                 tools:text="4200" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.dicoding.soothemate.customviews.CustomButton
                 android:id="@+id/btnEditAndSave"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
@@ -395,45 +397,40 @@
                 android:layout_marginTop="52dp"
                 android:layout_marginEnd="28dp"
                 android:allowClickWhenDisabled="false"
-                android:background="@drawable/selector_btn_save"
                 android:enabled="false"
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/edit_and_save"
                 android:textAllCaps="false"
-                android:textColor="@color/color_selector"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etDailySteps" />
 
-            <LinearLayout
-                android:id="@+id/btnBackToHistory"
+            <com.dicoding.soothemate.customviews.CustomButton
+                android:id="@+id/btn_back_to_history"
                 android:layout_width="match_parent"
                 android:layout_height="47dp"
                 android:layout_marginStart="28dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="28dp"
-                android:background="@drawable/background_save_enabled"
-                android:gravity="center"
-                android:orientation="horizontal"
+                android:enabled="true"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/return_to_history"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/btnEditAndSave">
+                app:layout_constraintTop_toBottomOf="@id/btnEditAndSave" />
 
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/arrow_left_white" />
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginStart="32dp"
+                android:src="@drawable/arrow_left_white"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_back_to_history"
+                app:layout_constraintStart_toStartOf="@+id/btn_back_to_history"
+                app:layout_constraintTop_toTopOf="@+id/btn_back_to_history" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="@string/return_to_history"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.motion.widget.MotionLayout>

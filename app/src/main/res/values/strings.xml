@@ -76,6 +76,64 @@
     <string name="select_gender">Select Gender</string>
     <string name="minimum_working_hours_per_day">Minimum Working Hours per day</string>
     <string name="maximum_working_hours_per_day">Maximum Working Hours per day</string>
+    <string name="input">input</string>
+    <string name="quality_of_sleep">Quality of Sleep</string>
+    <string name="bmi_category">BMI Category</string>
+    <string name="edit_and_save">Edit and Save</string>
+    <string name="return_to_history">Return to History\n</string>
+    <string name="history_input">History Input</string>
+    <string name="history">History</string>
+    <string name="keep_on_track_and_improve_on_your_stress_level">Keep on track and improve on your stress level</string>
+    <string name="your_current_stress_level">Your current stress level</string>
+    <string name="today">Today</string>
+    <string name="_0">0%</string>
+    <string name="home_banner_desc">Calculate your stress now!</string>
+    <string name="start_calculate">Start Calculate</string>
+    <string name="user">User</string>
+    <string name="greetings">Good Morning,</string>
+    <string name="profile">Profile</string>
+    <string name="username">Username</string>
+    <string name="email_address">User@gmail.com</string>
+    <string name="detail">Detail</string>
+    <string name="account">Account</string>
+    <string name="predict_stress_layout_title">Predict Your Stress</string>
+    <string name="calculate">Calculate</string>
+    <string name="calculate_bmi">calculate</string>
+    <string name="result_layout_title">Result</string>
+    <string name="your_stress_level">YOUR STRESS LEVEL</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="continue_without_save">Continue Without Save</string>
+    <string name="continue_and_save_result">Continue and Save Result</string>
+    <string name="change_password_layout_title">Change Password</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="set_password">Set Password</string>
+    <string name="current_stress_level">CURRENT STRESS LEVEL</string>
+    <string name="percentage">Today | %</string>
+    <string name="stress_level">Stress Level</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="get_started_now">Get Started now</string>
+    <string name="create_an_account_or_log_in_to_explore_our_app">Create an account or log in to explore our app</string>
+    <string name="remember_me">Remember me</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="soothemate">SootheMate</string>
+    <string name="customising_your_experience">Customising your experience....</string>
+
+    <string-array name="spinner_array">
+        <item>Date</item>
+        <item>Yesterday</item>
+        <item>Today</item>
+        <item>Last 3 Days</item>
+        <item>Last 7 Days</item>
+    </string-array>
 
     <string-array name="spinner_array">
         <item>Date</item>
@@ -301,6 +359,6 @@
         <item>97</item>
         <item>98</item>
         <item>99</item>
-        <item>1000</item>
+        <item>100</item>
     </string-array>
 </resources>

@@ -28,6 +28,8 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         initView()
 
     }
@@ -48,7 +50,10 @@ class SignUpActivity : AppCompatActivity() {
             val confirmPassword = binding.etConfirmPassword.text.toString()
 
             if (validateInput(username, email, password, confirmPassword)) {
-                viewModel.signUp(username, email, password, confirmPassword,"", "")
+                viewModel.signUp(username, email, password, confirmPassword,"")
+// =======
+//                 viewModel.signUp(username, email, password, confirmPassword,"", "")
+// >>>>>>> develop
                 viewModel.signUpSuccess.observe(this) { isSignUpSuccess ->
                     if (isSignUpSuccess == true) {
                         toLogin()
@@ -73,6 +78,7 @@ class SignUpActivity : AppCompatActivity() {
             isValid = false
         } else {
             binding.etUsernameLayout.error = null
+
         }
 
         if (email.isEmpty()) {
@@ -95,6 +101,7 @@ class SignUpActivity : AppCompatActivity() {
         } else {
             binding.etConfirmPasswordLayout.error = null
         }
+
 
         return isValid
     }

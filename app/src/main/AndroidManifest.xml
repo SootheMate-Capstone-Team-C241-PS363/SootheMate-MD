@@ -15,17 +15,18 @@
         android:theme="@style/Theme.SootheMate"
         tools:targetApi="31">
         <activity
-            android:name=".ui.history.HistoryDetailActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.history.HistoryActivity"
             android:exported="false" />
         <activity
             android:name=".ui.welcome.WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.signup.SignUpActivity"
+            android:name=".ui.history.HistoryDetailActivity"
             android:exported="false" />
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
             android:name=".ui.profile.editprofile.EditProfileActivity"
             android:exported="false" />
@@ -37,6 +38,9 @@
             android:exported="false" />
         <activity
             android:name=".ui.profile.changepass.ChangePassActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.signup.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".ui.splashscreen.SplashScreenActivity"

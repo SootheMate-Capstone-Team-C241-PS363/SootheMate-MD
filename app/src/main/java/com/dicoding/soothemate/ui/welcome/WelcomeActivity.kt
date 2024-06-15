@@ -31,6 +31,9 @@ class WelcomeActivity : AppCompatActivity() {
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
+
         val paint = binding.tvSootheMate.paint
         val width = paint.measureText(binding.tvSootheMate.text.toString())
         val textShader: Shader = LinearGradient(0f, 0f, width, binding.tvSootheMate.textSize,

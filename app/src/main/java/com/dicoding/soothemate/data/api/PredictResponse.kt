@@ -17,5 +17,15 @@ data class PredictResponse(
 data class PredictData(
 
 	@field:SerializedName("stress_level")
-	val stressLevel: Int
+	val stressLevel: Int,
+
+	@field:SerializedName("title")
+	val title: String,
+
+	@field:SerializedName("description")
+	val description: String
 )
+// =======
+// 	val stressLevel: Int
+// )
+// >>>>>>> develop
