@@ -25,3 +25,7 @@ data class PredictData(
 	@field:SerializedName("description")
 	val description: String
 )
+// =======
+// 	val stressLevel: Int
+// )
+// >>>>>>> develop

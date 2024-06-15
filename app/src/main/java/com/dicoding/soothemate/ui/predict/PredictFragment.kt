@@ -33,7 +33,7 @@ class PredictFragment : Fragment() {
     }
 
     private val mainViewModel by viewModels<MainViewModel> {
-        ViewModelFactory.getInstance(requireActivity())
+        ViewModelFactory.getInstance(requireContext())
     }
 
     var gender : String? = null
@@ -124,9 +124,12 @@ class PredictFragment : Fragment() {
                 return view
             }
         }
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
         spinner.adapter = adapter
     }
+
 
     private fun dropdownComponent() {
         binding.apply {
@@ -185,6 +188,7 @@ class PredictFragment : Fragment() {
     }
 
     private fun calculate() {
+
         binding.calculateBtn.setOnClickListener {
             gender = binding.spinnerGender.selectedItem.toString()
             age = binding.spinnerAge.selectedItem.toString().toIntOrNull() ?: 0
@@ -215,8 +219,10 @@ class PredictFragment : Fragment() {
                             minWorkingHours!!, maksWorkingHours!!, bmiCategory, null, null, null,
                             token!!
                         )
+
                     }
                 }
+
             } else {
                 if (validateMandatory()) {
                     if (token == null) {
@@ -236,6 +242,7 @@ class PredictFragment : Fragment() {
                         )
                     }
                 }
+
             }
         }
     }

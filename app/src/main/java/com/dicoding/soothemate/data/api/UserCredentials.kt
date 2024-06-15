@@ -34,4 +34,3 @@ data class UpdateUserInfo(
     @field:SerializedName("birth_date")
     val birthDate : String
 )
-

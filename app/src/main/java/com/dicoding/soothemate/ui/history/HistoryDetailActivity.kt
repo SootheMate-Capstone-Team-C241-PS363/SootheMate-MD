@@ -11,6 +11,9 @@ import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.widget.addTextChangedListener
 import com.dicoding.soothemate.R
+
+import com.dicoding.soothemate.databinding.ActivityHistoryBinding
+// >>>>>>> develop
 import com.dicoding.soothemate.databinding.ActivityHistoryDetailBinding
 
 class HistoryDetailActivity : AppCompatActivity() {
@@ -23,8 +26,11 @@ class HistoryDetailActivity : AppCompatActivity() {
         binding = ActivityHistoryDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         supportActionBar?.hide()
 
+// =======
+// >>>>>>> develop
         initSpinner()
         initView()
         initTextWatcher()
@@ -84,7 +90,11 @@ class HistoryDetailActivity : AppCompatActivity() {
 
         ArrayAdapter.createFromResource(
             this,
+
             R.array.dropdown_gender,
+// =======
+//             R.array.gender_array,
+// >>>>>>> develop
             android.R.layout.simple_spinner_dropdown_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -95,7 +105,11 @@ class HistoryDetailActivity : AppCompatActivity() {
 
         ArrayAdapter.createFromResource(
             this,
+
             R.array.dropdown_bmi,
+// =======
+//             R.array.BMI_array,
+// >>>>>>> develop
             android.R.layout.simple_spinner_dropdown_item
         ).also { adapter ->
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
