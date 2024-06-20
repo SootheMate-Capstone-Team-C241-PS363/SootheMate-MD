@@ -23,11 +23,7 @@ class UserRepository private constructor(
 
     suspend fun login(email: String, password: String): String? {
         return try {
-// <<<<<<< kevin
-            val request = UserCredentials("", email, password, "", "", "")
-// =======
-//             val request = UserRequest(email, password)
-// >>>>>>> develop
+            val request = UserRequest(email, password)
             val response = apiService.login(request)
             val token = response.data.accessToken
             if (response.status == "success") {
