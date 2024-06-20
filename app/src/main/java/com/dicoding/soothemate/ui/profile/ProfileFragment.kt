@@ -1,13 +1,14 @@
 package com.dicoding.soothemate.ui.profile
 
+import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.dicoding.soothemate.databinding.FragmentProfileBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
@@ -16,6 +17,10 @@ import com.dicoding.soothemate.ui.profile.changepass.ChangePassActivity
 import com.dicoding.soothemate.ui.profile.editprofile.EditProfileActivity
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.ProfileViewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class ProfileFragment : Fragment() {
 
@@ -42,24 +47,36 @@ class ProfileFragment : Fragment() {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-
-        // run the viewmodel only once
-        if (savedInstanceState === null){
-            mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
-                var token = user.token
-                profileViewModel.getDetailProfile(token)
-            }
+        mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
+            var token = user.token
+            profileViewModel.getDetailProfile(token)
         }
 
-
-        // observe the detail profile data
         profileViewModel.detailProfile.observe(viewLifecycleOwner) { userDetail ->
             if (userDetail != null) {
+
+                if (userDetail.avatar != null) {
+                    Glide.with(binding.root)
+                        .load(userDetail.avatar)
+                        .into(binding.profilePicture)
+                }
+
                 binding.username.text = userDetail.name
                 binding.email.text = userDetail.email
                 binding.birthDateValue.text = userDetail.birthDate
                 binding.genderValue.text = userDetail.gender
+
+                val dateFormatter = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                if (userDetail.birthDate != null) {
+                    val birthDate = userDetail.birthDate?.let { dateFormatter.parse(it) }
+                    val age = birthDate?.age ?: 0
+                    binding.ageValue.text = "$age years old"
+                }
             }
+        }
+
+        profileViewModel.isLoading.observe(viewLifecycleOwner) {
+            showLoading(it)
         }
 
         editProfile()
@@ -68,6 +85,13 @@ class ProfileFragment : Fragment() {
 
         return root
     }
+
+    val Date.age: Int
+        get() {
+            val calendar = Calendar.getInstance()
+            calendar.time = Date(time - Date().time)
+            return 1970 - (calendar.get(Calendar.YEAR) + 1)
+        }
 
     private fun logout(){
         binding.logoutBtn.setOnClickListener {
@@ -95,6 +119,10 @@ class ProfileFragment : Fragment() {
         binding.profilePicture.setOnClickListener {
             startActivity(Intent(requireContext(), EditProfileActivity::class.java))
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {

@@ -3,24 +3,372 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="get_started_now">Get Started now</string>
+    <string name="create_an_account_or_log_in_to_explore_our_app">Create an account or log in to explore our app</string>
+
+    <!--    <string name="email">Email</string>-->
+    <string name="password">Password</string>
+    <string name="remember_me">Remember me</string>
+    <string name="log_in">Log In</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="set_password">Set Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="soothemate">SootheMate</string>
+    <string name="customising_your_experience">Customising your experience....</string>
+    <string name="history_input">History Input</string>
+    <string name="current_stress_level">CURRENT STRESS LEVEL</string>
+    <string name="stress_level">Stress Level</string>
+    <string name="percentage">Today | %</string>
+    <string name="input">Input</string>
+    <!--    <string name="gender">Gender</string>-->
+    <!--    <string name="age">Age</string>-->
+    <!--    <string name="sleep_duration">Sleep Duration</string>-->
+    <string name="quality_of_sleep">Quality of Sleep</string>
+    <!--    <string name="physical_activity_level">Physical Activity Level</string>-->
+    <string name="working_hours">Working Hours</string>
+    <string name="bmi_category">BMI Category</string>
+    <!--    <string name="blood_pressure">Blood Pressure</string>-->
+    <!--    <string name="heart_rate">Heart Rate</string>-->
+    <!--    <string name="daily_steps">Daily Steps</string>-->
+    <string name="edit_and_save">Edit and Save</string>
+    <string name="return_to_history">Return to History</string>
 
     <!--    testing-->
-    <string name="title_menu_1">Title 1</string>
-    <string name="title_menu_2">Title 2</string>
-    <string name="title_menu_3">Title 3</string>
-    <string name="title_menu_4">Title 4</string>
-    <string name="desc_menu_1">Description 1</string>
-    <string name="desc_menu_2">Description 2</string>
-    <string name="desc_menu_3">Description 3</string>
-    <string name="desc_menu_4">Description 4</string>
-    <string name="learn_now">Belajar Sekarang</string>
+    <string name="title_menu_1">Steps To Calmness</string>
+    <string name="title_menu_2">Manage Stress Easily</string>
+    <string name="title_menu_3">Find Inner Peace</string>
+    <string name="title_menu_4">Get Calm Life</string>
+    <string name="desc_menu_1">Find peace in your life by managing stress more easily and purposefully</string>
+    <string name="desc_menu_2">Monitor your progress and see how your stress reduces over time</string>
+    <string name="desc_menu_3">Find emotional balance and feel deep sence of inner calm</string>
+    <string name="desc_menu_4">Enjoy a calmer and happier life by managing your stress level</string>
     <string name="password_hint">Password</string>
     <string name="title_add">Add</string>
     <string name="title_profile">Profile</string>
+    <string name="splash_screen_desc">Stress AI Therapy</string>
+    <string name="age">Age</string>
+    <string name="null_value">-</string>
+    <string name="date_of_birth">Date of Birth</string>
+    <string name="gender">Gender</string>
+    <string name="history_btn_desc">Go to history to view your previous input!</string>
+    <string name="extras_checkbox">Do you want to input additional data?</string>
+    <string name="sleep_duration">Sleep Duration</string>
+    <string name="physical_activity_level">Physical Activity Level</string>
+    <string name="dropdown_option">Select an option</string>
+    <string name="blood_pressure">Blood Pressure</string>
+    <string name="heart_rate">Heart Rate</string>
+    <string name="heart_rate_value">in BPM</string>
+    <string name="daily_steps">Daily Steps</string>
+    <string name="input_value">Input</string>
+    <string name="bmi_result_null">Please input all the information given above to get the score</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="change_password">Change Password</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_gender">Select Gender</string>
+    <string name="minimum_working_hours_per_day">Minimum Working Hours per day</string>
+    <string name="maximum_working_hours_per_day">Maximum Working Hours per day</string>
+    <string name="input">input</string>
+    <string name="quality_of_sleep">Quality of Sleep</string>
+    <string name="bmi_category">BMI Category</string>
+    <string name="edit_and_save">Edit and Save</string>
+    <string name="return_to_history">Return to History\n</string>
+    <string name="history_input">History Input</string>
+    <string name="history">History</string>
+    <string name="keep_on_track_and_improve_on_your_stress_level">Keep on track and improve on your stress level</string>
+    <string name="your_current_stress_level">Your current stress level</string>
+    <string name="today">Today</string>
+    <string name="_0">0%</string>
+    <string name="home_banner_desc">Calculate your stress now!</string>
+    <string name="start_calculate">Start Calculate</string>
+    <string name="user">User</string>
+    <string name="greetings">Good Morning,</string>
+    <string name="profile">Profile</string>
+    <string name="username">Username</string>
+    <string name="email_address">User@gmail.com</string>
+    <string name="detail">Detail</string>
+    <string name="account">Account</string>
+    <string name="predict_stress_layout_title">Predict Your Stress</string>
+    <string name="calculate">Calculate</string>
+    <string name="calculate_bmi">calculate</string>
+    <string name="result_layout_title">Result</string>
+    <string name="your_stress_level">YOUR STRESS LEVEL</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="continue_without_save">Continue Without Save</string>
+    <string name="continue_and_save_result">Continue and Save Result</string>
+    <string name="change_password_layout_title">Change Password</string>
+    <string name="new_password">New Password</string>
+    <string name="old_password">Old Password</string>
+    <string name="set_password">Set Password</string>
+    <string name="current_stress_level">CURRENT STRESS LEVEL</string>
+    <string name="percentage">Today | %</string>
+    <string name="stress_level">Stress Level</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="login">Login</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="get_started_now">Get Started now</string>
+    <string name="create_an_account_or_log_in_to_explore_our_app">Create an account or log in to explore our app</string>
+    <string name="remember_me">Remember me</string>
+    <string name="don_t_have_an_account">Don’t have an account?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password</string>
+    <string name="log_in">Log In</string>
+    <string name="welcome_to">Welcome to</string>
+    <string name="soothemate">SootheMate</string>
+    <string name="customising_your_experience">Customising your experience....</string>
+    <string name="title_articles">Articles</string>
+
+    <style name="RoundedCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
+
+    <string-array name="spinner_array">
+        <item>Date</item>
+        <item>Yesterday</item>
+        <item>Today</item>
+        <item>Last 3 Days</item>
+        <item>Last 7 Days</item>
+    </string-array>
+
+    <string-array name="spinner_array">
+        <item>Date</item>
+        <item>Yesterday</item>
+        <item>Today</item>
+        <item>Last 3 Days</item>
+        <item>Last 7 Days</item>
+    </string-array>
+
+    <string-array name="gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string-array name="BMI_array">
+        <item>Underweight</item>
+        <item>Normal</item>
+        <item>Overweight</item>
+    </string-array>
 
     <string-array name="dropdown_gender">
-        <item>Item 1</item>
-        <item>Item 2</item>
-        <item>Item 3</item>
+        <item>Select an option</item>
+        <item>Male</item>
+        <item>Female</item>
     </string-array>
+
+    <string-array name="dropdown_bmi">
+        <item>Select an option</item>
+        <item>Underweight</item>
+        <item>Normal</item>
+        <item>Normal Weight</item>
+        <item>Overweight</item>
+        <item>Obese</item>
+    </string-array>
+
+    <string-array name="sleep_duration">
+        <item>Select an option</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="sleep_quality">
+        <item>Select an option</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
+
+    <string-array name="working_hours">
+        <item>Select an option</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+    </string-array>
+
+    <string-array name="dropdown_age">
+        <item>Select an option</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
+        <item>26</item>
+        <item>27</item>
+        <item>28</item>
+        <item>29</item>
+        <item>30</item>
+        <item>31</item>
+        <item>32</item>
+        <item>33</item>
+        <item>34</item>
+        <item>35</item>
+        <item>36</item>
+        <item>37</item>
+        <item>38</item>
+        <item>39</item>
+        <item>40</item>
+        <item>41</item>
+        <item>42</item>
+        <item>43</item>
+        <item>44</item>
+        <item>45</item>
+        <item>46</item>
+        <item>47</item>
+        <item>48</item>
+        <item>49</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+        <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
+        <item>70</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
+        <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
+        <item>90</item>
+    </string-array>
+
+    <string-array name="dropdown_heart_rate">
+        <item>Select an option</item>
+        <item>50</item>
+        <item>51</item>
+        <item>52</item>
+        <item>53</item>
+        <item>54</item>
+        <item>55</item>
+        <item>56</item>
+        <item>57</item>
+        <item>58</item>
+        <item>59</item>
+        <item>60</item>
+        <item>61</item>
+        <item>62</item>
+        <item>63</item>
+        <item>64</item>
+        <item>65</item>
+        <item>66</item>
+        <item>67</item>
+        <item>68</item>
+        <item>69</item>
+        <item>70</item>
+        <item>71</item>
+        <item>72</item>
+        <item>73</item>
+        <item>74</item>
+        <item>75</item>
+        <item>76</item>
+        <item>77</item>
+        <item>78</item>
+        <item>79</item>
+        <item>80</item>
+        <item>81</item>
+        <item>82</item>
+        <item>83</item>
+        <item>84</item>
+        <item>85</item>
+        <item>86</item>
+        <item>87</item>
+        <item>88</item>
+        <item>89</item>
+        <item>90</item>
+        <item>91</item>
+        <item>92</item>
+        <item>93</item>
+        <item>94</item>
+        <item>95</item>
+        <item>96</item>
+        <item>97</item>
+        <item>98</item>
+        <item>99</item>
+        <item>100</item>
+    </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="in_minutes">in minutes</string>
+    <string name="systolic_diastolic_in_number">Systolic/Diastolic pressure in number</string>
+    <string name="_0_30_000_steps">0-30.000 steps</string>
 </resources>

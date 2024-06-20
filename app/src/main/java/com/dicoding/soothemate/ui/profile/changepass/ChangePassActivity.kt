@@ -1,11 +1,11 @@
 package com.dicoding.soothemate.ui.profile.changepass
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -13,9 +13,9 @@ import androidx.appcompat.app.AlertDialog
 import com.dicoding.soothemate.R
 import com.dicoding.soothemate.databinding.ActivityChangePassBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.ProfileViewModel
-import com.dicoding.soothemate.viewmodel.SignUpViewModel
 
 class ChangePassActivity : AppCompatActivity() {
 
@@ -29,19 +29,35 @@ class ChangePassActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    private lateinit var utils: Utils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChangePassBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (savedInstanceState === null){
+            profileViewModel.apiMessage.observe(this){
+                Toast.makeText(this, it, Toast.LENGTH_LONG).show()
+            }
+
+            profileViewModel.isLoading.observe(this) {
+                showLoading(it)
+            }
+        }
+
         supportActionBar?.hide()
 
-        setup()
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
+
+        validationPass()
+        exitPage()
     }
 
     private fun setup() {
         binding.confirmButton.setOnClickListener {
-            customAlertDialog()
             mainViewModel.getSession().observe(this) { user ->
                 val token = user.token
                 var oldPassword = binding.oldPasswordEdt.text.toString()
@@ -50,7 +66,7 @@ class ChangePassActivity : AppCompatActivity() {
                 profileViewModel.changePassword(oldPassword, newPassword, passwordConfirmation, token)
             }
 
-            profileViewModel.changePassSuccess.observe(this){ success ->
+            profileViewModel.isSuccess.observe(this){ success ->
                 if (success == true) {
                     Toast.makeText(this, "Password berhasil diperbarui", Toast.LENGTH_LONG).show()
                     customAlertDialog()
@@ -81,6 +97,48 @@ class ChangePassActivity : AppCompatActivity() {
         }
 
         builder.show()
+    }
+
+    private fun validationPass() {
+        val oldPasswordEditText = binding.oldPasswordEdt
+        val newPasswordEditText = binding.newPasswordEdt
+        val confirmPasswordEditText = binding.confirmPasswordEdt
+        val confirmButton = binding.confirmButton
+
+        confirmButton.isEnabled = false
+
+        val textWatcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                confirmButton.isEnabled = !confirmPasswordEditText.text.isNullOrEmpty() &&
+                        !oldPasswordEditText.text.isNullOrEmpty() &&  !newPasswordEditText.text.isNullOrEmpty()
+            }
+
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+        }
+
+        confirmPasswordEditText.addTextChangedListener(textWatcher)
+        oldPasswordEditText.addTextChangedListener(textWatcher)
+        newPasswordEditText.addTextChangedListener(textWatcher)
+
+        confirmButton.setOnClickListener {
+            setup()
+        }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun exitPage() {
+        binding.backBtn.setOnClickListener{
+            finish()
+        }
     }
 
 }

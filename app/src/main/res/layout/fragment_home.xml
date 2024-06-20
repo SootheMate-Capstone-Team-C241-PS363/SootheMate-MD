@@ -15,8 +15,10 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
-        android:text="Good Morning,"
+        android:text="@string/greetings"
         android:textAlignment="center"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/grey_five"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.01"
@@ -25,29 +27,31 @@
         app:layout_constraintVertical_bias="0.575" />
 
     <TextView
-        android:id="@+id/current_status"
+        android:id="@+id/current_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="User"
+        android:text="@string/user"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/black_two"
         android:textSize="20sp"
-        android:textStyle="bold"
+        android:fontFamily="@font/poppins_semibold"
         app:layout_constraintEnd_toEndOf="@+id/greetings"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/greetings"
         app:layout_constraintTop_toBottomOf="@+id/greetings" />
 
-    <ImageView
-        android:id="@+id/profile_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/profile_icon_home"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="32dp"
+        android:src="@drawable/profile_icon_home_cropped"
+        app:layout_constraintBottom_toBottomOf="@+id/current_username"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/greetings" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_add"
@@ -60,7 +64,7 @@
         android:clipToOutline="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/current_status">
+        app:layout_constraintTop_toBottomOf="@+id/current_username">
 
         <ImageView
             android:id="@+id/imageView3"
@@ -85,7 +89,7 @@
             android:alpha="0.6"
             android:clipToOutline="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/vedtor_add_container_200"
+            android:src="@drawable/vector_add_container_200"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -94,8 +98,8 @@
 
         <ImageView
             android:id="@+id/blur_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="138dp"
+            android:layout_height="120dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/glassy_icon_lotus"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -104,11 +108,11 @@
             app:layout_constraintVertical_bias="0.566" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/clock_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="11:00 AM"
-            android:textColor="@color/black"
+            android:textColor="@color/black_two"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -123,19 +127,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/desc_menu_1"
-            app:layout_constraintEnd_toEndOf="@+id/textView7"
+            android:text="@string/home_banner_desc"
+            android:textColor="@color/grey_five"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintEnd_toEndOf="@+id/clock_text"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView7"
-            app:layout_constraintTop_toBottomOf="@+id/textView7" />
+            app:layout_constraintStart_toStartOf="@+id/clock_text"
+            app:layout_constraintTop_toBottomOf="@+id/clock_text" />
 
         <com.dicoding.soothemate.customviews.CustomButton
             android:id="@+id/calculate_btn"
             android:layout_width="140dp"
             android:layout_height="35dp"
-            android:text="Start Calculate"
+            android:text="@string/start_calculate"
             android:textAllCaps="false"
             android:textSize="12sp"
+            android:elevation="12dp"
+            android:outlineAmbientShadowColor="@color/blue_500"
+            android:outlineSpotShadowColor="@color/blue_600"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/blur_image"
             app:layout_constraintHorizontal_bias="0.404"
@@ -158,8 +167,8 @@
         android:id="@+id/stressLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="45%"
-        android:textStyle="bold"
+        android:text="@string/_0"
+        android:fontFamily="@font/poppins_bold"
         android:textSize="36sp"
         android:textColor="@color/blue_600"
         app:layout_constraintBottom_toBottomOf="@+id/circularProgressView"
@@ -183,8 +192,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Your current stress level"
-            android:textSize="12sp"
+            android:text="@string/your_current_stress_level"
+            android:textSize="10sp"
+            android:textColor="@color/grey_five"
+            android:fontFamily="@font/poppins_medium"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -203,10 +214,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Today"
-            android:textColor="@color/black"
+            android:text="@string/today"
+            android:textColor="@color/black_two"
             android:textSize="14sp"
-            android:textStyle="bold"
+            android:fontFamily="@font/poppins_semibold"
             app:layout_constraintStart_toStartOf="@+id/textView10"
             app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -214,8 +225,9 @@
             android:id="@+id/stressLevel2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="45%"
+            android:text="@string/_0"
             android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
             app:layout_constraintBottom_toBottomOf="@+id/textView11"
             app:layout_constraintEnd_toEndOf="@+id/imageView6"
             app:layout_constraintHorizontal_bias="0.555"
@@ -238,9 +250,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="6dp"
-            android:text="Keep on track and improve on your stress level"
+            android:text="@string/keep_on_track_and_improve_on_your_stress_level"
             android:textAlignment="center"
-            android:textSize="12sp"
+            android:textSize="10sp"
+            android:fontFamily="@font/poppins_semibold"
+            android:textColor="@color/grey_five"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -248,11 +262,11 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <com.dicoding.soothemate.customviews.CustomButton
-        android:id="@+id/customButton"
+        android:id="@+id/history_btn"
         android:layout_width="206dp"
         android:layout_height="49dp"
-        android:layout_marginBottom="16dp"
-        android:text="History"
+        android:layout_marginBottom="6dp"
+        android:text="@string/history"
         android:textAllCaps="false"
         app:layout_constraintBottom_toTopOf="@+id/textView12"
         app:layout_constraintEnd_toEndOf="parent"
@@ -261,14 +275,17 @@
 
     <TextView
         android:id="@+id/textView12"
-        android:layout_width="250dp"
+        android:layout_width="240dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="64dp"
-        android:text="Go to history to view your previous input!"
+        android:fontFamily="@font/poppins_medium"
+        android:text="@string/history_btn_desc"
         android:textAlignment="center"
+        android:textColor="@color/grey_five"
+        android:textSize="12sp"
+        android:layout_marginBottom="64dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/customButton"
-        app:layout_constraintHorizontal_bias="0.477"
-        app:layout_constraintStart_toStartOf="@+id/customButton" />
+        app:layout_constraintEnd_toEndOf="@+id/history_btn"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="@+id/history_btn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

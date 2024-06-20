@@ -5,7 +5,6 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-    <color name="black_400">#40434D</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="navi">#2D3D4F</color>
@@ -19,4 +18,13 @@
     <color name="blue_400">#b8e8fe</color>
     <color name="blue_500">#0098DA</color>
     <color name="blue_600">#007aae</color>
+    <color name="red">#ff0f0f</color>
+    <color name="blue_one">#0098DA</color>
+    <color name="grey">#6C7278</color>
+    <color name="grey_two">#EDF1F3</color>
+    <color name="black_two">#40434D</color>
+    <color name="grey_three">#ACB5BB</color>
+    <color name="blue_two">#F4FBFF</color>
+    <color name="grey_four">#B6B4C2</color>
+    <color name="grey_five">#90A5B4</color>
 </resources>
