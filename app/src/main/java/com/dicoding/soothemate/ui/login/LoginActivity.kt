@@ -15,6 +15,7 @@ import com.dicoding.soothemate.databinding.ActivityLoginBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.signup.SignUpActivity
 import com.dicoding.soothemate.ui.welcome.WelcomeActivity
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.LoginViewModel
 
 class LoginActivity : AppCompatActivity() {
@@ -22,12 +23,18 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private val loginViewModel: LoginViewModel by viewModels { ViewModelFactory.getInstance(this) }
 
+    private lateinit var utils : Utils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
 
         initView()

@@ -40,7 +40,7 @@ class PredictViewModel : ViewModel() {
     fun predictStress(gender: String, age: Int, sleepDuration: Int, qualityOfSleep: Int, physicalActivityLevel: Int, minWorkingHours: Int, maxWorkingHours: Int, bmiCategory: String?, bloodPressure: String?, heartRate: Int?, dailySteps: Int?, token: String) {
         _isLoading.value = true
 
-        val request = PredictStressData(minWorkingHours, maxWorkingHours, dailySteps, gender, physicalActivityLevel, bmiCategory, sleepDuration, heartRate, qualityOfSleep, bloodPressure, age)
+        val request = PredictStressData(minWorkingHours = minWorkingHours, maxWorkingHours = maxWorkingHours, dailySteps = dailySteps, gender = gender, physicalActivityLevel = physicalActivityLevel, bmiCategory = bmiCategory, sleepDuration = sleepDuration, heartRate = heartRate, qualityOfSleep = qualityOfSleep, bloodPressure = bloodPressure, age = age)
 
         val client = ApiConfig.getApiService(token).predictStress(request)
         client.enqueue(object : Callback<PredictResponse> {
@@ -85,11 +85,11 @@ class PredictViewModel : ViewModel() {
         })
     }
 
-    fun savePredictStress(gender: String, age: Int, sleepDuration: Int, qualityOfSleep: Int, physicalActivityLevel: Int, minWorkingHours: Int, maxWorkingHours: Int, stressLevel: Int, stressTitle: String, stressDesc: String, token: String ) {
+    fun savePredictStress(gender: String, age: Int, sleepDuration: Int, qualityOfSleep: Int, physicalActivityLevel: Int, minWorkingHours: Int, maxWorkingHours: Int, stressLevel: Int, stressTitle: String, stressDesc: String, bmiCategory: String?, bloodPressure: String?, heartRate: Int?, dailySteps: Int?, token: String ) {
 
         _isLoading.value = true
 
-        val request = SavePredictData(gender, age, sleepDuration, qualityOfSleep, physicalActivityLevel, minWorkingHours, maxWorkingHours, result = SavePredictDataResult(stressLevel = stressLevel, title = stressTitle , description = stressDesc))
+        val request = SavePredictData(gender, age, sleepDuration, qualityOfSleep, physicalActivityLevel, minWorkingHours, maxWorkingHours, bmiCategory = bmiCategory, bloodPressure = bloodPressure, heartRate = heartRate, dailySteps = dailySteps, result = SavePredictDataResult(stressLevel = stressLevel, title = stressTitle , description = stressDesc))
 
         val client = ApiConfig.getApiService(token).savePredictStress(request)
         client.enqueue(object : Callback<SavePredictResponse> {

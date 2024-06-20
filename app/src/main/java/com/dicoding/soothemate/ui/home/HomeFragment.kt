@@ -18,6 +18,7 @@ import com.dicoding.soothemate.R
 import com.dicoding.soothemate.customviews.CircularProgressView
 import com.dicoding.soothemate.databinding.FragmentHomeBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
+import com.dicoding.soothemate.ui.history.HistoryActivity
 import com.dicoding.soothemate.ui.history.HistoryDetailActivity
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.PredictViewModel
@@ -44,14 +45,14 @@ class HomeFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
 
-    private val predicttViewModel: PredictViewModel by viewModels {
+    private val predictViewModel: PredictViewModel by viewModels {
         ViewModelFactory.getInstance(requireContext())
     }
 
     private lateinit var circularProgressView: CircularProgressView
     private var currentProgress: Float = 0f
     private var currentStress: Int = 0
-    
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,33 +64,31 @@ class HomeFragment : Fragment() {
 
         circularProgressView = binding.circularProgressView
 
-        if (savedInstanceState === null){
-            mainViewModel.getSession().observe(viewLifecycleOwner){
-                val token = it.token
-                profileViewModel.getDetailProfile(token)
-                predicttViewModel.getHistory(null, token)
-            }
-
-            profileViewModel.detailProfile.observe(viewLifecycleOwner){
-                if (it != null) {
-                    Glide.with(binding.root)
-                        .load(it.avatar ?: "")
-                        .into(binding.profileBtn)
-
-                    binding.currentUsername.text = it.name
-                }
-            }
-
-
+        mainViewModel.getSession().observe(viewLifecycleOwner){
+            val token = it.token
+            profileViewModel.getDetailProfile(token)
+            predictViewModel.getHistory(null, token)
         }
 
-        predicttViewModel.stressHistoryValue.observe(viewLifecycleOwner) { dataList ->
+        profileViewModel.detailProfile.observe(viewLifecycleOwner){
+            if (it != null) {
+                if (it.avatar != null){
+                    Glide.with(binding.root)
+                        .load(it.avatar)
+                        .into(binding.profileBtn)
+                }
+
+                binding.currentUsername.text = it.name
+            }
+        }
+
+        predictViewModel.stressHistoryValue.observe(viewLifecycleOwner) { dataList ->
             if (dataList != null && dataList.isNotEmpty()) {
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
 
                 val sortedList = dataList.sortedByDescending { dataItem ->
                     try {
-                        dateFormat.parse(dataItem?.updateAt ?: "")
+                        dateFormat.parse(dataItem?.updateAt)
                     } catch (e: ParseException) {
                         null
                     }
@@ -127,7 +126,7 @@ class HomeFragment : Fragment() {
         }
 
         binding.historyBtn.setOnClickListener {
-            startActivity(Intent(requireContext(), HistoryDetailActivity::class.java))
+            startActivity(Intent(requireContext(), HistoryActivity::class.java))
         }
 
         realtimeClock()
@@ -164,7 +163,6 @@ class HomeFragment : Fragment() {
         return hoursOnlyFormat.format(Calendar.getInstance().time).toInt()
     }
 
-    // animate tracking indicator
     private fun animateProgress(targetProgress: Float) {
         val animator = ValueAnimator.ofFloat(currentProgress, targetProgress)
         animator.duration = 1000
@@ -177,7 +175,6 @@ class HomeFragment : Fragment() {
         currentProgress = targetProgress
     }
 
-    // animate angka
     private fun animateTextViewChange(targetProgress: Int) {
         val animator = ValueAnimator.ofInt(currentStress, targetProgress)
         animator.duration = 1500

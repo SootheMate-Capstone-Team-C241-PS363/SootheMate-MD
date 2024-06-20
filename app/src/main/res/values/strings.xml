@@ -48,7 +48,6 @@
     <string name="desc_menu_2">Monitor your progress and see how your stress reduces over time</string>
     <string name="desc_menu_3">Find emotional balance and feel deep sence of inner calm</string>
     <string name="desc_menu_4">Enjoy a calmer and happier life by managing your stress level</string>
-    <string name="learn_now">Belajar Sekarang</string>
     <string name="password_hint">Password</string>
     <string name="title_add">Add</string>
     <string name="title_profile">Profile</string>
@@ -126,6 +125,12 @@
     <string name="welcome_to">Welcome to</string>
     <string name="soothemate">SootheMate</string>
     <string name="customising_your_experience">Customising your experience....</string>
+    <string name="title_articles">Articles</string>
+
+    <style name="RoundedCorners">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">16dp</item>
+    </style>
 
     <string-array name="spinner_array">
         <item>Date</item>
@@ -361,4 +366,9 @@
         <item>99</item>
         <item>100</item>
     </string-array>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="in_minutes">in minutes</string>
+    <string name="systolic_diastolic_in_number">Systolic/Diastolic pressure in number</string>
+    <string name="_0_30_000_steps">0-30.000 steps</string>
 </resources>

@@ -11,10 +11,12 @@ import com.dicoding.soothemate.R
 import com.dicoding.soothemate.databinding.ActivityOnboardingBinding
 import com.dicoding.soothemate.ui.login.LoginActivity
 import com.dicoding.soothemate.ui.signup.SignUpActivity
+import com.dicoding.soothemate.utils.Utils
 
 class OnboardingActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOnboardingBinding
+    private lateinit var utils : Utils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +24,10 @@ class OnboardingActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
         binding.apply {
             loginText.setOnClickListener {

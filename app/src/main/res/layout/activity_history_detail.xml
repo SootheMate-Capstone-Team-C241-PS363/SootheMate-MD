@@ -48,7 +48,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="-110dp"
-        android:background="@drawable/rounded_container_35"
         android:paddingBottom="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +55,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_container_35">
 
             <TextView
                 android:id="@+id/tvGender"
@@ -73,23 +73,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <Spinner
+            <com.dicoding.soothemate.customviews.CustomSelectOption
                 android:id="@+id/etGender"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginStart="28dp"
-                android:layout_marginEnd="28dp"
-                android:background="@drawable/bg_input_form_history_detail"
-                android:fontFamily="@font/poppins_light"
-                android:hint="@string/input"
-                android:inputType="text"
                 android:popupBackground="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvGender"
-                tools:text="Male" />
+                app:layout_constraintTop_toBottomOf="@id/tvGender"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_drop_down_24"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/etGender"
+                app:layout_constraintEnd_toEndOf="@+id/etGender"
+                app:layout_constraintTop_toTopOf="@+id/etGender" />
 
             <TextView
                 android:id="@+id/tvAge"
@@ -106,23 +111,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etGender" />
 
-            <EditText
+            <com.dicoding.soothemate.customviews.CustomSelectOption
                 android:id="@+id/etAge"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:fontFamily="@font/poppins_light"
+                android:popupBackground="@drawable/bg_input_form_history_detail"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="28dp"
-                android:background="@drawable/bg_input_form_history_detail"
-                android:fontFamily="@font/poppins_light"
-                android:hint="@string/input"
-                android:inputType="number"
-                android:padding="12dp"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvAge"
-                tools:text="15" />
+                app:layout_constraintTop_toBottomOf="@id/tvAge"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_drop_down_24"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/etAge"
+                app:layout_constraintEnd_toEndOf="@+id/etAge"
+                app:layout_constraintTop_toTopOf="@+id/etAge" />
 
             <TextView
                 android:id="@+id/tvSleepDuration"
@@ -139,23 +149,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etAge" />
 
-            <EditText
+            <com.dicoding.soothemate.customviews.CustomSelectOption
                 android:id="@+id/etSleepDuration"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:fontFamily="@font/poppins_light"
+                android:popupBackground="@drawable/bg_input_form_history_detail"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="28dp"
-                android:background="@drawable/bg_input_form_history_detail"
-                android:fontFamily="@font/poppins_light"
-                android:hint="@string/input"
-                android:inputType="numberDecimal"
-                android:padding="12dp"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSleepDuration"
-                tools:text="15" />
+                app:layout_constraintTop_toBottomOf="@id/tvSleepDuration"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_drop_down_24"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/etSleepDuration"
+                app:layout_constraintEnd_toEndOf="@+id/etSleepDuration"
+                app:layout_constraintTop_toTopOf="@+id/etSleepDuration" />
 
             <TextView
                 android:id="@+id/tvSleepQuality"
@@ -172,23 +187,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etSleepDuration" />
 
-            <EditText
+            <com.dicoding.soothemate.customviews.CustomSelectOption
                 android:id="@+id/etSleepQuality"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:fontFamily="@font/poppins_light"
+                android:popupBackground="@drawable/bg_input_form_history_detail"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="28dp"
-                android:background="@drawable/bg_input_form_history_detail"
-                android:fontFamily="@font/poppins_light"
-                android:hint="@string/input"
-                android:inputType="numberDecimal"
-                android:padding="12dp"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvSleepQuality"
-                tools:text="4" />
+                app:layout_constraintTop_toBottomOf="@id/tvSleepQuality"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_drop_down_24"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/etSleepQuality"
+                app:layout_constraintEnd_toEndOf="@+id/etSleepQuality"
+                app:layout_constraintTop_toTopOf="@+id/etSleepQuality" />
 
             <TextView
                 android:id="@+id/tvPhysicalActivity"
@@ -213,7 +233,7 @@
                 android:layout_marginEnd="28dp"
                 android:background="@drawable/bg_input_form_history_detail"
                 android:fontFamily="@font/poppins_light"
-                android:hint="@string/input"
+                android:hint="@string/in_minutes"
                 android:inputType="numberDecimal"
                 android:padding="12dp"
                 android:textColor="@color/black_two"
@@ -222,6 +242,44 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tvPhysicalActivity"
                 tools:text="60" />
+
+            <TextView
+                android:id="@+id/tvMinWorkingHours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="@string/minimum_working_hours_per_day"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/etPhysicalActivity" />
+
+            <com.dicoding.soothemate.customviews.CustomSelectOption
+                android:id="@+id/etMinWorkingHours"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:fontFamily="@font/poppins_light"
+                android:popupBackground="@drawable/bg_input_form_history_detail"
+                android:layout_marginStart="28dp"
+                android:layout_marginEnd="28dp"
+                android:textColor="@color/black_two"
+                android:textSize="15sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvMinWorkingHours"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_drop_down_24"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/etMinWorkingHours"
+                app:layout_constraintEnd_toEndOf="@+id/etMinWorkingHours"
+                app:layout_constraintTop_toTopOf="@+id/etMinWorkingHours" />
 
             <TextView
                 android:id="@+id/tvWorkingHours"
@@ -236,25 +294,30 @@
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/etPhysicalActivity" />
+                app:layout_constraintTop_toBottomOf="@id/etMinWorkingHours" />
 
-            <EditText
+            <com.dicoding.soothemate.customviews.CustomSelectOption
                 android:id="@+id/etWorkingHours"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:fontFamily="@font/poppins_light"
+                android:popupBackground="@drawable/bg_input_form_history_detail"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="28dp"
-                android:background="@drawable/bg_input_form_history_detail"
-                android:fontFamily="@font/poppins_light"
-                android:hint="@string/input"
-                android:inputType="numberDecimal"
-                android:padding="12dp"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvWorkingHours"
-                tools:text="8" />
+                app:layout_constraintTop_toBottomOf="@id/tvWorkingHours"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_drop_down_24"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/etWorkingHours"
+                app:layout_constraintEnd_toEndOf="@+id/etWorkingHours"
+                app:layout_constraintTop_toTopOf="@+id/etWorkingHours" />
 
             <TextView
                 android:id="@+id/tvBMICategory"
@@ -271,23 +334,28 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etWorkingHours" />
 
-            <Spinner
+            <com.dicoding.soothemate.customviews.CustomSelectOption
                 android:id="@+id/etBMICategory"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:fontFamily="@font/poppins_light"
+                android:popupBackground="@drawable/bg_input_form_history_detail"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="28dp"
-                android:background="@drawable/bg_input_form_history_detail"
-                android:fontFamily="@font/poppins_light"
-                android:hint="@string/input"
-                android:inputType="text"
-                android:popupBackground="@drawable/bg_input_form_history_detail"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvBMICategory"
-                tools:text="Overweight" />
+                app:layout_constraintTop_toBottomOf="@id/tvBMICategory"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_drop_down_24"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/etBMICategory"
+                app:layout_constraintEnd_toEndOf="@+id/etBMICategory"
+                app:layout_constraintTop_toTopOf="@+id/etBMICategory" />
 
             <TextView
                 android:id="@+id/tvBloodPressure"
@@ -312,7 +380,7 @@
                 android:layout_marginEnd="28dp"
                 android:background="@drawable/bg_input_form_history_detail"
                 android:fontFamily="@font/poppins_light"
-                android:hint="@string/input"
+                android:hint="@string/systolic_diastolic_in_number"
                 android:inputType="text"
                 android:padding="12dp"
                 android:textColor="@color/black_two"
@@ -337,23 +405,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/etBloodPressure" />
 
-            <EditText
+            <com.dicoding.soothemate.customviews.CustomSelectOption
                 android:id="@+id/etHeartRate"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:popupBackground="@drawable/bg_input_form_history_detail"
+                android:fontFamily="@font/poppins_light"
+                android:padding="12dp"
+                android:inputType="number"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="28dp"
-                android:background="@drawable/bg_input_form_history_detail"
-                android:fontFamily="@font/poppins_light"
-                android:hint="@string/input"
-                android:inputType="number"
-                android:padding="12dp"
                 android:textColor="@color/black_two"
                 android:textSize="15sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvHeartRate"
-                tools:text="98" />
+                app:layout_constraintTop_toBottomOf="@id/tvHeartRate"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_drop_down_24"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintBottom_toBottomOf="@+id/etHeartRate"
+                app:layout_constraintEnd_toEndOf="@+id/etHeartRate"
+                app:layout_constraintTop_toTopOf="@+id/etHeartRate" />
 
 
             <TextView
@@ -379,7 +454,7 @@
                 android:layout_marginEnd="28dp"
                 android:background="@drawable/bg_input_form_history_detail"
                 android:fontFamily="@font/poppins_light"
-                android:hint="@string/input"
+                android:hint="@string/_0_30_000_steps"
                 android:inputType="number"
                 android:padding="12dp"
                 android:textColor="@color/black_two"
@@ -430,6 +505,16 @@
                 app:layout_constraintBottom_toBottomOf="@+id/btn_back_to_history"
                 app:layout_constraintStart_toStartOf="@+id/btn_back_to_history"
                 app:layout_constraintTop_toTopOf="@+id/btn_back_to_history" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
