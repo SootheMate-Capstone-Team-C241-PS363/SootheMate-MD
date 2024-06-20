@@ -117,7 +117,7 @@ class BmiCalculateActivity : AppCompatActivity() {
 
         binding.bmiEdt.gravity = Gravity.TOP
         val formattedBMI = String.format("%.1f", bmi)
-        val combinedText = "$formattedBMI \" $result\\n\\n\" $bmiDescription"
+        val combinedText = "$formattedBMI ($result)\n\n$bmiDescription"
 
         val spannableString = SpannableString(combinedText)
         val startIndex = combinedText.indexOf(bmiDescription)
