@@ -3,6 +3,7 @@ package com.dicoding.soothemate.data
 import android.util.Log
 import com.dicoding.soothemate.data.api.ApiService
 import com.dicoding.soothemate.data.api.UserCredentials
+import com.dicoding.soothemate.data.api.UserRequest
 import com.dicoding.soothemate.data.pref.UserModel
 import com.dicoding.soothemate.data.pref.UserPreference
 import kotlinx.coroutines.flow.Flow
@@ -22,7 +23,11 @@ class UserRepository private constructor(
 
     suspend fun login(email: String, password: String): String? {
         return try {
+// <<<<<<< kevin
             val request = UserCredentials("", email, password, "", "", "")
+// =======
+//             val request = UserRequest(email, password)
+// >>>>>>> develop
             val response = apiService.login(request)
             val token = response.data.accessToken
             if (response.status == "success") {
@@ -36,13 +41,20 @@ class UserRepository private constructor(
         }
     }
 
+
     suspend fun logout() {
         userPreference.logout()
     }
 
+// <<<<<<< kevin
     suspend fun register(name: String, email: String, password: String,passwordConfirmation: String, birthDate: String, gender: String): String? {
         return try {
             val request = UserCredentials(name, email, password, passwordConfirmation, birthDate, gender)
+// =======
+//     suspend fun register(name: String, email: String, password: String,paswordConfirmation: String, birthDate: String, gender: String): String? {
+//         return try {
+//             val request = UserCredentials(name, email, password, paswordConfirmation, birthDate, gender)
+// >>>>>>> develop
             val response = apiService.register(request)
             val token = response.data.accessToken
             if (response.status == "success") {

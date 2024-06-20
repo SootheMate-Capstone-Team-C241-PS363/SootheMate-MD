@@ -1,53 +1,140 @@
-package com.dicoding.soothemate.viewmodel
+package com.dicoding.soothemate.ui.signup
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.dicoding.soothemate.data.UserRepository
-import com.dicoding.soothemate.data.pref.UserModel
-import kotlinx.coroutines.launch
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.LinearGradient
+import android.graphics.Shader
+import android.os.Bundle
+import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
+import androidx.lifecycle.Observer
+import com.dicoding.soothemate.databinding.ActivitySignUpBinding
+import com.dicoding.soothemate.factory.ViewModelFactory
+import com.dicoding.soothemate.ui.login.LoginActivity
+import com.dicoding.soothemate.utils.Utils
+import com.dicoding.soothemate.viewmodel.MainViewModel
+import com.dicoding.soothemate.viewmodel.ProfileViewModel
+import com.dicoding.soothemate.viewmodel.SignUpViewModel
 
-class SignUpViewModel (private val repository: UserRepository) : ViewModel() {
+class SignUpActivity : AppCompatActivity() {
 
-    private val _signUpSuccess = MutableLiveData<Boolean?>()
-    val signUpSuccess: LiveData<Boolean?> = _signUpSuccess
+    private lateinit var binding: ActivitySignUpBinding
 
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-    private val _apiMessage = MutableLiveData<String?>()
-    val apiMessage: LiveData<String?> = _apiMessage
-
-
-    fun signUp(name: String, email: String, password: String, passwordConfirmation: String, gender: String) {
-        _isLoading.value = true
-        viewModelScope.launch {
-            try {
-                _signUpSuccess.value = null
-                val token = repository.register(name, email, password, passwordConfirmation, "", gender)
-                if (token != null) {
-                    val userModel = UserModel(email, token)
-                    saveSession(userModel)
-                    _signUpSuccess.value = true
-                    _apiMessage.value = token
-                } else {
-                    _apiMessage.value = token
-                    _signUpSuccess.value = false
-                }
-            } catch (e: Exception) {
-                Log.e("Error SignUpViewModel", e.message, e)
-                _signUpSuccess.value = false
-            } finally {
-                _isLoading.value = false
-            }
-        }
+    private val viewModel by viewModels<SignUpViewModel> {
+        ViewModelFactory.getInstance(this)
     }
 
-    fun saveSession(user: UserModel) {
-        viewModelScope.launch {
-            repository.saveSession(user)
+    private val profileViewModel by viewModels<ProfileViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
+    private lateinit var utils : Utils
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+        super.onCreate(savedInstanceState)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
+
+        profileViewModel.isLoading.observe(this@SignUpActivity) {
+            showLoading(it)
         }
+
+        profileViewModel.isLoading.observe(this, Observer { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        })
+
+        initView()
+
+    }
+
+    private fun initView() {
+        binding.btnBack.setOnClickListener {
+            finish()
+        }
+
+        binding.toLogIn.setOnClickListener {
+            toLogin()
+        }
+
+        binding.btnRegister.setOnClickListener {
+            val username = binding.etUsername.text.toString()
+            val email = binding.etEmail.text.toString()
+            val password = binding.etSetPassword.text.toString()
+            val confirmPassword = binding.etConfirmPassword.text.toString()
+
+            if (validateInput(username, email, password, confirmPassword)) {
+                viewModel.signUp(username, email, password, confirmPassword,"")
+                viewModel.signUpSuccess.observe(this) { isSignUpSuccess ->
+                    if (isSignUpSuccess == true) {
+                        toLogin()
+                    }
+                }
+            }
+        }
+        val paint = binding.tvSignUp.paint
+        val width = paint.measureText(binding.tvSignUp.text.toString())
+        val textShader: Shader = LinearGradient(0f, 0f, width, binding.tvSignUp.textSize,
+            intArrayOf(
+                Color.parseColor("#800098DA"), Color.parseColor("#5DCCFC"), Color.parseColor("#0098DA")
+            ), null, Shader.TileMode.REPEAT)
+
+        binding.tvSignUp.paint.shader = textShader
+    }
+
+    private fun validateInput(username: String, email: String, password: String, confirmPassword: String): Boolean {
+        var isValid = true
+        if (username.isEmpty()) {
+            binding.etUsernameLayout.error = "Username is required"
+            isValid = false
+        } else {
+            binding.etUsernameLayout.error = null
+
+        }
+
+        if (email.isEmpty()) {
+            binding.etEmailLayout.error = "Email is required"
+            isValid = false
+        } else {
+            binding.etEmailLayout.error = null
+        }
+
+        if (password.isEmpty()) {
+            binding.etSetPasswordLayout.error = "Password is required"
+            isValid = false
+        } else {
+            binding.etSetPasswordLayout.error = null
+        }
+
+        if (password != confirmPassword) {
+            binding.etConfirmPasswordLayout.error = "Passwords do not match"
+            isValid = false
+        } else {
+            binding.etConfirmPasswordLayout.error = null
+        }
+
+
+        return isValid
+    }
+
+
+    private fun toLogin() {
+        val intentToLogin = Intent(this@SignUpActivity, LoginActivity::class.java)
+        intentToLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        startActivity(intentToLogin)
+        finish()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

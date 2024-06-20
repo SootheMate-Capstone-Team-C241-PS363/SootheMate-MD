@@ -74,6 +74,9 @@ class SignUpActivity : AppCompatActivity() {
 
             if (validateInput(username, email, password, confirmPassword)) {
                 viewModel.signUp(username, email, password, confirmPassword,"")
+// =======
+//                 viewModel.signUp(username, email, password, confirmPassword,"", "")
+// >>>>>>> develop
                 viewModel.signUpSuccess.observe(this) { isSignUpSuccess ->
                     if (isSignUpSuccess == true) {
                         toLogin()
