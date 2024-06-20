@@ -2,6 +2,7 @@ package com.dicoding.soothemate
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.viewModels
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
@@ -42,6 +43,17 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        // Set listener for item selection to change icon dynamically
+        navView.setOnNavigationItemSelectedListener { item ->
+            navController.navigate(item.itemId)
+            true
+        }
+
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            updateNavIcon(destination.id)
+        }
+        navView.itemIconTintList = getColorStateList(R.color.nav_item_color)
+        navView.itemTextColor = getColorStateList(R.color.nav_item_text_color)
 
         navView.setOnNavigationItemSelectedListener { item ->
             navController.navigate(item.itemId)
@@ -60,14 +72,17 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.navigation_home)
                     true
                 }
+
                 R.id.navigation_add -> {
                     navController.navigate(R.id.navigation_add)
                     true
                 }
+
                 R.id.navigation_profile -> {
                     navController.navigate(R.id.navigation_profile)
                     true
                 }
+
                 else -> false
             }
         }
@@ -78,6 +93,7 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
         }
+
     }
 
     private fun updateNavIcon(selectedItemId: Int) {
@@ -92,4 +108,5 @@ class MainActivity : AppCompatActivity() {
             if (selectedItemId == R.id.navigation_profile) R.drawable.ic_profile_filled else R.drawable.ic_profile_24dp
         )
     }
+
 }

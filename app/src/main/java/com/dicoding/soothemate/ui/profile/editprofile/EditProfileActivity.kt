@@ -1,10 +1,11 @@
 package com.dicoding.soothemate.ui.profile.editprofile
 
 import android.app.DatePickerDialog
-import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -14,9 +15,10 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.Toast
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.dicoding.soothemate.R
@@ -48,6 +50,22 @@ class EditProfileActivity : AppCompatActivity() {
 
     private var currentImageUri: Uri? = null
     private lateinit var utils: Utils
+
+    private val storageDir: File by lazy {
+        File(filesDir, "cropped_images").apply { mkdirs() }
+    }
+
+    val multiplePermissionId = 1
+    private val listOfPremissionNeeded = if (Build.VERSION.SDK_INT >= 33) {
+        arrayListOf(
+            android.Manifest.permission.READ_MEDIA_IMAGES
+        )
+    } else {
+        arrayListOf(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -109,38 +127,53 @@ class EditProfileActivity : AppCompatActivity() {
         exitPage()
 
         binding.profilePicture.setOnClickListener {
-            startGallery()
+            if (checkMultiplePermission()){
+                startGallery()
+            }
         }
     }
 
-    private fun startGallery() {
-        val intent = Intent()
-        intent.action = Intent.ACTION_GET_CONTENT
-        intent.type = "image/*"
-        val chooser = Intent.createChooser(intent, "Choose a Picture")
-        launcherGallery.launch(chooser)
+    private fun checkMultiplePermission(): Boolean {
+        val listOfPermission = arrayListOf<String>()
+        for (permission in listOfPremissionNeeded) {
+            if (ContextCompat.checkSelfPermission(
+                    this,
+                    permission
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                listOfPermission.add(permission)
+            }
+        }
+        if (listOfPermission.isNotEmpty()) {
+            ActivityCompat.requestPermissions(
+                this,
+                listOfPermission.toTypedArray(),
+                multiplePermissionId
+            )
+            return false
+        }
+        return true
     }
 
-    private val launcherGallery = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { result ->
-        if (result.resultCode == RESULT_OK) {
-            val selectedImg: Uri = result.data?.data ?: return@registerForActivityResult
-            val useFlags = result.data!!.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-            contentResolver.takePersistableUriPermission(selectedImg, useFlags)
+    private fun startGallery() {
+        getContent.launch("image/*")
+    }
 
-            val storageDir = File(filesDir, "cropped_images")
-            if (!storageDir.exists()) {
-                storageDir.mkdirs()
-            }
+    private fun handleImageSelection(selectedImg: Uri) {
+        val destinationUri = Uri.fromFile(File(cacheDir, "cropped_image.jpg"))
 
-            val croppedFile = File(storageDir, "cropped_image_${System.currentTimeMillis()}.jpg")
-            val croppedUri = Uri.fromFile(croppedFile)
+        val options = UCrop.Options()
+        options.setCompressionFormat(Bitmap.CompressFormat.JPEG)
+        options.setCompressionQuality(80)
 
-            UCrop.of(selectedImg, croppedUri)
-                .start(this@EditProfileActivity, launcherIntentCrop)
+        UCrop.of(selectedImg, destinationUri)
+            .withOptions(options)
+            .start(this, launcherIntentCrop)
+    }
 
-            currentImageUri = croppedUri
+    private val getContent = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+        uri?.let {
+            handleImageSelection(it)
         }
     }
 
@@ -148,13 +181,21 @@ class EditProfileActivity : AppCompatActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
-            showImage()
+            result.data?.let { data ->
+                val croppedUri: Uri? = UCrop.getOutput(data)
+                croppedUri?.let {
+                    currentImageUri = it
+                    showImage()
+                }
+            }
+        } else if (result.resultCode == UCrop.RESULT_ERROR) {
+            val error = UCrop.getError(result.data!!)
+            Log.e("UCrop Error", "Error while cropping: $error")
         }
     }
 
     private fun showImage() {
         currentImageUri?.let {
-            Log.d("Image URI", "showImage: $it")
             binding.profilePicture.setImageURI(it)
         }
     }

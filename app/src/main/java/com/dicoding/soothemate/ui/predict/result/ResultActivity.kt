@@ -37,6 +37,10 @@ class ResultActivity : AppCompatActivity() {
     var physicalActivity: Int = 0
     var sleepQuality: Int = 0
     var sleepDuration: Int = 0
+    var bmi: String? = null
+    var bloodPressure: String? = null
+    var heartRate: Int? = null
+    var dailySteps: Int = 0
 
     var token: String? = null
 
@@ -74,6 +78,10 @@ class ResultActivity : AppCompatActivity() {
         physicalActivity = intent.getStringExtra(PHYSICAL_ACTIVITY).toString().toInt()
         sleepQuality = intent.getStringExtra(SLEEP_QUALITY).toString().toInt()
         sleepDuration = intent.getStringExtra(SLEEP_DURATION).toString().toInt()
+        bmi = intent.getStringExtra(BMI).toString()
+        bloodPressure = intent.getStringExtra(BLOOD_PRESSURE).toString()
+        heartRate = intent.getStringExtra(HEART_RATE)?.toIntOrNull() ?: 0
+        dailySteps = intent.getStringExtra(STEPS).toString().toInt()
 
         animateProgress(stressValue!!.toFloat())
         animateTextViewChange(stressValue!!.toInt())
@@ -113,9 +121,15 @@ class ResultActivity : AppCompatActivity() {
             if (token == null){
                 mainViewModel.getSession().observe(this){
                     token = it.token
-                    predictViewModel.savePredictStress(genderValue, ageValue, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, stressValue, stressTitle, stressDesc,
-                        token!!
-                    )
+                    if (bmi != "kosong" && bloodPressure != "kosong" && heartRate != 0 && dailySteps != 0){
+                        predictViewModel.savePredictStress(genderValue, ageValue, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, stressValue, stressTitle, stressDesc, bmiCategory = bmi, bloodPressure = bloodPressure, heartRate = heartRate, dailySteps = dailySteps,
+                            token!!
+                        )
+                    } else {
+                        predictViewModel.savePredictStress(genderValue, ageValue, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, stressValue, stressTitle, stressDesc, null, null, null, null,
+                            token!!
+                        )
+                    }
                 }
             }
         }
@@ -144,5 +158,9 @@ class ResultActivity : AppCompatActivity() {
         var PHYSICAL_ACTIVITY = "physical_activity"
         var SLEEP_QUALITY = "sleep_quality"
         var SLEEP_DURATION = "sleep_duration"
+        var BMI = "bmi"
+        var BLOOD_PRESSURE = "blood_pressure"
+        var HEART_RATE = "heart_rate"
+        var STEPS = "steps"
     }
 }

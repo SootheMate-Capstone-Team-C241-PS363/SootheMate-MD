@@ -69,7 +69,7 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="45%"
+        android:text="0%"
         android:includeFontPadding="false"
         android:textColor="@color/white"
         android:textSize="36sp"
@@ -129,5 +129,26 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/spinnerBg"
         />
+
+    <TextView
+        android:id="@+id/noHistory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No history available"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivBgBanner" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

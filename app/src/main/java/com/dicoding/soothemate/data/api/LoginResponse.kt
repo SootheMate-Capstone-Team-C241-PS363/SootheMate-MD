@@ -46,3 +46,4 @@ data class LoginData(
 	@field:SerializedName("user")
 	val user: LoginUser
 )
+

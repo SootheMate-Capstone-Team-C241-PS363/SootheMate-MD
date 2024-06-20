@@ -12,7 +12,6 @@ class CustomEditText @JvmOverloads constructor(
 ) : TextInputEditText(context, attrs) {
 
     init {
-        hint = "Input"
         val initialBackground: Drawable? = ContextCompat.getDrawable(context, R.drawable.input_bg)
         this.background = initialBackground
 

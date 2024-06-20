@@ -5,13 +5,17 @@ import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.lifecycle.Observer
 import com.dicoding.soothemate.databinding.ActivitySignUpBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.login.LoginActivity
 import com.dicoding.soothemate.viewmodel.MainViewModel
+import com.dicoding.soothemate.viewmodel.ProfileViewModel
 import com.dicoding.soothemate.viewmodel.SignUpViewModel
 
 class SignUpActivity : AppCompatActivity() {
@@ -22,12 +26,25 @@ class SignUpActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    private val profileViewModel by viewModels<ProfileViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         supportActionBar?.hide()
+
+        profileViewModel.isLoading.observe(this@SignUpActivity) {
+            showLoading(it)
+        }
+
+        profileViewModel.isLoading.observe(this, Observer { isLoading ->
+            binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        })
 
         initView()
 
@@ -74,6 +91,7 @@ class SignUpActivity : AppCompatActivity() {
             isValid = false
         } else {
             binding.etUsernameLayout.error = null
+
         }
 
         if (email.isEmpty()) {
@@ -97,6 +115,7 @@ class SignUpActivity : AppCompatActivity() {
             binding.etConfirmPasswordLayout.error = null
         }
 
+
         return isValid
     }
 
@@ -106,5 +125,9 @@ class SignUpActivity : AppCompatActivity() {
         intentToLogin.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         startActivity(intentToLogin)
         finish()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

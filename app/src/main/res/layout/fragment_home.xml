@@ -89,7 +89,7 @@
             android:alpha="0.6"
             android:clipToOutline="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/vedtor_add_container_200"
+            android:src="@drawable/vector_add_container_200"
             app:layout_constraintBottom_toBottomOf="@+id/imageView3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"

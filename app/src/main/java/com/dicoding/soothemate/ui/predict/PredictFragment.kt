@@ -36,14 +36,17 @@ class PredictFragment : Fragment() {
         ViewModelFactory.getInstance(requireActivity())
     }
 
-    var gender : String? = null
-    var age : Int? = 0
-    var sleepDuration : Int? = 0
-    var sleepQuality : Int? = 0
-    var physicalActivity : Int? = 0
-    var minWorkingHours : Int? = 0
-    var maksWorkingHours : Int? = 0
-    var bmiCategory : String? = null
+    var gender: String? = null
+    var age: Int? = 0
+    var sleepDuration: Int? = 0
+    var sleepQuality: Int? = 0
+    var physicalActivity: Int? = 0
+    var minWorkingHours: Int? = 0
+    var maksWorkingHours: Int? = 0
+    var bmiCategory: String? = null
+    var bloodPressure: String? = null
+    var heartRate: Int? = null
+    var dailySteps: Int? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -58,30 +61,16 @@ class PredictFragment : Fragment() {
         _binding = FragmentPredictBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        if (savedInstanceState === null){
+        if (savedInstanceState === null) {
             predictViewModel.apiMessage.observe(viewLifecycleOwner) {
                 if (it.toString() == "All optional fields must be provided together: blood_pressure, heart_rate, daily_steps, bmi_category") {
-                    Toast.makeText(requireContext(), "Please fill out all the necessary forms", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Please fill out all the necessary forms",
+                        Toast.LENGTH_LONG
+                    ).show()
                 } else {
                     Toast.makeText(requireContext(), it.toString(), Toast.LENGTH_LONG).show()
-                }
-            }
-        }
-
-        predictViewModel.stressValue.observe(viewLifecycleOwner){ stressLevel ->
-            if (stressLevel != null){
-                Intent(requireContext(), ResultActivity::class.java).also {
-                    it.putExtra(ResultActivity.STRESS_VALUE, stressLevel.stressLevel.toString())
-                    it.putExtra(ResultActivity.STRESS_TITLE, stressLevel.title)
-                    it.putExtra(ResultActivity.STRESS_DESC, stressLevel.description)
-                    it.putExtra(ResultActivity.AGE, age.toString())
-                    it.putExtra(ResultActivity.GENDER, gender.toString())
-                    it.putExtra(ResultActivity.MAX_WORKING_HOURS, maksWorkingHours.toString())
-                    it.putExtra(ResultActivity.MIN_WORKING_HOURS, minWorkingHours.toString())
-                    it.putExtra(ResultActivity.PHYSICAL_ACTIVITY, physicalActivity.toString())
-                    it.putExtra(ResultActivity.SLEEP_QUALITY, sleepQuality.toString())
-                    it.putExtra(ResultActivity.SLEEP_DURATION, sleepDuration.toString())
-                    startActivity(it)
                 }
             }
         }
@@ -116,7 +105,11 @@ class PredictFragment : Fragment() {
                 return position != 0
             }
 
-            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
+            override fun getDropDownView(
+                position: Int,
+                convertView: View?,
+                parent: ViewGroup
+            ): View {
                 val view = super.getDropDownView(position, convertView, parent)
                 if (position == 0) {
                     (view as TextView).setTextColor(Color.GRAY)
@@ -160,7 +153,7 @@ class PredictFragment : Fragment() {
         }
     }
 
-    private fun bmiCalculate(){
+    private fun bmiCalculate() {
         binding.bmiCalculateBtn.setOnClickListener {
             startActivity(Intent(requireContext(), BmiCalculateActivity::class.java))
         }
@@ -193,13 +186,16 @@ class PredictFragment : Fragment() {
             physicalActivity = binding.physicalActivity.text.toString().toIntOrNull() ?: 0
             minWorkingHours = binding.spinnerMinWorkingHours.selectedItem.toString().toIntOrNull() ?: 0
             maksWorkingHours = binding.spinnerMaksWorkingHours.selectedItem.toString().toIntOrNull() ?: 0
-            bmiCategory = binding.spinnerMaksWorkingHours.selectedItem.toString()
+            bmiCategory = binding.spinnerBmi.selectedItem.toString().takeIf { it != "Select an option" }?:"kosong"
+            bloodPressure = binding.bloodPressureEdtl.text.toString().takeIf { it.isNotBlank() }?:"kosong"
+            heartRate = binding.spinnerHeartRate.selectedItem.toString().takeIf { it != "Select an option" }?.toIntOrNull() ?: 0
+            dailySteps = binding.dailyStepsEdtl.text.toString().takeIf { it.isNotBlank() }?.toIntOrNull() ?: 0
+
+
 
             val isChecked = binding.checkBox.isChecked
             if (isChecked) {
                 if (validateExtras()) {
-                    startActivity(Intent(requireContext(), ResultActivity::class.java))
-                } else{
                     if (token == null) {
                         mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
                             token = user.token
@@ -212,13 +208,11 @@ class PredictFragment : Fragment() {
                             sleepDuration!!,
                             sleepQuality!!,
                             physicalActivity!!,
-                            minWorkingHours!!, maksWorkingHours!!, bmiCategory, null, null, null,
-                            token!!
-                        )
+                            minWorkingHours!!, maksWorkingHours!!, bmiCategory, bloodPressure, heartRate, dailySteps, token!!)
                     }
                 }
             } else {
-                if (validateMandatory()) {
+                if (validateMandatory()){
                     if (token == null) {
                         mainViewModel.getSession().observe(viewLifecycleOwner) { user ->
                             token = user.token
@@ -235,6 +229,30 @@ class PredictFragment : Fragment() {
                             token!!
                         )
                     }
+                }
+            }
+        }
+
+        predictViewModel.stressValue.observe(viewLifecycleOwner) { stressLevel ->
+            if (stressLevel != null) {
+                Intent(requireContext(), ResultActivity::class.java).also {
+                    it.putExtra(ResultActivity.STRESS_VALUE, stressLevel.stressLevel.toString())
+                    it.putExtra(ResultActivity.STRESS_TITLE, stressLevel.title)
+                    it.putExtra(ResultActivity.STRESS_DESC, stressLevel.description)
+                    it.putExtra(ResultActivity.GENDER, gender.toString())
+                    it.putExtra(ResultActivity.AGE, age.toString())
+                    it.putExtra(ResultActivity.SLEEP_DURATION, sleepDuration.toString())
+                    it.putExtra(ResultActivity.SLEEP_QUALITY, sleepQuality.toString())
+                    it.putExtra(ResultActivity.PHYSICAL_ACTIVITY, physicalActivity.toString())
+                    it.putExtra(ResultActivity.MIN_WORKING_HOURS, minWorkingHours.toString())
+                    it.putExtra(ResultActivity.MAX_WORKING_HOURS, maksWorkingHours.toString())
+                    it.putExtra(ResultActivity.BMI, bmiCategory.toString())
+                    it.putExtra(ResultActivity.BLOOD_PRESSURE, bloodPressure.toString())
+                    it.putExtra(ResultActivity.HEART_RATE, heartRate.toString())
+                    it.putExtra(ResultActivity.STEPS, dailySteps.toString())
+
+
+                    startActivity(it)
                 }
             }
         }
@@ -305,13 +323,8 @@ class PredictFragment : Fragment() {
         return allValid
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        binding.progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
-    }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }
