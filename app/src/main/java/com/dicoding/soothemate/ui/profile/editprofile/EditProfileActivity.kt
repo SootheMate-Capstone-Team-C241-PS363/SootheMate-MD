@@ -162,7 +162,7 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun handleImageSelection(selectedImg: Uri) {
-        val destinationUri = Uri.fromFile(File(cacheDir, "cropped_image.jpg"))
+        val destinationUri = Uri.fromFile(File(cacheDir, "cropped_image_${System.currentTimeMillis()}.jpg"))
 
         val options = UCrop.Options()
         options.setCompressionFormat(Bitmap.CompressFormat.JPEG)
