@@ -66,10 +66,10 @@ class ResultActivity : AppCompatActivity() {
 
         predictViewModel.isSuccess.observe(this){
             if (it == true){
-                Toast.makeText(this, "Save predict berhasil", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Save predict success", Toast.LENGTH_LONG).show()
                 exitPage()
             } else {
-                Toast.makeText(this, "Save predict gagal", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Save predict failed", Toast.LENGTH_LONG).show()
             }
         }
 
