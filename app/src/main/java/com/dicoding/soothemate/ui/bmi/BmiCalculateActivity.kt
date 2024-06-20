@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.dicoding.soothemate.R
 import com.dicoding.soothemate.databinding.ActivityBmiCalculateBinding
+import com.dicoding.soothemate.utils.Utils
 import soup.neumorphism.NeumorphButton
 
 class BmiCalculateActivity : AppCompatActivity() {
@@ -19,6 +20,7 @@ class BmiCalculateActivity : AppCompatActivity() {
 
     private lateinit var maleButton: NeumorphButton
     private lateinit var femaleButton: NeumorphButton
+    private lateinit var utils : Utils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +28,10 @@ class BmiCalculateActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
         binding.apply {
 

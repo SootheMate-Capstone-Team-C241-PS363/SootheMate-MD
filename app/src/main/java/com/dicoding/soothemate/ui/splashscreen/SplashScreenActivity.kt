@@ -10,6 +10,7 @@ import com.dicoding.soothemate.MainActivity
 import com.dicoding.soothemate.R
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.onboarding.OnboardingActivity
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.MainViewModel
 
 class SplashScreenActivity : AppCompatActivity() {
@@ -18,11 +19,17 @@ class SplashScreenActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    private lateinit var utils : Utils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
         Handler(Looper.getMainLooper()).postDelayed({
             viewModel.getSession().observe(this) { user ->

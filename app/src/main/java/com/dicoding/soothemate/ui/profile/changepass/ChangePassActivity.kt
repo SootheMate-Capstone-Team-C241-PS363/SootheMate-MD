@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog
 import com.dicoding.soothemate.R
 import com.dicoding.soothemate.databinding.ActivityChangePassBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.ProfileViewModel
 
@@ -27,6 +28,8 @@ class ChangePassActivity : AppCompatActivity() {
     private val profileViewModel by viewModels<ProfileViewModel> {
         ViewModelFactory.getInstance(this)
     }
+
+    private lateinit var utils: Utils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,6 +47,10 @@ class ChangePassActivity : AppCompatActivity() {
         }
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
         validationPass()
         exitPage()

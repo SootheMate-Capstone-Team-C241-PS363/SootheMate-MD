@@ -15,6 +15,7 @@ import com.dicoding.soothemate.databinding.ActivityWelcomeBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.history.HistoryActivity
 import com.dicoding.soothemate.ui.onboarding.OnboardingActivity
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.MainViewModel
 
 class WelcomeActivity : AppCompatActivity() {
@@ -25,6 +26,8 @@ class WelcomeActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    private lateinit var utils : Utils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
@@ -32,6 +35,10 @@ class WelcomeActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
 
         val paint = binding.tvSootheMate.paint

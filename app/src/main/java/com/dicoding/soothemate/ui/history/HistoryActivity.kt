@@ -25,6 +25,7 @@ import kotlinx.coroutines.flow.first
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.soothemate.data.pref.UserPreference
 import com.dicoding.soothemate.factory.ViewModelFactory
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.PredictViewModel
 import kotlinx.coroutines.launch
@@ -44,12 +45,19 @@ class HistoryActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    private lateinit var utils : Utils
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
         mainViewModel.getSession().observe(this@HistoryActivity) { user ->
             if (user != null){
@@ -58,8 +66,17 @@ class HistoryActivity : AppCompatActivity() {
             }
         }
 
+
+
+        closeActivity()
         initSpinner()
         initRecyclerView()
+    }
+
+    private fun closeActivity(){
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
     }
 
     private fun animateTextViewChange(targetProgress: Int) {

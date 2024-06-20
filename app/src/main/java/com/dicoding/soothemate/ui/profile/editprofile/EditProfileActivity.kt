@@ -87,6 +87,8 @@ class EditProfileActivity : AppCompatActivity() {
 
         utils = Utils()
 
+        utils.setTransparentStatusBar(this)
+
         profileViewModel.detailProfile.observe(this@EditProfileActivity) { userDetail ->
             if (userDetail != null) {
 

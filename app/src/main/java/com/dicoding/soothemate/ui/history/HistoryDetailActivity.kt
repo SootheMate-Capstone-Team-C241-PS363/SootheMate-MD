@@ -21,6 +21,7 @@ import com.dicoding.soothemate.data.api.HistoryDetailResponse
 import com.dicoding.soothemate.databinding.ActivityHistoryDetailBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.predict.result.ResultActivity
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.PredictViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -55,12 +56,18 @@ class HistoryDetailActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    private lateinit var utils : Utils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
         historyId = intent.getStringExtra("HISTORY_ID") ?: ""
 

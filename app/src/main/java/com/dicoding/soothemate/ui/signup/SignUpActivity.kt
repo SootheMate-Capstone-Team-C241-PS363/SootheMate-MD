@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import com.dicoding.soothemate.databinding.ActivitySignUpBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.login.LoginActivity
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.ProfileViewModel
 import com.dicoding.soothemate.viewmodel.SignUpViewModel
@@ -30,6 +31,8 @@ class SignUpActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    private lateinit var utils : Utils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         super.onCreate(savedInstanceState)
@@ -37,6 +40,10 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
         profileViewModel.isLoading.observe(this@SignUpActivity) {
             showLoading(it)
