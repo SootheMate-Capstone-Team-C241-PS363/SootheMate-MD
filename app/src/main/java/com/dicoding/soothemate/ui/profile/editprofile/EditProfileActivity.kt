@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
@@ -279,39 +278,18 @@ class EditProfileActivity : AppCompatActivity() {
         binding.apply {
             val gender: Spinner = genderEdt
             setSpinnerAdapter(gender, R.array.dropdown_gender)
-            gender.prompt = getString(R.string.select_gender)
         }
     }
 
     private fun setSpinnerAdapter(spinner: Spinner, arrayResId: Int) {
-        val adapter = object : ArrayAdapter<String>(
+        val adapter = ArrayAdapter.createFromResource(
             this,
-            android.R.layout.simple_spinner_dropdown_item,
-            resources.getStringArray(arrayResId)
-        ) {
-            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-                val view = super.getView(position, convertView, parent)
-                if (position == 0) {
-                    (view as TextView).setTextColor(Color.GRAY)
-                }
-                return view
-            }
-
-            override fun isEnabled(position: Int): Boolean {
-                return position != 0
-            }
-
-            override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
-                val view = super.getDropDownView(position, convertView, parent)
-                if (position == 0) {
-                    (view as TextView).setTextColor(Color.GRAY)
-                }
-                return view
-            }
-        }
+            arrayResId,
+            android.R.layout.simple_spinner_dropdown_item
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         spinner.adapter = adapter
     }
-
 
     private fun validate(): Boolean {
         val editTextValue = listOf(

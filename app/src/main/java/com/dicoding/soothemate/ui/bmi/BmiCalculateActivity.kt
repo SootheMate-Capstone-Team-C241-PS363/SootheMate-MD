@@ -20,6 +20,7 @@ class BmiCalculateActivity : AppCompatActivity() {
 
     private lateinit var maleButton: NeumorphButton
     private lateinit var femaleButton: NeumorphButton
+    private var selectedGenderButton: NeumorphButton? = null
     private lateinit var utils : Utils
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +65,11 @@ class BmiCalculateActivity : AppCompatActivity() {
             }
         }
 
+        if (selectedGenderButton == null) {
+            allValid = false
+            Toast.makeText(this, "Please select a gender", Toast.LENGTH_SHORT).show()
+        }
+
         return allValid
     }
 
@@ -80,6 +86,8 @@ class BmiCalculateActivity : AppCompatActivity() {
         unselectedButton.setBackgroundColor(ContextCompat.getColor(this, R.color.blue_200))
         unselectedButton.setShadowColorDark(ContextCompat.getColor(this, R.color.blue_300))
         unselectedButton.setShadowColorLight(ContextCompat.getColor(this, R.color.blue_200))
+
+        selectedGenderButton = selectedButton
     }
 
     private fun calculateBmi(height: Int, weight: Double) {
@@ -109,7 +117,7 @@ class BmiCalculateActivity : AppCompatActivity() {
 
         binding.bmiEdt.gravity = Gravity.TOP
         val formattedBMI = String.format("%.1f", bmi)
-        val combinedText = "$formattedBMI (\" ($result)\\n\\n\") $bmiDescription"
+        val combinedText = "$formattedBMI \" $result\\n\\n\" $bmiDescription"
 
         val spannableString = SpannableString(combinedText)
         val startIndex = combinedText.indexOf(bmiDescription)

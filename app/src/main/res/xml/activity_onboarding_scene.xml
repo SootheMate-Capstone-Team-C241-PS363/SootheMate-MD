@@ -311,6 +311,7 @@
         motion:constraintSetEnd="@+id/onboarding4" >
         <OnSwipe motion:dragDirection="dragLeft" />
         <OnClick motion:targetId="@+id/skip_text" />
+        <OnClick motion:targetId="@+id/next_btn" />
     </Transition>
     <Transition
         motion:constraintSetStart="@+id/start"
