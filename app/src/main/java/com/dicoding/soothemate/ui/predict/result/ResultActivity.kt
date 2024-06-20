@@ -13,6 +13,7 @@ import com.dicoding.soothemate.R
 import com.dicoding.soothemate.customviews.CircularProgressView
 import com.dicoding.soothemate.databinding.ActivityResultBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.MainViewModel
 import com.dicoding.soothemate.viewmodel.PredictViewModel
 import com.dicoding.soothemate.viewmodel.ProfileViewModel
@@ -37,6 +38,10 @@ class ResultActivity : AppCompatActivity() {
     var physicalActivity: Int = 0
     var sleepQuality: Int = 0
     var sleepDuration: Int = 0
+    var bmi: String? = null
+    var bloodPressure: String? = null
+    var heartRate: Int? = null
+    var dailySteps: Int = 0
 
     var token: String? = null
 
@@ -46,12 +51,18 @@ class ResultActivity : AppCompatActivity() {
     private var currentProgress: Float = 0f
     private var currentStress: Int = 0
 
+    private lateinit var utils : Utils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityResultBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
         predictViewModel.isSuccess.observe(this){
             if (it == true){
@@ -74,6 +85,10 @@ class ResultActivity : AppCompatActivity() {
         physicalActivity = intent.getStringExtra(PHYSICAL_ACTIVITY).toString().toInt()
         sleepQuality = intent.getStringExtra(SLEEP_QUALITY).toString().toInt()
         sleepDuration = intent.getStringExtra(SLEEP_DURATION).toString().toInt()
+        bmi = intent.getStringExtra(BMI).toString()
+        bloodPressure = intent.getStringExtra(BLOOD_PRESSURE).toString()
+        heartRate = intent.getStringExtra(HEART_RATE)?.toIntOrNull() ?: 0
+        dailySteps = intent.getStringExtra(STEPS).toString().toInt()
 
         animateProgress(stressValue!!.toFloat())
         animateTextViewChange(stressValue!!.toInt())
@@ -113,9 +128,15 @@ class ResultActivity : AppCompatActivity() {
             if (token == null){
                 mainViewModel.getSession().observe(this){
                     token = it.token
-                    predictViewModel.savePredictStress(genderValue, ageValue, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, stressValue, stressTitle, stressDesc,
-                        token!!
-                    )
+                    if (bmi != "kosong" && bloodPressure != "kosong" && heartRate != 0 && dailySteps != 0){
+                        predictViewModel.savePredictStress(genderValue, ageValue, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, stressValue, stressTitle, stressDesc, bmiCategory = bmi, bloodPressure = bloodPressure, heartRate = heartRate, dailySteps = dailySteps,
+                            token!!
+                        )
+                    } else {
+                        predictViewModel.savePredictStress(genderValue, ageValue, sleepDuration, sleepQuality, physicalActivity, minWorkingHours, maksWorkingHours, stressValue, stressTitle, stressDesc, null, null, null, null,
+                            token!!
+                        )
+                    }
                 }
             }
         }
@@ -144,5 +165,9 @@ class ResultActivity : AppCompatActivity() {
         var PHYSICAL_ACTIVITY = "physical_activity"
         var SLEEP_QUALITY = "sleep_quality"
         var SLEEP_DURATION = "sleep_duration"
+        var BMI = "bmi"
+        var BLOOD_PRESSURE = "blood_pressure"
+        var HEART_RATE = "heart_rate"
+        var STEPS = "steps"
     }
 }

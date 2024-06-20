@@ -25,8 +25,20 @@ data class SavePredictData(
 	@field:SerializedName("max_working_hours")
 	val maxWorkingHours: Int,
 
+	@field:SerializedName("bmi_category")
+	val bmiCategory: String?,
+
+	@field:SerializedName("blood_pressure")
+	val bloodPressure: String?,
+
+	@field:SerializedName("heart_rate")
+	val heartRate: Int?,
+
+	@field:SerializedName("daily_steps")
+	val dailySteps: Int?,
+
 	@field:SerializedName("result")
-	val result: SavePredictDataResult
+	val result: SavePredictDataResult?
 
 )
 

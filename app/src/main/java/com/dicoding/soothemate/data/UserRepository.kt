@@ -1,9 +1,7 @@
 package com.dicoding.soothemate.data
 
 import android.util.Log
-import com.dicoding.soothemate.data.api.ApiConfig
 import com.dicoding.soothemate.data.api.ApiService
-import com.dicoding.soothemate.data.api.ResetUserCredentials
 import com.dicoding.soothemate.data.api.UserCredentials
 import com.dicoding.soothemate.data.api.UserRequest
 import com.dicoding.soothemate.data.pref.UserModel
@@ -62,7 +60,7 @@ class UserRepository private constructor(
             if (response.status == "success") {
                 token
             } else {
-                null
+                response.message
             }
         } catch (e: Exception) {
             Log.e("register Error", e.message ?: "Unknown error", e)

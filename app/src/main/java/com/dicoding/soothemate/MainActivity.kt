@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.dicoding.soothemate.databinding.ActivityMainBinding
 import com.dicoding.soothemate.factory.ViewModelFactory
 import com.dicoding.soothemate.ui.onboarding.OnboardingActivity
+import com.dicoding.soothemate.utils.Utils
 import com.dicoding.soothemate.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private lateinit var utils : Utils
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,6 +33,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
         val navView: BottomNavigationView = binding.navView
 
@@ -72,14 +79,17 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.navigation_home)
                     true
                 }
+
                 R.id.navigation_add -> {
                     navController.navigate(R.id.navigation_add)
                     true
                 }
+
                 R.id.navigation_profile -> {
                     navController.navigate(R.id.navigation_profile)
                     true
                 }
+
                 else -> false
             }
         }
@@ -92,18 +102,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-    private fun updateNavIcon(selectedItemId: Int) {
-        val menu = binding.navView.menu
-        menu.findItem(R.id.navigation_home)?.setIcon(
-            if (selectedItemId == R.id.navigation_home) R.drawable.ic_home_filled else R.drawable.ic_home_24dp
-        )
-        menu.findItem(R.id.navigation_add)?.setIcon(
-            if (selectedItemId == R.id.navigation_add) R.drawable.ic_add_filled else R.drawable.ic_add_24dp
-        )
-        menu.findItem(R.id.navigation_profile)?.setIcon(
-            if (selectedItemId == R.id.navigation_profile) R.drawable.ic_profile_filled else R.drawable.ic_profile_24dp
-        )
-    }
 
     private fun updateNavIcon(selectedItemId: Int) {
         val menu = binding.navView.menu
@@ -117,4 +115,5 @@ class MainActivity : AppCompatActivity() {
             if (selectedItemId == R.id.navigation_profile) R.drawable.ic_profile_filled else R.drawable.ic_profile_24dp
         )
     }
+
 }

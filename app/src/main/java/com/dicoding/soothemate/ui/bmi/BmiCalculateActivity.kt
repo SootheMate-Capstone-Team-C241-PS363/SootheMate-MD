@@ -7,9 +7,11 @@ import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.AbsoluteSizeSpan
 import android.view.Gravity
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.dicoding.soothemate.R
 import com.dicoding.soothemate.databinding.ActivityBmiCalculateBinding
+import com.dicoding.soothemate.utils.Utils
 import soup.neumorphism.NeumorphButton
 
 class BmiCalculateActivity : AppCompatActivity() {
@@ -18,6 +20,7 @@ class BmiCalculateActivity : AppCompatActivity() {
 
     private lateinit var maleButton: NeumorphButton
     private lateinit var femaleButton: NeumorphButton
+    private lateinit var utils : Utils
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +28,10 @@ class BmiCalculateActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.hide()
+
+        utils = Utils()
+
+        utils.setTransparentStatusBar(this)
 
         binding.apply {
 
@@ -40,6 +47,24 @@ class BmiCalculateActivity : AppCompatActivity() {
         }
 
         setupCalculateButton()
+    }
+
+    private fun validation(): Boolean{
+        val editTexts = listOf(
+            binding.ageEdt,
+            binding.heightEdt,
+            binding.weightEdt,
+        )
+
+        var allValid = true
+
+        for (editText in editTexts) {
+            if (!editText.isValidForm()) {
+                allValid = false
+            }
+        }
+
+        return allValid
     }
 
     private fun selectGender(selectedButton: NeumorphButton, unselectedButton: NeumorphButton) {
@@ -84,7 +109,7 @@ class BmiCalculateActivity : AppCompatActivity() {
 
         binding.bmiEdt.gravity = Gravity.TOP
         val formattedBMI = String.format("%.1f", bmi)
-        val combinedText = "$formattedBMI ($result) $bmiDescription"
+        val combinedText = "$formattedBMI (\" ($result)\\n\\n\") $bmiDescription"
 
         val spannableString = SpannableString(combinedText)
         val startIndex = combinedText.indexOf(bmiDescription)
@@ -100,8 +125,11 @@ class BmiCalculateActivity : AppCompatActivity() {
             val weight = binding.weightEdt.text.toString().toDoubleOrNull()
 
             if (height != null && weight != null) {
-                calculateBmi(height, weight)
+                if (validation()){
+                    calculateBmi(height, weight)
+                }
             } else {
+                validation()
                 binding.bmiEdt.text = Editable.Factory.getInstance().newEditable("Please enter valid height and weight.")
             }
         }
